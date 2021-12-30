@@ -7,23 +7,25 @@ from Api.ReturnObject import ApiReturnObject
 from Api.Exceptions.StackErrorApi import create_error_object
 
 
-def calculate(a, b, operator) -> Union[int, float]:
+def calculate(
+    a: Union[int, float], b: Union[int, float], operator: str
+) -> Union[int, float]:
     return operator_to_function(operator)(a, b)
 
 
-def add(a: int, b: int) -> int:
+def add(a: Union[int, float], b: Union[int, float]) -> Union[int, float]:
     return a + b
 
 
-def sub(a: int, b: int) -> int:
+def sub(a: Union[int, float], b: Union[int, float]) -> Union[int, float]:
     return a - b
 
 
-def mul(a: int, b: int) -> int:
+def mul(a: Union[int, float], b: Union[int, float]) -> Union[int, float]:
     return a * b
 
 
-def div(a: int, b: int) -> float:
+def div(a: Union[int, float], b: Union[int, float]) -> float:
     return a / b
 
 
