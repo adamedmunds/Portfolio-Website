@@ -3,7 +3,6 @@ from Functions.Functions import calculate
 
 
 class TestCalculateFunctions(unittest.TestCase):
-
     def test_add(self):
         self.assertEqual(calculate(0, 0, "+"), 0)
         self.assertEqual(calculate(20, 10, "+"), 30)
