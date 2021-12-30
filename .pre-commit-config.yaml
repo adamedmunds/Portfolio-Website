@@ -30,7 +30,8 @@ repos:
       - id: Test
         name: Run all tests
         language: python
-        entry: python -m unittest -h
+        entry: python -m unittest discover test/ -v
+        exclude: .pre-commit-config.yaml
 
       - id: stop-if-syntax-error
         name: stop the build if there are Python syntax errors or undefined names
