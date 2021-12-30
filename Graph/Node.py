@@ -13,7 +13,7 @@ class Node:
         self._value: Union[int, float] = value
         self._operand_one: Union[int, float] = operand_one
         self._operand_two: Union[int, float] = operand_two
-        self._infix: str = f"{operand_one} {operator} {operand_two} = {operand_one + operand_two}"
+        self._infix: str = f"{operand_one} {operator} {operand_two} = {value}"
 
     def get_operands(self) -> List[Union[int, float]]:
         return [self._operand_one, self._operand_two]

@@ -1,13 +1,17 @@
 from flask import Flask
-from flask_restx import Resource, Api
+from flask_restx import Resource, Api, reqparse
 from Functions.Functions import rpn_api_endpoint
 
 app = Flask(__name__)
 api = Api(app)
 
+parser = reqparse.RequestParser()
+parser.add_argument('rpn', type=str)
+
 
 @api.route('/api')
 class CalculateRpn(Resource):
-    def get(self):
-        d = rpn_api_endpoint("1 2+3/5+2A*DA3ASD*5/3*")
+    @api.expect(parser)
+    def post(self):
+        d = rpn_api_endpoint(parser.parse_args()["rpn"])
         return {"data": d}
