@@ -7,7 +7,7 @@ from Api.ReturnObject import ApiReturnObject
 from Api.Exceptions.StackErrorApi import create_error_object
 
 
-def calculate(a, b, operator):
+def calculate(a, b, operator) -> Union[int, float]:
     return operator_to_function(operator)(a, b)
 
 
@@ -28,12 +28,7 @@ def div(a: int, b: int) -> float:
 
 
 def operator_to_function(operator) -> Callable[[int, int], Union[int, float]]:
-    switch = {
-        "+": add,
-        "-": sub,
-        "*": mul,
-        "/": div
-    }
+    switch = {"+": add, "-": sub, "*": mul, "/": div}
     return switch.get(operator)
 
 
@@ -52,7 +47,9 @@ def rpn_api_endpoint(user_input: str) -> str:
             stack.append(int(char))
         else:
             if len(stack) == 1:
-                return create_error_object("Something went wrong, check your input", user_input)
+                return create_error_object(
+                    "Something went wrong, check your input", user_input
+                )
             operand_two, operand_one = stack.pop(), stack.pop()
             if (operand_one == 0 or operand_two == 0) and char == "/":
                 return create_error_object("You can't divide by 0", user_input)

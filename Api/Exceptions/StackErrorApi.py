@@ -2,7 +2,7 @@ from json import loads
 from Api.ReturnObject import ApiReturnObject
 
 
-def create_error_object(error_msg: str, user_input: str):
+def create_error_object(error_msg: str, user_input: str) -> str:
     error = ApiReturnObject()
     error.user_input = user_input
     error.error = error_msg
