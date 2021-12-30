@@ -2,8 +2,8 @@ import re
 from typing import List, Union
 
 from Graph.Node import Node
-from Functions import calculate
-from Exceptions import StackError
+from Functions.Functions import calculate
+from Exceptions.StackError import StackError
 
 OPERATORS: List[str] = ["+", "-", "*", "/"]
 
