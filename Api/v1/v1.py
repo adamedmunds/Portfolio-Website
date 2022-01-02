@@ -1,3 +1,4 @@
+import time
 from flask import Blueprint
 from flask_restx import Api, Resource, reqparse
 from Functions.Functions import rpn_api_endpoint
@@ -22,3 +23,6 @@ class CalculateRpn(Resource):
     def post(self) -> dict[str, str]:
         d = rpn_api_endpoint(parser.parse_args()["rpn"])
         return {"data": d}
+
+    def get(self) -> dict:
+        return {"time": time.time()}
