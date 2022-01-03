@@ -4,8 +4,6 @@ from Api.v1.v1 import blueprint as api
 app = Flask(__name__, static_folder="../frontend/build", static_url_path="/")
 app.register_blueprint(api, url_prefix="/api/v1")
 
-print(app.static_folder)
-
 
 @app.route("/", defaults={"path": ""})
 def serve(path):
