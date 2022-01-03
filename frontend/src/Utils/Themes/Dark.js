@@ -3,11 +3,11 @@ import { createTheme } from "@mui/material";
 const darkTheme = createTheme({
   palette: {
     primary: {
-      main: "#405162",
+      main: "#91E5F6",
       white: "#fff",
     },
     secondary: {
-      main: "#00c7f5",
+      main: "#84D2F6",
     },
     background: {
       default: "#24252a",
@@ -15,7 +15,7 @@ const darkTheme = createTheme({
   },
   typography: {
     allVariants: {
-      fontFamily: "Montserrat",
+      fontFamily: "'Montserrat', sans-serif",
     },
   },
 });
