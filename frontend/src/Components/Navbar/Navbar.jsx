@@ -1,25 +1,38 @@
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import ArticleIcon from "@mui/icons-material/Article";
+import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
+import EmailIcon from "@mui/icons-material/Email";
+import LoginIcon from "@mui/icons-material/Login";
 import "@fontsource/montserrat/400.css";
 import {
   AppBar,
   Avatar,
   Box,
   Container,
+  Divider,
   Drawer,
   Fade,
   IconButton,
+  List,
   ListItem,
   ListItemIcon,
   ListItemText,
   Toolbar,
   Tooltip,
-  Typography,
 } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 export const Navbar = ({ notHomepage = false }) => {
   const [isSidebarOpen, setSideBarOpen] = useState(false);
-  const pages = ["Contact", "Pokedex", "Portfolio", "Home"];
+  const pages = ["home", "portfolio", "pokedex", "contact"];
+  const icons = [
+    <DashboardIcon />,
+    <ArticleIcon />,
+    <CatchingPokemonIcon sx={{ transform: "rotate(180deg)" }} />,
+    <EmailIcon />,
+  ];
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -33,9 +46,9 @@ export const Navbar = ({ notHomepage = false }) => {
 
   return (
     <>
-      <AppBar position="static" color="transparent" elevation={0}>
+      <AppBar position="absolute" color="transparent" elevation={0}>
         <Fade in={true} timeout={1000}>
-          <Container maxWidth="false">
+          <Container maxWidth="false" component="section">
             <Toolbar disableGutters>
               <Box
                 sx={{
@@ -55,22 +68,6 @@ export const Navbar = ({ notHomepage = false }) => {
                   <MenuIcon />
                 </IconButton>
               </Box>
-              {notHomepage && (
-                <Typography
-                  variant="h6"
-                  noWrap
-                  component="div"
-                  sx={{
-                    flexGrow: { xs: 1, md: 0 },
-                    display: { xs: "flex" },
-                    color: "white",
-                    textTransform: "uppercase",
-                    fontFamily: "'Merienda One', sans-serif",
-                  }}
-                >
-                  Adam Edmunds
-                </Typography>
-              )}
 
               <Box
                 sx={{
@@ -99,15 +96,42 @@ export const Navbar = ({ notHomepage = false }) => {
         open={isSidebarOpen}
         onClose={toggleDrawer(false)}
         elevation={0}
+        PaperProps={{ sx: { backgroundColor: "#24252a", color: "white" } }}
       >
-        {pages.map((text) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-            <ListItemIcon>
-              <MenuIcon />
-            </ListItemIcon>
-          </ListItem>
-        ))}
+        <Box
+          sx={{ width: { xs: 175, md: 250 } }}
+          role="presentation"
+          onClick={toggleDrawer(false)}
+          onKeyDown={toggleDrawer(false)}
+        >
+          <List>
+            {pages.map((value, index) => (
+              <ListItem
+                button
+                key={value}
+                component={NavLink}
+                to={value === "home" ? "/" : value}
+              >
+                <ListItemIcon sx={{ color: "white" }}>
+                  {icons[index]}
+                </ListItemIcon>
+                <ListItemText
+                  primary={value}
+                  sx={{ textTransform: "capitalize" }}
+                />
+              </ListItem>
+            ))}
+          </List>
+          <Divider sx={{ bgcolor: "#CACACA" }} variant="middle" />
+          <List>
+            <ListItem button key={"Login"} component={NavLink} to={"/login"}>
+              <ListItemIcon sx={{ color: "white" }}>
+                <LoginIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Login"} />
+            </ListItem>
+          </List>
+        </Box>
       </Drawer>
     </>
   );

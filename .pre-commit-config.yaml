@@ -16,7 +16,7 @@ repos:
     rev: v2.5.1
     hooks:
       - id: prettier
-        exclude: ^Pipfile\.loc frontend
+        exclude: frontend
 
   - repo: https://gitlab.com/pycqa/flake8
     rev: 3.9.2
