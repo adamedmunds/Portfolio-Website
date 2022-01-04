@@ -27,16 +27,18 @@ export const About = () => {
             sx={{ mb: 1.5 }}
             color="primary"
             data-aos="fade-down"
+            data-aos-once
           >
             <Divider spacing={2}>Hi There</Divider>
           </Typography>
           <Typography
             variant="body1"
             data-aos="fade-down"
+            data-aos-once
             color="primary"
           ></Typography>
         </CardContent>
-        <CardActions data-aos="fade-down">
+        <CardActions data-aos="fade-down" data-aos-once>
           <Button size="small">Learn More</Button>
         </CardActions>
       </Card>
@@ -47,6 +49,7 @@ export const About = () => {
           height: "100vh",
         }}
         data-aos="fade-down"
+        data-aos-once
         mt={10}
       >
         Hi There

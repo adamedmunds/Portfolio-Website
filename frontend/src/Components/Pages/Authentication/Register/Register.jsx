@@ -63,6 +63,7 @@ export const Register = ({ user, setUser }) => {
         navigate("/profile", { replace: true });
       })
       .catch((error) => {
+        console.log(error);
         handleErrorMessage(error);
       });
   };
@@ -77,6 +78,9 @@ export const Register = ({ user, setUser }) => {
         break;
       case "auth/missing-email":
         setErrorMessage({ error: "You forgot to input your email" });
+        break;
+      case "auth/user-disabled":
+        setErrorMessage({ error: "Your account has been disabled" });
         break;
       default:
         setErrorMessage({ error: "Something went wrong" });
