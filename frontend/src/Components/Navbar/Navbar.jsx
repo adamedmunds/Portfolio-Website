@@ -5,7 +5,7 @@ import ArticleIcon from "@mui/icons-material/Article";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import EmailIcon from "@mui/icons-material/Email";
 import LoginIcon from "@mui/icons-material/Login";
-import LockOpenIcon from "@mui/icons-material/LockOpen";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import "@fontsource/montserrat/400.css";
 import {
   AppBar,
@@ -23,10 +23,21 @@ import {
   Toolbar,
   Tooltip,
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../Utils/Authentication/firebase-config";
+import { signOut } from "firebase/auth";
 
-export const Navbar = ({ notHomepage = false }) => {
+export const Navbar = ({ user, setUser }) => {
   const [isSidebarOpen, setSideBarOpen] = useState(false);
+  const navigate = useNavigate();
+
+  let userURL = user
+    ? user.photoURL
+      ? user.photoURL
+      : "https://cdn-icons-png.flaticon.com/512/147/147144.png"
+    : "";
+
   const pages = ["home", "portfolio", "pokedex", "contact"];
   const icons = [
     <DashboardIcon />,
@@ -43,6 +54,23 @@ export const Navbar = ({ notHomepage = false }) => {
       return;
     }
     setSideBarOpen(open);
+  };
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
+
+  const logout = async () => {
+    await signOut(auth);
+    navigate("/", { replace: true });
+  };
+
+  const handleClick = () => {
+    if (user) {
+      navigate("/profile", { replace: true });
+      return;
+    }
+    navigate("/register", { replace: true });
   };
 
   return (
@@ -80,11 +108,10 @@ export const Navbar = ({ notHomepage = false }) => {
                   },
                 }}
               />
-
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Profile">
-                  <IconButton sx={{ gap: 2 }}>
-                    <Avatar alt="Default Image" src="" />
+                  <IconButton sx={{ gap: 2 }} onClick={handleClick}>
+                    <Avatar alt="Default Image" src={userURL} />
                   </IconButton>
                 </Tooltip>
               </Box>
@@ -125,23 +152,39 @@ export const Navbar = ({ notHomepage = false }) => {
           </List>
           <Divider sx={{ bgcolor: "#CACACA" }} variant="middle" />
           <List>
-            <ListItem button key={"Login"} component={NavLink} to={"/login"}>
-              <ListItemIcon sx={{ color: "white" }}>
-                <LoginIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Login"} />
-            </ListItem>
-            <ListItem
-              button
-              key={"Register"}
-              component={NavLink}
-              to={"/register"}
-            >
-              <ListItemIcon sx={{ color: "white" }}>
-                <LockOpenIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Register"} />
-            </ListItem>
+            {user ? (
+              <ListItem button key={"Logout"} onClick={logout}>
+                <ListItemIcon sx={{ color: "white" }}>
+                  <LoginIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Logout"} />
+              </ListItem>
+            ) : (
+              <>
+                <ListItem
+                  button
+                  key={"Login"}
+                  component={NavLink}
+                  to={"/login"}
+                >
+                  <ListItemIcon sx={{ color: "white" }}>
+                    <AccountCircleOutlinedIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={"Login"} />
+                </ListItem>
+                <ListItem
+                  button
+                  key={"Register"}
+                  component={NavLink}
+                  to={"/register"}
+                >
+                  <ListItemIcon sx={{ color: "white" }}>
+                    <AccountCircleOutlinedIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={"Register"} />
+                </ListItem>
+              </>
+            )}
           </List>
         </Box>
       </Drawer>

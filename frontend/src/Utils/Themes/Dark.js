@@ -13,6 +13,9 @@ const darkTheme = createTheme({
     inputColor: {
       main: "#fff",
     },
+    error: {
+      main: "#FF3B00",
+    },
     background: {
       default: "#24252a",
     },

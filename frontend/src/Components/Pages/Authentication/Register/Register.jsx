@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import GoogleButton from "../../../../Utils/Resources/GoogleButton.jsx";
 import {
@@ -12,11 +12,16 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-
-import { app, auth } from "../../../../Utils/Authentication/firebase-config";
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+import { auth } from "../../../../Utils/Authentication/firebase-config";
 import Background from "../../../../Utils/Resources/background.svg";
 import { styled } from "@mui/material/styles";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
+import { useNavigate } from "react-router-dom";
 
 const StyledTextField = styled(TextField)(`
   &:hover .${outlinedInputClasses.notchedOutline} {
@@ -24,20 +29,58 @@ const StyledTextField = styled(TextField)(`
   }
 `);
 
-const signInWithGoogle = () => {
-  const provider = new app.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider);
-};
+export const Register = ({ user, setUser }) => {
+  const [errorMessage, setErrorMessage] = useState({});
+  const navigate = useNavigate();
 
-export const Register = () => {
-  const handleSubmit = (event) => {
-    const data = new FormData(event.currentTarget);
-    event.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  useEffect(() => {
+    if (user) {
+      navigate("/", { replace: true });
+    }
+  });
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const data = new FormData(e.currentTarget);
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        data.get("email").toString(),
+        data.get("password").toString()
+      );
+      setUser(user);
+      navigate("/profile", { replace: true });
+    } catch (error) {
+      handleErrorMessage(error);
+    }
+  };
+
+  const signInWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        setUser(result.user);
+        navigate("/profile", { replace: true });
+      })
+      .catch((error) => {
+        handleErrorMessage(error);
+      });
+  };
+
+  const handleErrorMessage = (error) => {
+    switch (error.code) {
+      case "auth/email-already-in-use":
+        setErrorMessage({ error: "Email already in use" });
+        break;
+      case "auth/weak-password":
+        setErrorMessage({ error: "Invalid password" });
+        break;
+      case "auth/missing-email":
+        setErrorMessage({ error: "You forgot to input your email" });
+        break;
+      default:
+        setErrorMessage({ error: "Something went wrong" });
+    }
   };
 
   return (
@@ -118,6 +161,13 @@ export const Register = () => {
                   />
                 </Grid>
               </Grid>
+              {errorMessage.error && (
+                <Grid item xs={12}>
+                  <Typography align="center" mt={3} color="error">
+                    {errorMessage.error}
+                  </Typography>
+                </Grid>
+              )}
               <Button
                 type="submit"
                 fullWidth
@@ -134,7 +184,7 @@ export const Register = () => {
                       align="center"
                       color="primary.white"
                     >
-                      Other ways to sign in
+                      Other ways to register
                     </Typography>
                   </Divider>
                 </Grid>
