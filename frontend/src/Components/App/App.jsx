@@ -11,6 +11,7 @@ import { Homepage } from "../Pages/Homepage";
 import { Portfolio } from "../Pages/Portfolio";
 import { Pokedex } from "../Pages/Pokedex";
 import { Login } from "../Pages/Authentication/Login";
+import { Register } from "../Pages/Authentication/Register";
 import { Contact } from "../Pages/Contact";
 import { NotFound } from "../Pages/NotFound/NotFound";
 import { Navbar } from "../Navbar";
@@ -28,6 +29,7 @@ export const App = () => {
             <Route path="pokedex" element={<Pokedex />} />
             <Route path="Contact" element={<Contact />} />
             <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </ThemeProvider>

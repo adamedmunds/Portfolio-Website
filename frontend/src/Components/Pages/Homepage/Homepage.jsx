@@ -1,6 +1,6 @@
 import { Suspense, lazy } from "react";
 import { Button, Container, Slide, Typography } from "@mui/material";
-import Background from "../../../Utils/SVGs/background.svg";
+import Background from "../../../Utils/Resources/background.svg";
 import { Link } from "react-router-dom";
 
 const About = lazy(() =>

@@ -10,6 +10,9 @@ const darkTheme = createTheme({
     secondary: {
       main: "#84D2F6",
     },
+    inputColor: {
+      main: "#fff",
+    },
     background: {
       default: "#24252a",
     },
@@ -29,6 +32,16 @@ const darkTheme = createTheme({
           "&::after": {
             borderTop: "thin solid #CACACA",
           },
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          color: "#fff",
+        },
+        notchedOutline: {
+          borderColor: "#91E5F6",
         },
       },
     },

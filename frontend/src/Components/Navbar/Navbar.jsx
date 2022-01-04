@@ -5,6 +5,7 @@ import ArticleIcon from "@mui/icons-material/Article";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import EmailIcon from "@mui/icons-material/Email";
 import LoginIcon from "@mui/icons-material/Login";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
 import "@fontsource/montserrat/400.css";
 import {
   AppBar,
@@ -129,6 +130,17 @@ export const Navbar = ({ notHomepage = false }) => {
                 <LoginIcon />
               </ListItemIcon>
               <ListItemText primary={"Login"} />
+            </ListItem>
+            <ListItem
+              button
+              key={"Register"}
+              component={NavLink}
+              to={"/register"}
+            >
+              <ListItemIcon sx={{ color: "white" }}>
+                <LockOpenIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Register"} />
             </ListItem>
           </List>
         </Box>
