@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import GoogleButton from "../../../../Utils/Resources/GoogleButton.jsx";
+import GoogleButton from "../../../../Utils/Resources/googleSignIn.png";
 import {
   Avatar,
   Box,
   Button,
+  ButtonBase,
   Container,
   Divider,
   Grid,
-  Link,
   TextField,
   Typography,
 } from "@mui/material";
@@ -16,12 +16,13 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../../../../Utils/Authentication/firebase-config";
 import Background from "../../../../Utils/Resources/background.svg";
 import { styled } from "@mui/material/styles";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const StyledTextField = styled(TextField)(`
   &:hover .${outlinedInputClasses.notchedOutline} {
@@ -29,14 +30,16 @@ const StyledTextField = styled(TextField)(`
   }
 `);
 
-export const Register = ({ user, setUser }) => {
+export const Register = ({ setUser }) => {
   const [errorMessage, setErrorMessage] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) {
-      navigate("/", { replace: true });
-    }
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("../", { replace: true });
+      }
+    });
   });
 
   const handleSubmit = async (e) => {
@@ -63,7 +66,6 @@ export const Register = ({ user, setUser }) => {
         navigate("/profile", { replace: true });
       })
       .catch((error) => {
-        console.log(error);
         handleErrorMessage(error);
       });
   };
@@ -129,16 +131,45 @@ export const Register = ({ user, setUser }) => {
             <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component="h1" variant="h5" color="primary.white">
+            <Typography
+              component="h1"
+              variant="authTitle"
+              color="primary.white"
+            >
               REGISTER
             </Typography>
             <Box
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 3 }}
+              sx={{ mt: 3, width: "85%" }}
             >
               <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <StyledTextField
+                    autoComplete="given-name"
+                    name="firstName"
+                    required
+                    fullWidth
+                    id="firstName"
+                    label="First Name"
+                    autoFocus
+                    color="inputColor"
+                    InputLabelProps={{ sx: { color: "#fff" } }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <StyledTextField
+                    required
+                    fullWidth
+                    id="lastName"
+                    label="Last Name"
+                    name="lastName"
+                    autoComplete="family-name"
+                    color="inputColor"
+                    InputLabelProps={{ sx: { color: "#fff" } }}
+                  />
+                </Grid>
                 <Grid item xs={12}>
                   <StyledTextField
                     required
@@ -176,7 +207,7 @@ export const Register = ({ user, setUser }) => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2, fontWeight: "bold" }}
               >
                 Register
               </Button>
@@ -192,22 +223,29 @@ export const Register = ({ user, setUser }) => {
                     </Typography>
                   </Divider>
                 </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  textAlign={"center"}
-                  onClick={signInWithGoogle}
-                  mt={2}
-                >
-                  <Button variant="outlined" size="small">
-                    <GoogleButton />
-                    Sign in with Google
-                  </Button>
+                <Grid item xs={12} textAlign={"center"} mt={2}>
+                  <ButtonBase onClick={signInWithGoogle}>
+                    <img alt="Google sign in" src={GoogleButton} />
+                  </ButtonBase>
                 </Grid>
-                <Grid item mt={2}>
-                  <Link href="/login" variant="body2" underline="hover">
+              </Grid>
+              <Grid>
+                <Grid item mt={2} textAlign={"right"} xs={12}>
+                  <Typography
+                    component={Link}
+                    to={"/login"}
+                    sx={{
+                      textDecoration: "none",
+                      color: "#6EB0BD",
+                      transition: "0.1s",
+                      "&:hover": {
+                        color: "#91E5F6",
+                        transition: "0.1s",
+                      },
+                    }}
+                  >
                     Already have an account? Login
-                  </Link>
+                  </Typography>
                 </Grid>
               </Grid>
             </Box>

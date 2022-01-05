@@ -24,6 +24,9 @@ const darkTheme = createTheme({
     allVariants: {
       fontFamily: "'Montserrat', sans-serif",
     },
+    authTitle: {
+      fontSize: "1.75em",
+    },
   },
   components: {
     MuiDivider: {
