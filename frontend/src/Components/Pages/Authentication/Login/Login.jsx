@@ -23,6 +23,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Background from "../../../../Utils/Resources/background.svg";
 import { styled } from "@mui/material/styles";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
+import { createFirestoreUser } from "../../../../Utils/API/createFirestoreUser";
 
 const StyledTextField = styled(TextField)(`
   &:hover .${outlinedInputClasses.notchedOutline} {
@@ -64,6 +65,7 @@ export const Login = ({ setUser }) => {
     signInWithPopup(auth, provider)
       .then((result) => {
         setUser(result.user);
+        createFirestoreUser(result.user);
         navigate("/profile", { replace: true });
       })
       .catch((error) => {

@@ -35,7 +35,6 @@ export const ResetPassword = () => {
         });
       })
       .catch((error) => {
-        console.log(error.message);
         switch (error.code) {
           case "auth/invalid-email":
             setConfirmMessage({ message: "Invalid Email" });
