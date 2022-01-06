@@ -38,6 +38,7 @@ export const Navbar = ({ user, setUser }) => {
       : "https://cdn-icons-png.flaticon.com/512/147/147144.png"
     : "";
 
+  const tooltipMessage = user ? "Profile" : "Login";
   const pages = ["home", "portfolio", "pokedex", "contact"];
   const icons = [
     <DashboardIcon />,
@@ -70,7 +71,7 @@ export const Navbar = ({ user, setUser }) => {
       navigate("/profile", { replace: true });
       return;
     }
-    navigate("/register", { replace: true });
+    navigate("/login", { replace: true });
   };
 
   return (
@@ -109,7 +110,7 @@ export const Navbar = ({ user, setUser }) => {
                 }}
               />
               <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Profile">
+                <Tooltip title={tooltipMessage}>
                   <IconButton sx={{ gap: 2 }} onClick={handleClick}>
                     <Avatar alt="Default Image" src={userURL} />
                   </IconButton>

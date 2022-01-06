@@ -2,3 +2,4 @@ flask~=1.1.2
 flask-restx
 Jinja2~=2.11.3
 flake8
+firebase-admin
