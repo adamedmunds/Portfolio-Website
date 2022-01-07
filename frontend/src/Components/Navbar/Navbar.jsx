@@ -27,17 +27,12 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../Utils/Authentication/firebase-config";
 import { signOut } from "firebase/auth";
+import axios from "axios";
 
 export const Navbar = ({ user, setUser }) => {
   const [isSidebarOpen, setSideBarOpen] = useState(false);
+  const [photo, setPhoto] = useState("");
   const navigate = useNavigate();
-
-  let userURL = user
-    ? user.photoURL
-      ? user.photoURL
-      : "https://cdn-icons-png.flaticon.com/512/147/147144.png"
-    : "";
-
   const tooltipMessage = user ? "Profile" : "Login";
   const pages = ["home", "portfolio", "pokedex", "contact"];
   const icons = [
@@ -46,6 +41,16 @@ export const Navbar = ({ user, setUser }) => {
     <CatchingPokemonIcon sx={{ transform: "rotate(180deg)" }} />,
     <EmailIcon />,
   ];
+  let userURL = user ? (user.photoURL ? user.photoURL : photo) : "";
+
+  const getUserAvatar = async (userId) => {
+    await axios.get(`/api/v1/getAvatar?userId=${userId}`).then((res) => {
+      setPhoto(res.data.data);
+    });
+  };
+  if (user) {
+    getUserAvatar(user.uid);
+  }
 
   const toggleDrawer = (open) => (event) => {
     if (

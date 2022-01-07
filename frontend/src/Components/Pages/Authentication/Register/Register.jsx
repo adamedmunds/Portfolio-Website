@@ -17,12 +17,14 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   onAuthStateChanged,
+  sendEmailVerification,
 } from "firebase/auth";
 import { auth } from "../../../../Utils/Authentication/firebase-config";
 import Background from "../../../../Utils/Resources/background.svg";
 import { styled } from "@mui/material/styles";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { Link, useNavigate } from "react-router-dom";
+import { createFirestoreUser } from "../../../../Utils/API/createFirestoreUser";
 
 const StyledTextField = styled(TextField)(`
   &:hover .${outlinedInputClasses.notchedOutline} {
@@ -52,6 +54,8 @@ export const Register = ({ setUser }) => {
         data.get("password").toString()
       );
       setUser(user);
+      sendEmailVerification(auth.currentUser).then(() => {});
+      createFirestoreUser(user.user);
       navigate("/profile", { replace: true });
     } catch (error) {
       handleErrorMessage(error);
@@ -63,6 +67,7 @@ export const Register = ({ setUser }) => {
     signInWithPopup(auth, provider)
       .then((result) => {
         setUser(result.user);
+        createFirestoreUser(result.user);
         navigate("/profile", { replace: true });
       })
       .catch((error) => {
@@ -145,31 +150,6 @@ export const Register = ({ setUser }) => {
               sx={{ mt: 3, width: "85%" }}
             >
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <StyledTextField
-                    autoComplete="given-name"
-                    name="firstName"
-                    required
-                    fullWidth
-                    id="firstName"
-                    label="First Name"
-                    autoFocus
-                    color="inputColor"
-                    InputLabelProps={{ sx: { color: "#fff" } }}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <StyledTextField
-                    required
-                    fullWidth
-                    id="lastName"
-                    label="Last Name"
-                    name="lastName"
-                    autoComplete="family-name"
-                    color="inputColor"
-                    InputLabelProps={{ sx: { color: "#fff" } }}
-                  />
-                </Grid>
                 <Grid item xs={12}>
                   <StyledTextField
                     required
