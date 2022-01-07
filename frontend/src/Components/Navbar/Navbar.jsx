@@ -41,7 +41,6 @@ export const Navbar = ({ user, setUser }) => {
     <CatchingPokemonIcon sx={{ transform: "rotate(180deg)" }} />,
     <EmailIcon />,
   ];
-  let userURL = user ? (user.photoURL ? user.photoURL : photo) : "";
 
   const getUserAvatar = async (userId) => {
     await axios.get(`/api/v1/getAvatar?userId=${userId}`).then((res) => {
@@ -51,6 +50,8 @@ export const Navbar = ({ user, setUser }) => {
   if (user) {
     getUserAvatar(user.uid);
   }
+
+  let userURL = user ? (user.photoURL ? user.photoURL : photo) : "";
 
   const toggleDrawer = (open) => (event) => {
     if (
