@@ -10,17 +10,19 @@ db = firestore.client()
 
 
 def createUser(user: dict):
-    db.collection("users").document(user["id"]).set(
-        {
-            "id": user["id"],
-            "displayName": user["displayName"],
-            "email": user["email"],
-            "isVerified": user["isVerified"],
-            "photo": user["photoURL"],
-            "createdAt": user["createdAt"],
-            "role": "user",
-        }
-    )
+    result = db.collection("users").document(user["id"]).get()
+    if not result.exists:
+        db.collection("users").document(user["id"]).set(
+            {
+                "id": user["id"],
+                "displayName": user["displayName"],
+                "email": user["email"],
+                "isVerified": user["isVerified"],
+                "photo": user["photoURL"],
+                "createdAt": user["createdAt"],
+                "role": "user",
+            }
+        )
 
 
 def getUserAvatar(userId: str):

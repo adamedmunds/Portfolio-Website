@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ArticleIcon from "@mui/icons-material/Article";
@@ -47,9 +47,11 @@ export const Navbar = ({ user, setUser }) => {
       setPhoto(res.data.data);
     });
   };
-  if (user) {
-    getUserAvatar(user.uid);
-  }
+  useEffect(() => {
+    if (user) {
+      getUserAvatar(user.uid);
+    }
+  }, [user]);
 
   let userURL = user ? (user.photoURL ? user.photoURL : photo) : "";
 
@@ -118,7 +120,10 @@ export const Navbar = ({ user, setUser }) => {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title={tooltipMessage}>
                   <IconButton sx={{ gap: 2 }} onClick={handleClick}>
-                    <Avatar alt="Default Image" src={userURL} />
+                    <Avatar
+                      alt="Default Image"
+                      src={userURL}
+                    />
                   </IconButton>
                 </Tooltip>
               </Box>

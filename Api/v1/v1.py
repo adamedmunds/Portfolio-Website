@@ -41,7 +41,7 @@ class CreateFirestoreUser(Resource):
     def post(self):
         data = user.parse_args()["user"]
         createUser(data)
-        return {"data": {"Success"}}
+        return {"data": "Success"}
 
 
 @api.route("/getAvatar")
