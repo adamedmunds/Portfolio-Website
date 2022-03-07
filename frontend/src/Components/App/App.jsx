@@ -39,6 +39,12 @@ const ResetPassword = lazy(() =>
   }))
 );
 
+const Logout = lazy(() =>
+  import('../Pages/Authentication/Logout').then((module) => ({
+    default: module.Logout,
+  }))
+);
+
 export const App = () => {
   const dispatch = useDispatch();
   const { authenticateUser } = bindActionCreators(actionCreators, dispatch);
@@ -76,6 +82,14 @@ export const App = () => {
               element={
                 <Suspense fallback={<Fallback />}>
                   <Register />
+                </Suspense>
+              }
+            />
+            <Route
+              path="logout"
+              element={
+                <Suspense fallback={<Fallback />}>
+                  <Logout />
                 </Suspense>
               }
             />
