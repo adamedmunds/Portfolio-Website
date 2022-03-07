@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
-import MenuIcon from "@mui/icons-material/Menu";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ArticleIcon from "@mui/icons-material/Article";
-import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
-import EmailIcon from "@mui/icons-material/Email";
-import LoginIcon from "@mui/icons-material/Login";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import "@fontsource/montserrat/400.css";
+import { useState, useEffect } from 'react';
+import MenuIcon from '@mui/icons-material/Menu';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ArticleIcon from '@mui/icons-material/Article';
+import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
+import EmailIcon from '@mui/icons-material/Email';
+import LoginIcon from '@mui/icons-material/Login';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import {
   AppBar,
   Avatar,
@@ -22,64 +21,59 @@ import {
   ListItemText,
   Toolbar,
   Tooltip,
-} from "@mui/material";
-import { NavLink, useNavigate } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../Utils/Authentication/firebase-config";
-import { signOut } from "firebase/auth";
-import axios from "axios";
+} from '@mui/material';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { auth } from '../../Utils/Authentication/firebase-config';
+import { signOut } from 'firebase/auth';
+import { useSelector, useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../Redux/actions';
+import { isEmpty } from 'lodash';
 
-export const Navbar = ({ user, setUser }) => {
+export const Navbar = () => {
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const { logoutUser } = bindActionCreators(actionCreators, dispatch);
   const [isSidebarOpen, setSideBarOpen] = useState(false);
-  const [photo, setPhoto] = useState("");
+  const [photo, setPhoto] = useState('');
   const navigate = useNavigate();
-  const tooltipMessage = user ? "Profile" : "Login";
-  const pages = ["home", "portfolio", "pokedex", "contact"];
+  const isUserLoggedIn = !isEmpty(user);
+  const tooltipMessage = isUserLoggedIn ? 'Profile' : 'Login';
+  const pages = ['home', 'portfolio', 'pokedex', 'contact'];
   const icons = [
     <DashboardIcon />,
     <ArticleIcon />,
-    <CatchingPokemonIcon sx={{ transform: "rotate(180deg)" }} />,
+    <CatchingPokemonIcon sx={{ transform: 'rotate(180deg)' }} />,
     <EmailIcon />,
   ];
-
-  const getUserAvatar = async (userId) => {
-    await axios.get(`/api/v1/getAvatar?userId=${userId}`).then((res) => {
-      setPhoto(res.data.data);
-    });
-  };
   useEffect(() => {
-    if (user) {
-      getUserAvatar(user.uid);
-    }
-  }, [user]);
+    setPhoto(user.photo);
+  }, [user.photo]);
 
-  let userURL = user ? (user.photoURL ? user.photoURL : photo) : "";
+  let userURL = isUserLoggedIn ? (user.photoURL ? user.photoURL : photo) : '';
 
   const toggleDrawer = (open) => (event) => {
     if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
     ) {
       return;
     }
     setSideBarOpen(open);
   };
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
-
   const logout = async () => {
+    logoutUser();
     await signOut(auth);
-    navigate("/", { replace: true });
+    navigate('/', { replace: true });
   };
 
   const handleClick = () => {
-    if (user) {
-      navigate("/profile", { replace: true });
+    if (isUserLoggedIn) {
+      navigate('/profile', { replace: true });
       return;
     }
-    navigate("/login", { replace: true });
+    navigate('/login', { replace: true });
   };
 
   return (
@@ -91,7 +85,7 @@ export const Navbar = ({ user, setUser }) => {
               <Box
                 sx={{
                   flexGrow: { xs: 1 },
-                  display: { xs: "flex" },
+                  display: { xs: 'flex' },
                 }}
               >
                 <IconButton
@@ -99,7 +93,7 @@ export const Navbar = ({ user, setUser }) => {
                   edge="start"
                   aria-label="open drawer"
                   sx={{
-                    color: "primary.white",
+                    color: 'primary.white',
                   }}
                   onClick={toggleDrawer(true)}
                 >
@@ -111,19 +105,16 @@ export const Navbar = ({ user, setUser }) => {
                 sx={{
                   flexGrow: 1,
                   display: {
-                    xs: "none",
-                    md: "flex",
-                    flexDirection: "row-reverse",
+                    xs: 'none',
+                    md: 'flex',
+                    flexDirection: 'row-reverse',
                   },
                 }}
               />
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title={tooltipMessage}>
                   <IconButton sx={{ gap: 2 }} onClick={handleClick}>
-                    <Avatar
-                      alt="Default Image"
-                      src={userURL}
-                    />
+                    <Avatar alt="Default Image" src={userURL} />
                   </IconButton>
                 </Tooltip>
               </Box>
@@ -132,11 +123,11 @@ export const Navbar = ({ user, setUser }) => {
         </Fade>
       </AppBar>
       <Drawer
-        anchor={"left"}
+        anchor={'left'}
         open={isSidebarOpen}
         onClose={toggleDrawer(false)}
         elevation={0}
-        PaperProps={{ sx: { backgroundColor: "#24252a", color: "white" } }}
+        PaperProps={{ sx: { backgroundColor: '#24252a', color: 'white' } }}
       >
         <Box
           sx={{ width: { xs: 175, md: 250 } }}
@@ -150,50 +141,50 @@ export const Navbar = ({ user, setUser }) => {
                 button
                 key={value}
                 component={NavLink}
-                to={value === "home" ? "/" : value}
+                to={value === 'home' ? '/' : value}
               >
-                <ListItemIcon sx={{ color: "white" }}>
+                <ListItemIcon sx={{ color: 'white' }}>
                   {icons[index]}
                 </ListItemIcon>
                 <ListItemText
                   primary={value}
-                  sx={{ textTransform: "capitalize" }}
+                  sx={{ textTransform: 'capitalize' }}
                 />
               </ListItem>
             ))}
           </List>
-          <Divider sx={{ bgcolor: "#CACACA" }} variant="middle" />
+          <Divider sx={{ bgcolor: '#CACACA' }} variant="middle" />
           <List>
-            {user ? (
-              <ListItem button key={"Logout"} onClick={logout}>
-                <ListItemIcon sx={{ color: "white" }}>
+            {isUserLoggedIn ? (
+              <ListItem button key={'Logout'} onClick={logout}>
+                <ListItemIcon sx={{ color: 'white' }}>
                   <LoginIcon />
                 </ListItemIcon>
-                <ListItemText primary={"Logout"} />
+                <ListItemText primary={'Logout'} />
               </ListItem>
             ) : (
               <>
                 <ListItem
                   button
-                  key={"Login"}
+                  key={'Login'}
                   component={NavLink}
-                  to={"/login"}
+                  to={'/login'}
                 >
-                  <ListItemIcon sx={{ color: "white" }}>
+                  <ListItemIcon sx={{ color: 'white' }}>
                     <AccountCircleOutlinedIcon />
                   </ListItemIcon>
-                  <ListItemText primary={"Login"} />
+                  <ListItemText primary={'Login'} />
                 </ListItem>
                 <ListItem
                   button
-                  key={"Register"}
+                  key={'Register'}
                   component={NavLink}
-                  to={"/register"}
+                  to={'/register'}
                 >
-                  <ListItemIcon sx={{ color: "white" }}>
+                  <ListItemIcon sx={{ color: 'white' }}>
                     <AccountCircleOutlinedIcon />
                   </ListItemIcon>
-                  <ListItemText primary={"Register"} />
+                  <ListItemText primary={'Register'} />
                 </ListItem>
               </>
             )}

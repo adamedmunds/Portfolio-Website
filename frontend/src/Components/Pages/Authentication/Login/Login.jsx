@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   Avatar,
   Box,
@@ -9,21 +9,21 @@ import {
   Grid,
   TextField,
   Typography,
-} from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../../../../Utils/Authentication/firebase-config";
+} from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../../../../Utils/Authentication/firebase-config';
 import {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-} from "firebase/auth";
-import GoogleButton from "../../../../Utils/Resources/googleSignIn.png";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Background from "../../../../Utils/Resources/background.svg";
-import { styled } from "@mui/material/styles";
-import { outlinedInputClasses } from "@mui/material/OutlinedInput";
-import { createFirestoreUser } from "../../../../Utils/API/createFirestoreUser";
+} from 'firebase/auth';
+import GoogleButton from '../../../../Utils/Resources/googleSignIn.png';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Background from '../../../../Utils/Resources/background.svg';
+import { styled } from '@mui/material/styles';
+import { outlinedInputClasses } from '@mui/material/OutlinedInput';
+import { createFirestoreUser } from '../../../../Utils/API/createFirestoreUser';
 
 const StyledTextField = styled(TextField)(`
   &:hover .${outlinedInputClasses.notchedOutline} {
@@ -31,14 +31,14 @@ const StyledTextField = styled(TextField)(`
   }
 `);
 
-export const Login = ({ setUser }) => {
+export const Login = () => {
   const [errorMessage, setErrorMessage] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        navigate("../", { replace: true });
+        navigate('../', { replace: true });
       }
     });
   });
@@ -48,13 +48,12 @@ export const Login = ({ setUser }) => {
       e.preventDefault();
       const data = new FormData(e.currentTarget);
       //TODO: Stop if empty
-      const user = await signInWithEmailAndPassword(
+      await signInWithEmailAndPassword(
         auth,
-        data.get("email").toString(),
-        data.get("password").toString()
+        data.get('email').toString(),
+        data.get('password').toString()
       );
-      setUser(user);
-      navigate("/profile", { replace: true });
+      navigate('/profile', { replace: true });
     } catch (error) {
       handleErrorMessage(error);
     }
@@ -64,9 +63,8 @@ export const Login = ({ setUser }) => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
-        setUser(result.user);
         createFirestoreUser(result.user);
-        navigate("/profile", { replace: true });
+        navigate('/profile', { replace: true });
       })
       .catch((error) => {
         handleErrorMessage(error);
@@ -75,20 +73,20 @@ export const Login = ({ setUser }) => {
 
   const handleErrorMessage = (error) => {
     switch (error.code) {
-      case "auth/email-already-in-use":
-        setErrorMessage({ error: "Email already in use" });
+      case 'auth/email-already-in-use':
+        setErrorMessage({ error: 'Email already in use' });
         break;
-      case "auth/weak-password":
-        setErrorMessage({ error: "Invalid password" });
+      case 'auth/weak-password':
+        setErrorMessage({ error: 'Invalid password' });
         break;
-      case "auth/missing-email":
-        setErrorMessage({ error: "You forgot to input your email" });
+      case 'auth/missing-email':
+        setErrorMessage({ error: 'You forgot to input your email' });
         break;
-      case "auth/user-disabled":
-        setErrorMessage({ error: "Your account has been disabled" });
+      case 'auth/user-disabled':
+        setErrorMessage({ error: 'Your account has been disabled' });
         break;
       default:
-        setErrorMessage({ error: "Something went wrong" });
+        setErrorMessage({ error: 'Something went wrong' });
     }
   };
 
@@ -97,13 +95,13 @@ export const Login = ({ setUser }) => {
       <Container
         maxWidth="false"
         sx={{
-          height: "100vh",
+          height: '100vh',
           backgroundImage: `url(${Background})`,
-          backgroundColor: "#2F3037",
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
-          backgroundSize: "cover",
-          filter: "blur(8px)",
+          backgroundColor: '#2F3037',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+          backgroundSize: 'cover',
+          filter: 'blur(8px)',
         }}
       />
       <Grid
@@ -115,7 +113,7 @@ export const Login = ({ setUser }) => {
         sx={{
           pt: 18,
           zIndex: 2,
-          position: "absolute",
+          position: 'absolute',
           top: 0,
         }}
       >
@@ -123,15 +121,15 @@ export const Login = ({ setUser }) => {
           <Box
             sx={{
               padding: 6,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              bgcolor: "#4E515E",
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              bgcolor: '#4E515E',
               borderRadius: 5,
               boxShadow: 3,
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
+            <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography
@@ -145,7 +143,7 @@ export const Login = ({ setUser }) => {
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 3, width: "85%" }}
+              sx={{ mt: 3, width: '85%' }}
             >
               <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -157,7 +155,7 @@ export const Login = ({ setUser }) => {
                     name="email"
                     autoComplete="email"
                     color="inputColor"
-                    InputLabelProps={{ sx: { color: "#fff" } }}
+                    InputLabelProps={{ sx: { color: '#fff' } }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -170,7 +168,7 @@ export const Login = ({ setUser }) => {
                     id="password"
                     autoComplete="new-password"
                     color="inputColor"
-                    InputLabelProps={{ sx: { color: "#fff" } }}
+                    InputLabelProps={{ sx: { color: '#fff' } }}
                   />
                 </Grid>
               </Grid>
@@ -185,7 +183,7 @@ export const Login = ({ setUser }) => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, fontWeight: "bold" }}
+                sx={{ mt: 3, mb: 2, fontWeight: 'bold' }}
               >
                 Login
               </Button>
@@ -201,7 +199,7 @@ export const Login = ({ setUser }) => {
                     </Typography>
                   </Divider>
                 </Grid>
-                <Grid item xs={12} textAlign={"center"} mt={2}>
+                <Grid item xs={12} textAlign={'center'} mt={2}>
                   <ButtonBase onClick={signInWithGoogle}>
                     <img alt="Google sign in" src={GoogleButton} />
                   </ButtonBase>
@@ -211,14 +209,14 @@ export const Login = ({ setUser }) => {
                 <Grid item xs>
                   <Typography
                     component={Link}
-                    to={"/resetpassword"}
+                    to={'/resetpassword'}
                     sx={{
-                      textDecoration: "none",
-                      color: "#6EB0BD",
-                      transition: "0.1s",
-                      "&:hover": {
-                        color: "#91E5F6",
-                        transition: "0.1s",
+                      textDecoration: 'none',
+                      color: '#6EB0BD',
+                      transition: '0.1s',
+                      '&:hover': {
+                        color: '#91E5F6',
+                        transition: '0.1s',
                       },
                     }}
                   >
@@ -228,18 +226,18 @@ export const Login = ({ setUser }) => {
                 <Grid item>
                   <Typography
                     component={Link}
-                    to={"/register"}
+                    to={'/register'}
                     sx={{
-                      textDecoration: "none",
-                      color: "#6EB0BD",
-                      transition: "0.1s",
-                      "&:hover": {
-                        color: "#91E5F6",
-                        transition: "0.1s",
+                      textDecoration: 'none',
+                      color: '#6EB0BD',
+                      transition: '0.1s',
+                      '&:hover': {
+                        color: '#91E5F6',
+                        transition: '0.1s',
                       },
                     }}
                   >
-                    Already have an account? Register
+                    Don't have an account? Register
                   </Typography>
                 </Grid>
               </Grid>

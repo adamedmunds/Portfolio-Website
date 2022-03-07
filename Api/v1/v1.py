@@ -2,7 +2,7 @@ import time
 from flask import Blueprint
 from flask_restx import Api, Resource, reqparse
 from Functions.Functions import rpn_api_endpoint
-from Api.UtilFunctions.Firebase import createUser, getUserAvatar
+from Api.UtilFunctions.Firebase import createUser, getUserAvatar, getUser
 
 blueprint = Blueprint("api", __name__)
 
@@ -20,8 +20,8 @@ parser.add_argument("rpn", type=str)
 user = reqparse.RequestParser()
 user.add_argument(name="user", type=dict, location="json", required=True)
 
-photo = reqparse.RequestParser()
-photo.add_argument(name="userId", required=True)
+userId = reqparse.RequestParser()
+userId.add_argument(name="userId", required=True)
 
 
 @api.route("/rpn")
@@ -38,7 +38,7 @@ class CalculateRpn(Resource):
 @api.route("/createUser")
 class CreateFirestoreUser(Resource):
     @api.expect(user)
-    def post(self):
+    def post(self) -> dict:
         data = user.parse_args()["user"]
         createUser(data)
         return {"data": "Success"}
@@ -46,7 +46,15 @@ class CreateFirestoreUser(Resource):
 
 @api.route("/getAvatar")
 class GetUserAvatar(Resource):
-    @api.expect(photo)
-    def get(self):
-        data = getUserAvatar(photo.parse_args()["userId"])
+    @api.expect(userId)
+    def get(self) -> dict:
+        data = getUserAvatar(userId.parse_args()["userId"])
+        return {"data": data}
+
+
+@api.route("/getUser")
+class GetUser(Resource):
+    @api.expect(userId)
+    def get(self) -> dict:
+        data = getUser(userId.parse_args()["userId"])
         return {"data": data}

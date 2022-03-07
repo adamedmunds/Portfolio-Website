@@ -1,46 +1,63 @@
-import React, { useState, lazy, Suspense } from "react";
-import darkTheme from "../../Utils/Themes/Dark";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import React, { lazy, Suspense, useEffect } from 'react';
+import darkTheme from '../../Utils/Themes/Dark';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Outlet,
-} from "react-router-dom";
-import { Homepage } from "../Pages/Homepage";
-import { Portfolio } from "../Pages/Portfolio";
-import { Pokedex } from "../Pages/Pokedex";
-import { Contact } from "../Pages/Contact";
-import { NotFound } from "../Pages/NotFound/NotFound";
-import { Navbar } from "../Navbar";
-import { Fallback } from "../Fallback";
+} from 'react-router-dom';
+import { Homepage } from '../Pages/Homepage';
+import { Portfolio } from '../Pages/Portfolio';
+import { Pokedex } from '../Pages/Pokedex';
+import { Contact } from '../Pages/Contact';
+import { NotFound } from '../Pages/NotFound/NotFound';
+import { Navbar } from '../Navbar';
+import { Fallback } from '../Fallback';
+import { auth } from '../../Utils/Authentication/firebase-config';
+import { onAuthStateChanged } from 'firebase/auth';
+
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../Redux/actions';
 
 const Login = lazy(() =>
-  import("../Pages/Authentication/Login").then((module) => ({
+  import('../Pages/Authentication/Login').then((module) => ({
     default: module.Login,
   }))
 );
 
 const Register = lazy(() =>
-  import("../Pages/Authentication/Register").then((module) => ({
+  import('../Pages/Authentication/Register').then((module) => ({
     default: module.Register,
   }))
 );
 
 const ResetPassword = lazy(() =>
-  import("../Pages/Authentication/ResetPassword").then((module) => ({
+  import('../Pages/Authentication/ResetPassword').then((module) => ({
     default: module.ResetPassword,
   }))
 );
 
 export const App = () => {
-  const [user, setUser] = useState({});
+  const dispatch = useDispatch();
+  const { authenticateUser } = bindActionCreators(actionCreators, dispatch);
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const timer = setTimeout(() => {
+          authenticateUser(user);
+        }, 100);
+        return () => clearTimeout(timer);
+      }
+    });
+  });
   return (
     <>
       <Router>
         <ThemeProvider theme={darkTheme}>
           <CssBaseline />
-          <Navbar user={user} setUser={setUser} />
+          <Navbar />
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="portfolio" element={<Portfolio />} />
@@ -50,7 +67,7 @@ export const App = () => {
               path="login"
               element={
                 <Suspense fallback={<Fallback />}>
-                  <Login setUser={setUser} />
+                  <Login />
                 </Suspense>
               }
             />
@@ -58,7 +75,7 @@ export const App = () => {
               path="register"
               element={
                 <Suspense fallback={<Fallback />}>
-                  <Register setUser={setUser} />
+                  <Register />
                 </Suspense>
               }
             />

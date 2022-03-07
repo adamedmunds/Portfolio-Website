@@ -21,6 +21,13 @@ def createUser(user: dict):
                 "photo": user["photoURL"],
                 "createdAt": user["createdAt"],
                 "role": "user",
+                "activePokedexes": ["all"]
+            }
+        )
+        db.collection("users").document(user["id"]).collection("all").document("1").set(
+            {
+                "id": 1,
+                "name": "bulbasaur"
             }
         )
 
@@ -29,3 +36,9 @@ def getUserAvatar(userId: str):
     result = db.collection("users").document(userId).get()
     if result.exists:
         return result.to_dict()["photo"]
+
+
+def getUser(userId: str):
+    result = db.collection("users").document(userId).get()
+    if result.exists:
+        return result.to_dict()
