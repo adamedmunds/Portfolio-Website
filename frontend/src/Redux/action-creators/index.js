@@ -1,4 +1,4 @@
-import { AUTH_USER, LOGOUT_USER } from '../actionList';
+import { AUTH_USER, LOGOUT_USER, NEW_POKDEX_ENTRY } from '../actionList';
 import axios from 'axios';
 
 export const authenticateUser = (user) => {
@@ -26,6 +26,15 @@ export const logoutUser = () => {
     dispatch({
       type: LOGOUT_USER,
       user: {},
+    });
+  };
+};
+
+export const newPokedexEntry = (page) => {
+  return (dispatch) => {
+    dispatch({
+      type: NEW_POKDEX_ENTRY,
+      pokedex: { id: page },
     });
   };
 };

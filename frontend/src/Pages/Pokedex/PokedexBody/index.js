@@ -1,0 +1,1 @@
+export { PokedexBody } from './PokedexBody';
