@@ -1,10 +1,10 @@
 import { Suspense, lazy } from "react";
 import { Button, Container, Slide, Typography } from "@mui/material";
-import Background from "../../../Utils/Resources/background.svg";
+import Background from "../../Utils/Resources/background.svg";
 import { Link } from "react-router-dom";
 
 const About = lazy(() =>
-  import("../../Homepage").then((module) => ({ default: module.About }))
+  import("./About").then((module) => ({ default: module.About }))
 );
 
 export const Homepage = () => {

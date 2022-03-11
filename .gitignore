@@ -177,3 +177,5 @@ frontend/yarn-error.log*
 
 test.py
 key.json
+mongoCert/
+data.json

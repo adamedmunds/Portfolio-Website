@@ -2,7 +2,7 @@ import time
 from flask import Blueprint
 from flask_restx import Api, Resource, reqparse
 from Functions.Functions import rpn_api_endpoint
-from Api.UtilFunctions.Firebase import createUser, getUserAvatar, getUser
+from Api.UtilFunctions.Database import createUser, getUser
 
 blueprint = Blueprint("api", __name__)
 
@@ -42,14 +42,6 @@ class CreateFirestoreUser(Resource):
         data = user.parse_args()["user"]
         createUser(data)
         return {"data": "Success"}
-
-
-@api.route("/getAvatar")
-class GetUserAvatar(Resource):
-    @api.expect(userId)
-    def get(self) -> dict:
-        data = getUserAvatar(userId.parse_args()["userId"])
-        return {"data": data}
 
 
 @api.route("/getUser")

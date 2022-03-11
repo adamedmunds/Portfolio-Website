@@ -1,0 +1,1 @@
+export { PokeIdNumberBar } from './PokeIdNumberBar';

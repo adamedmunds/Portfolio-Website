@@ -1,7 +1,7 @@
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
-export const createFirestoreUser = async (user) => {
+export const createUser = async (user) => {
   const postData = {
     id: user.uid,
     displayName: user.displayName,

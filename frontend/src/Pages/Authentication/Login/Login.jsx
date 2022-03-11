@@ -11,19 +11,19 @@ import {
   Typography,
 } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import { auth } from '../../../../Utils/Authentication/firebase-config';
+import { auth } from '../../../Utils/Authentication/firebase-config';
 import {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from 'firebase/auth';
-import GoogleButton from '../../../../Utils/Resources/googleSignIn.png';
+import GoogleButton from '../../../Utils/Resources/googleSignIn.png';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Background from '../../../../Utils/Resources/background.svg';
+import Background from '../../../Utils/Resources/background.svg';
 import { styled } from '@mui/material/styles';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
-import { createFirestoreUser } from '../../../../Utils/API/createFirestoreUser';
+import { createUser } from '../../../Utils/API/createUser';
 
 const StyledTextField = styled(TextField)(`
   &:hover .${outlinedInputClasses.notchedOutline} {
@@ -63,7 +63,7 @@ export const Login = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
-        createFirestoreUser(result.user);
+        createUser(result.user);
         navigate('/profile', { replace: true });
       })
       .catch((error) => {
@@ -155,7 +155,6 @@ export const Login = () => {
                     name="email"
                     autoComplete="email"
                     color="inputColor"
-                    InputLabelProps={{ sx: { color: '#fff' } }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -168,7 +167,6 @@ export const Login = () => {
                     id="password"
                     autoComplete="new-password"
                     color="inputColor"
-                    InputLabelProps={{ sx: { color: '#fff' } }}
                   />
                 </Grid>
               </Grid>

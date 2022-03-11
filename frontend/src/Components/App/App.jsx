@@ -7,11 +7,11 @@ import {
   Route,
   Outlet,
 } from 'react-router-dom';
-import { Homepage } from '../Pages/Homepage';
-import { Portfolio } from '../Pages/Portfolio';
-import { Pokedex } from '../Pages/Pokedex';
-import { Contact } from '../Pages/Contact';
-import { NotFound } from '../Pages/NotFound/NotFound';
+import { Homepage } from '../../Pages/Homepage';
+import { Portfolio } from '../../Pages/Portfolio';
+import { Pokedex } from '../../Pages/Pokedex';
+import { Contact } from '../../Pages/Contact';
+import { NotFound } from '../../Pages/NotFound/NotFound';
 import { Navbar } from '../Navbar';
 import { Fallback } from '../Fallback';
 import { auth } from '../../Utils/Authentication/firebase-config';
@@ -22,25 +22,25 @@ import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../Redux/actions';
 
 const Login = lazy(() =>
-  import('../Pages/Authentication/Login').then((module) => ({
+  import('../../Pages/Authentication/Login').then((module) => ({
     default: module.Login,
   }))
 );
 
 const Register = lazy(() =>
-  import('../Pages/Authentication/Register').then((module) => ({
+  import('../../Pages/Authentication/Register').then((module) => ({
     default: module.Register,
   }))
 );
 
 const ResetPassword = lazy(() =>
-  import('../Pages/Authentication/ResetPassword').then((module) => ({
+  import('../../Pages/Authentication/ResetPassword').then((module) => ({
     default: module.ResetPassword,
   }))
 );
 
 const Logout = lazy(() =>
-  import('../Pages/Authentication/Logout').then((module) => ({
+  import('../../Pages/Authentication/Logout').then((module) => ({
     default: module.Logout,
   }))
 );
@@ -65,12 +65,12 @@ export const App = () => {
           <CssBaseline />
           <Navbar />
           <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="portfolio" element={<Portfolio />} />
-            <Route path="pokedex" element={<Pokedex />} />
-            <Route path="Contact" element={<Contact />} />
+            <Route path='/' element={<Homepage />} />
+            <Route path='portfolio' element={<Portfolio />} />
+            <Route path='Contact' element={<Contact />} />
+            <Route path='pokedex' element={<Pokedex />} />
             <Route
-              path="login"
+              path='login'
               element={
                 <Suspense fallback={<Fallback />}>
                   <Login />
@@ -78,7 +78,7 @@ export const App = () => {
               }
             />
             <Route
-              path="register"
+              path='register'
               element={
                 <Suspense fallback={<Fallback />}>
                   <Register />
@@ -86,7 +86,7 @@ export const App = () => {
               }
             />
             <Route
-              path="logout"
+              path='logout'
               element={
                 <Suspense fallback={<Fallback />}>
                   <Logout />
@@ -94,14 +94,14 @@ export const App = () => {
               }
             />
             <Route
-              path="resetpassword"
+              path='resetpassword'
               element={
                 <Suspense fallback={<Fallback />}>
                   <ResetPassword />
                 </Suspense>
               }
             />
-            <Route path="*" element={<NotFound />} />
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </ThemeProvider>
         <Outlet />

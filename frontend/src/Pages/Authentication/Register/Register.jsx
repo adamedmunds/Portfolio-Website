@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import GoogleButton from '../../../../Utils/Resources/googleSignIn.png';
+import GoogleButton from '../../../Utils/Resources/googleSignIn.png';
 import {
   Avatar,
   Box,
@@ -19,12 +19,12 @@ import {
   onAuthStateChanged,
   sendEmailVerification,
 } from 'firebase/auth';
-import { auth } from '../../../../Utils/Authentication/firebase-config';
-import Background from '../../../../Utils/Resources/background.svg';
+import { auth } from '../../../Utils/Authentication/firebase-config';
+import Background from '../../../Utils/Resources/background.svg';
 import { styled } from '@mui/material/styles';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 import { Link, useNavigate } from 'react-router-dom';
-import { createFirestoreUser } from '../../../../Utils/API/createFirestoreUser';
+import { createUser } from '../../../Utils/API/createUser';
 
 const StyledTextField = styled(TextField)(`
   &:hover .${outlinedInputClasses.notchedOutline} {
@@ -54,7 +54,7 @@ export const Register = () => {
         data.get('password').toString()
       );
       sendEmailVerification(auth.currentUser).then(() => {});
-      createFirestoreUser(user.user);
+      createUser(user.user);
       navigate('/profile', { replace: true });
     } catch (error) {
       handleErrorMessage(error);
@@ -65,7 +65,7 @@ export const Register = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
-        createFirestoreUser(result.user);
+        createUser(result.user);
         navigate('/profile', { replace: true });
       })
       .catch((error) => {
@@ -157,7 +157,6 @@ export const Register = () => {
                     name="email"
                     autoComplete="email"
                     color="inputColor"
-                    InputLabelProps={{ sx: { color: '#fff' } }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -170,7 +169,6 @@ export const Register = () => {
                     id="password"
                     autoComplete="new-password"
                     color="inputColor"
-                    InputLabelProps={{ sx: { color: '#fff' } }}
                   />
                 </Grid>
               </Grid>
