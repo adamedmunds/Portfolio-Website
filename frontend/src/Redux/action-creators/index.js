@@ -1,4 +1,9 @@
-import { AUTH_USER, LOGOUT_USER, NEW_POKDEX_ENTRY } from '../actionList';
+import {
+  AUTH_USER,
+  LOGOUT_USER,
+  NEW_POKDEX_ENTRY,
+  UPDATE_COLOR,
+} from '../actionList';
 import axios from 'axios';
 
 export const authenticateUser = (user) => {
@@ -32,9 +37,20 @@ export const logoutUser = () => {
 
 export const newPokedexEntry = (page) => {
   return (dispatch) => {
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${page}`).then((res) => {
+      dispatch({
+        type: NEW_POKDEX_ENTRY,
+        pokedex: { data: res.data },
+      });
+    });
+  };
+};
+
+export const newColor = (color, luma) => {
+  return (dispatch) => {
     dispatch({
-      type: NEW_POKDEX_ENTRY,
-      pokedex: { id: page },
+      type: UPDATE_COLOR,
+      color: { color: color, luma: luma },
     });
   };
 };

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import darkTheme from '../../Utils/Themes/Dark';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import {

@@ -10,7 +10,7 @@ def connect_to_mongo() -> MongoClient:
     return client
 
 
-def createUser(user: dict):
+def createUser(user: dict) -> None:
     client = connect_to_mongo()
     database = client['database']
     user_collection = database['users']
@@ -29,7 +29,7 @@ def createUser(user: dict):
     client.close()
 
 
-def getUser(userId: str):
+def getUser(userId: str) -> dict:
     client = connect_to_mongo()
     database = client['database']
     user_collection = database['users']
