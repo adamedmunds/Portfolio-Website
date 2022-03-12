@@ -12,7 +12,7 @@ export const PokedexBody = () => {
   const { data: pokedexData } = useSelector((state) => state.pokedex);
   const { newColor } = bindActionCreators(actionCreators, dispatch);
 
-  const { color, _ } = useColorThief(pokedexData?.sprites.front_default, {
+  const { color } = useColorThief(pokedexData?.sprites.front_default, {
     format: 'hex',
     colorCount: 10,
     quality: 12,
