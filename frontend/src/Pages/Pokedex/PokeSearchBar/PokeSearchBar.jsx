@@ -3,7 +3,6 @@ import {
   Box,
   Container,
   createFilterOptions,
-  IconButton,
   Pagination,
   Stack,
   TextField,
@@ -22,13 +21,10 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../../Redux/actions';
-import { useSnackbar } from 'notistack';
-import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
-
 import { VariableSizeList } from 'react-window';
 
-export const PokeSearchBar = (props) => {
+export const PokeSearchBar = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const { data: reduxPokemonSearchData } = useSelector(
@@ -38,7 +34,6 @@ export const PokeSearchBar = (props) => {
     actionCreators,
     dispatch
   );
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [inputValue, setInputValue] = useState('');
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
@@ -59,17 +54,6 @@ export const PokeSearchBar = (props) => {
     newPokedexEntry(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const action = (key) => (
-    <IconButton
-      size='small'
-      aria-label='close'
-      color='inherit'
-      onClick={() => closeSnackbar(key)}
-    >
-      <CloseIcon fontSize='small' />
-    </IconButton>
-  );
 
   const handleSubmit = async (e) => {
     axios
