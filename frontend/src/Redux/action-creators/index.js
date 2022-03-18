@@ -46,6 +46,15 @@ export const newPokedexEntry = (page) => {
   };
 };
 
+export const newPokedexEntryNoAPI = (data) => {
+  return (dispatch) => {
+    dispatch({
+      type: NEW_POKDEX_ENTRY,
+      pokedex: { data: data },
+    });
+  };
+};
+
 export const newColor = (color, luma) => {
   return (dispatch) => {
     dispatch({

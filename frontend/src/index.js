@@ -1,16 +1,31 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import { Provider } from "react-redux";
-import { store } from "./Redux/store";
+import { Provider } from 'react-redux';
+import { store } from './Redux/store';
 
-import { App } from "./Components/App";
+import { App } from './Components/App';
+import { SnackbarProvider } from 'notistack';
+import { Fade } from '@mui/material';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <SnackbarProvider
+      maxSnack={3}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      TransitionComponent={Fade}
+      hideIconVariant
+      preventDuplicate
+      transitionDuration={{ exit: 200, enter: 200 }}
+      autoHideDuration={8000}
+    >
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </SnackbarProvider>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );

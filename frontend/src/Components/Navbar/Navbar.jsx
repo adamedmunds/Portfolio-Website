@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ArticleIcon from '@mui/icons-material/Article';
@@ -35,7 +35,6 @@ export const Navbar = () => {
   const dispatch = useDispatch();
   const { logoutUser } = bindActionCreators(actionCreators, dispatch);
   const [isSidebarOpen, setSideBarOpen] = useState(false);
-  const [photo, setPhoto] = useState('');
   const navigate = useNavigate();
   const isUserLoggedIn = !isEmpty(user);
   const tooltipMessage = isUserLoggedIn ? 'Profile' : 'Login';
@@ -46,12 +45,6 @@ export const Navbar = () => {
     <CatchingPokemonIcon sx={{ transform: 'rotate(180deg)' }} />,
     <EmailIcon />,
   ];
-  useEffect(() => {
-    setPhoto(user.photo);
-  }, [user.photo]);
-
-  let userURL = isUserLoggedIn ? (user.photoURL ? user.photoURL : photo) : '';
-
   const toggleDrawer = (open) => (event) => {
     if (
       event.type === 'keydown' &&
@@ -78,9 +71,9 @@ export const Navbar = () => {
 
   return (
     <>
-      <AppBar position="absolute" color="transparent" elevation={0}>
+      <AppBar position='absolute' color='transparent' elevation={0}>
         <Fade in={true} timeout={1000}>
-          <Container maxWidth="false" component="section">
+          <Container maxWidth='false' component='section'>
             <Toolbar disableGutters>
               <Box
                 sx={{
@@ -89,9 +82,9 @@ export const Navbar = () => {
                 }}
               >
                 <IconButton
-                  size="large"
-                  edge="start"
-                  aria-label="open drawer"
+                  size='large'
+                  edge='start'
+                  aria-label='open drawer'
                   sx={{
                     color: 'primary.white',
                   }}
@@ -114,7 +107,7 @@ export const Navbar = () => {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title={tooltipMessage}>
                   <IconButton sx={{ gap: 2 }} onClick={handleClick}>
-                    <Avatar alt="Default Image" src={userURL} />
+                    <Avatar alt='Default Image' src={user.photo} />
                   </IconButton>
                 </Tooltip>
               </Box>
@@ -131,7 +124,7 @@ export const Navbar = () => {
       >
         <Box
           sx={{ width: { xs: 175, md: 250 } }}
-          role="presentation"
+          role='presentation'
           onClick={toggleDrawer(false)}
           onKeyDown={toggleDrawer(false)}
         >
@@ -153,7 +146,7 @@ export const Navbar = () => {
               </ListItem>
             ))}
           </List>
-          <Divider sx={{ bgcolor: '#CACACA' }} variant="middle" />
+          <Divider sx={{ bgcolor: '#CACACA' }} variant='middle' />
           <List>
             {isUserLoggedIn ? (
               <ListItem button key={'Logout'} onClick={logout}>

@@ -2,7 +2,7 @@ import { Container, CssBaseline, createTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { PokedexBody } from './PokedexBody';
-import { PokeIdNumberBar } from './PokeIdNumberBar';
+import { PokeSearchBar } from './PokeSearchBar';
 
 const theme = (color, luma) =>
   createTheme({
@@ -31,6 +31,9 @@ const theme = (color, luma) =>
     typography: {
       allVariants: {
         fontFamily: "'Montserrat', sans-serif",
+      },
+      pokemonList: {
+        fontWeight: '600',
       },
     },
     components: {
@@ -106,7 +109,7 @@ export const Pokedex = () => {
     <Container maxWidth='false'>
       <ThemeProvider theme={theme(boxColor.color, boxColor.luma)}>
         <CssBaseline />
-        <PokeIdNumberBar />
+        <PokeSearchBar />
         <PokedexBody />
       </ThemeProvider>
     </Container>
