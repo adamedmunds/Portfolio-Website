@@ -100,6 +100,16 @@ const theme = (color, luma) =>
           },
         },
       },
+      MuiChip: {
+        styleOverrides: {
+          root: {
+            // backgroundColor: 'white',
+          },
+          label: {
+            textTransform: 'capitalize',
+          },
+        },
+      },
     },
   });
 
