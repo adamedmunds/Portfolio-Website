@@ -1,13 +1,5 @@
-import {
-  Box,
-  Container,
-  Chip,
-  Divider,
-  Grid,
-  Tooltip,
-  Typography,
-} from '@mui/material';
-import { useEffect } from 'react';
+import { Box, Container, Chip, Grid, Tooltip, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators } from '../../../Redux/actions';
@@ -15,10 +7,15 @@ import useColorThief from 'use-color-thief';
 import { isNull } from 'lodash';
 import pSBC from 'shade-blend-color';
 import { types } from '../../../Utils/Resources/typeExporter';
+import {
+  importAll,
+  toTitleCase,
+} from '../../../Utils/Resources/helperFunctions';
 
 export const PokedexBody = () => {
   const dispatch = useDispatch();
   const boxColor = useSelector((state) => state.color);
+  const [images, setImages] = useState({});
   const { data: pokedexData } = useSelector((state) => state.pokedex);
   const { data: translatedNames } = useSelector((state) => state.pokemonList);
   const { newColor } = bindActionCreators(actionCreators, dispatch);
@@ -27,6 +24,7 @@ export const PokedexBody = () => {
     colorCount: 10,
     quality: 10,
   });
+
   useEffect(() => {
     if (!isNull(color)) {
       const hex = pSBC(0.5, color, '#FFF');
@@ -36,6 +34,15 @@ export const PokedexBody = () => {
       const luma = Math.sqrt(R * R * 0.241 + G * G * 0.691 + B * B * 0.068);
       newColor(hex, luma);
     }
+    setImages(
+      importAll(
+        require.context(
+          '../../../Utils/Resources/PokemonIcons',
+          false,
+          /\.(png|jpe?g|svg)$/
+        )
+      )
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [color]);
 
@@ -43,7 +50,7 @@ export const PokedexBody = () => {
     <Container maxWidth='false'>
       <img
         width='25%'
-        src={pokedexData.sprites.other['official-artwork'].front_default}
+        src={images[`${pokedexData.id}.png`]}
         alt={`${pokedexData.name}`}
         style={{
           zIndex: '-1',
@@ -85,44 +92,47 @@ export const PokedexBody = () => {
         </Grid>
 
         <Grid item container direction='row'>
-          <Grid item xs={7} mt={10}>
-            <Typography
-              variant='h1'
-              ml={10}
-              sx={{
-                color:
-                  boxColor.luma <= 128
-                    ? 'rgb(255 255 255 / 60%)'
-                    : 'rgb(0 0 0 / 60%)',
-                fontWeight: 'fontWeightBold',
-                fontfamily: "'Rubik', sans-serif",
-              }}
-            >
-              {translatedNames[pokedexData?.id - 1].japanese}
-            </Typography>
-
-            <Typography
-              variant='h1'
-              ml={10}
-              mt={4}
-              sx={{
-                color:
-                  boxColor.luma <= 128
-                    ? 'rgb(255 255 255 / 60%)'
-                    : 'rgb(0 0 0 / 60%)',
-                fontWeight: 'fontWeightBold',
-                fontfamily: "'Rubik', sans-serif",
-              }}
-            >
-              {translatedNames[pokedexData?.id - 1].chinese}
-            </Typography>
+          <Grid item xs={4} mt={10}>
+            <Tooltip title='Japanese'>
+              <Typography
+                variant='h1'
+                ml={10}
+                sx={{
+                  color:
+                    boxColor.luma <= 128
+                      ? 'rgb(255 255 255 / 60%)'
+                      : 'rgb(0 0 0 / 60%)',
+                  fontWeight: 'fontWeightBold',
+                  fontfamily: "'Rubik', sans-serif",
+                }}
+              >
+                {translatedNames[pokedexData?.id - 1].japanese}
+              </Typography>
+            </Tooltip>
+            <Tooltip title='Chinese'>
+              <Typography
+                variant='h1'
+                ml={10}
+                mt={2}
+                sx={{
+                  color:
+                    boxColor.luma <= 128
+                      ? 'rgb(255 255 255 / 60%)'
+                      : 'rgb(0 0 0 / 60%)',
+                  fontWeight: 'fontWeightBold',
+                  fontfamily: "'Rubik', sans-serif",
+                }}
+              >
+                {translatedNames[pokedexData?.id - 1].chinese}
+              </Typography>
+            </Tooltip>
           </Grid>
-
+          <Grid item xs={3} />
           <Grid container item xs>
             {pokedexData.types.map((typeData) => (
               <Grid item xs={2} key={typeData.type.name}>
                 <Tooltip
-                  title={typeData.type.name}
+                  title={toTitleCase(typeData.type.name)}
                   p={1}
                   sx={{
                     backgroundColor: 'white',
@@ -162,6 +172,7 @@ export const PokedexBody = () => {
                       sx={{
                         backgroundColor: 'white',
                         filter: 'drop-shadow(0 1mm 0.25rem rgb(0 0 0 / 30%))',
+                        borderRadius: '8px',
                       }}
                     />
                   </Grid>
@@ -193,6 +204,7 @@ export const PokedexBody = () => {
                             backgroundColor: '#C9C8C8',
                             filter:
                               'drop-shadow(0 1mm 0.25rem rgb(0 0 0 / 30%))',
+                            borderRadius: '8px',
                           }}
                         />
                       </Tooltip>
@@ -203,6 +215,7 @@ export const PokedexBody = () => {
                           backgroundColor: 'white',
                           fontWeight: 'bold',
                           filter: 'drop-shadow(0 1mm 0.25rem rgb(0 0 0 / 30%))',
+                          borderRadius: '8px',
                         }}
                       />
                     )}

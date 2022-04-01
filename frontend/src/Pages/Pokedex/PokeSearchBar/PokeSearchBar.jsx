@@ -23,10 +23,12 @@ import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../../Redux/actions';
 import axios from 'axios';
 import { VariableSizeList } from 'react-window';
+import { importAll } from '../../../Utils/Resources/helperFunctions';
 
 export const PokeSearchBar = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
+  const [images, setImages] = useState({});
   const { data: reduxPokemonSearchData } = useSelector(
     (state) => state.pokemonList
   );
@@ -52,6 +54,15 @@ export const PokeSearchBar = () => {
 
   useEffect(() => {
     newPokedexEntry(1);
+    setImages(
+      importAll(
+        require.context(
+          '../../../Utils/Resources/PokemonIcons',
+          false,
+          /\.(png|jpe?g|svg)$/
+        )
+      )
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -93,7 +104,12 @@ export const PokeSearchBar = () => {
 
     return (
       <Box component='li' {...dataSet[0]} noWrap style={inlineStyle}>
-        <img src={dataSet[1].image} alt='' width='40' loading='lazy' />
+        <img
+          src={images[`${dataSet[1].id}.png`]}
+          alt=''
+          width='30'
+          loading='lazy'
+        />
         <Typography mr={2} ml={1} variant='pokemonList'>
           #{dataSet[1].id}
         </Typography>
