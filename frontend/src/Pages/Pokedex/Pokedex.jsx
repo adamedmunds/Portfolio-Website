@@ -102,11 +102,15 @@ const theme = (color, luma) =>
       },
       MuiChip: {
         styleOverrides: {
-          root: {
-            // backgroundColor: 'white',
-          },
           label: {
             textTransform: 'capitalize',
+          },
+        },
+      },
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            backgroundColor: '#E5E5E5',
           },
         },
       },

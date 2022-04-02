@@ -1,8 +1,11 @@
 import {
   AUTH_USER,
   LOGOUT_USER,
+  NEW_CURRENT_POKEMON_DATA,
   NEW_POKDEX_ENTRY,
+  NEW_POKEMON_EVO_CHAIN,
   UPDATE_COLOR,
+  UPDATE_PAGE,
 } from '../actionList';
 import axios from 'axios';
 
@@ -60,6 +63,35 @@ export const newColor = (color, luma) => {
     dispatch({
       type: UPDATE_COLOR,
       color: { color: color, luma: luma },
+    });
+  };
+};
+
+export const newEvoData = (url) => {
+  return (dispatch) => {
+    axios.get(url).then((res) => {
+      dispatch({
+        type: NEW_POKEMON_EVO_CHAIN,
+        evolutionData: { data: res.data },
+      });
+    });
+  };
+};
+
+export const newCurrentPokemonEntry = (data) => {
+  return (dispatch) => {
+    dispatch({
+      type: NEW_CURRENT_POKEMON_DATA,
+      currentPokemon: { data: data },
+    });
+  };
+};
+
+export const updatePage = (pageData) => {
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_PAGE,
+      pageData: { data: pageData },
     });
   };
 };

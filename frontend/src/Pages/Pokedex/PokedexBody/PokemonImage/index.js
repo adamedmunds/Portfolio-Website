@@ -1,0 +1,1 @@
+export { PokemonImage } from './PokemonImage';

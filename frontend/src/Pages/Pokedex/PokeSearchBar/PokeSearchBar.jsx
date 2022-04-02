@@ -27,15 +27,18 @@ import { importAll } from '../../../Utils/Resources/helperFunctions';
 
 export const PokeSearchBar = () => {
   const dispatch = useDispatch();
-  const [page, setPage] = useState(1);
   const [images, setImages] = useState({});
   const { data: reduxPokemonSearchData } = useSelector(
     (state) => state.pokemonList
   );
-  const { newPokedexEntry, newPokedexEntryNoAPI } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { data: currentPage } = useSelector((state) => state.currentPage);
+  const {
+    newPokedexEntry,
+    newPokedexEntryNoAPI,
+    newEvoData,
+    newCurrentPokemonEntry,
+    updatePage,
+  } = bindActionCreators(actionCreators, dispatch);
   const [inputValue, setInputValue] = useState('');
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
@@ -43,6 +46,7 @@ export const PokeSearchBar = () => {
       setOpen(true);
     }
   };
+
   const handleInputChange = (_, newInputValue) => {
     setInputValue(newInputValue);
     if (newInputValue.length > 0) {
@@ -54,6 +58,10 @@ export const PokeSearchBar = () => {
 
   useEffect(() => {
     newPokedexEntry(1);
+    axios.get('https://pokeapi.co/api/v2/pokemon-species/1').then((result) => {
+      newEvoData(result.data.evolution_chain.url);
+      newCurrentPokemonEntry(result.data);
+    });
     setImages(
       importAll(
         require.context(
@@ -71,7 +79,11 @@ export const PokeSearchBar = () => {
       .get(`https://pokeapi.co/api/v2/pokemon/${e.toLowerCase()}`)
       .then((res) => {
         newPokedexEntryNoAPI(res.data);
-        setPage(parseInt(res.data.id));
+        axios.get(res.data.species.url).then((result) => {
+          newEvoData(result.data.evolution_chain.url);
+          newCurrentPokemonEntry(result.data);
+        });
+        updatePage(parseInt(res.data.id));
       });
   };
 
@@ -183,10 +195,16 @@ export const PokeSearchBar = () => {
           siblingCount={8}
           onChange={(_, page) => {
             newPokedexEntry(page);
-            setPage(page);
+            updatePage(page);
+            axios
+              .get(`https://pokeapi.co/api/v2/pokemon-species/${page}`)
+              .then((result) => {
+                newEvoData(result.data.evolution_chain.url);
+                newCurrentPokemonEntry(result.data);
+              });
           }}
           color='paginationHighlight'
-          page={page}
+          page={parseInt(currentPage)}
         />
         <Autocomplete
           id='pokemon-search-autocomplete'
@@ -194,8 +212,6 @@ export const PokeSearchBar = () => {
           options={reduxPokemonSearchData}
           autoHighlight
           disableClearable
-          clearOnBlur
-          clearOnEscape
           ListboxComponent={ListboxComponent}
           getOptionLabel={(option) => option.name}
           filterOptions={filterOptions}
@@ -208,6 +224,7 @@ export const PokeSearchBar = () => {
           onClose={() => setOpen(false)}
           inputValue={inputValue}
           onInputChange={handleInputChange}
+          popupIcon={null}
           renderInput={(params) => (
             <TextField
               id='pokemon-search-field'

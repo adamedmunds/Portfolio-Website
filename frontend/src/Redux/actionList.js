@@ -2,4 +2,9 @@ export const AUTH_USER = 'AUTH_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 
 export const NEW_POKDEX_ENTRY = 'NEW_POKDEX_ENTRY';
+export const NEW_POKEMON_EVO_CHAIN = 'NEW_POKEMON_EVO_CHAIN';
+export const NEW_CURRENT_POKEMON_DATA = 'NEW_CURRENT_POKEMON_DATA';
+
+export const UPDATE_PAGE = 'UPDATE_PAGE';
+
 export const UPDATE_COLOR = 'UPDATE_COLOR';

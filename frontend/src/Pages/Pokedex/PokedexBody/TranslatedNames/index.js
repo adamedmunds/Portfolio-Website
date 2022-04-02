@@ -1,0 +1,1 @@
+export {TranslatedNames} from './TranslatedNames';
