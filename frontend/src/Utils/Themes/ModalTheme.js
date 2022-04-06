@@ -1,0 +1,17 @@
+export const ModalTheme = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: { xs: '75vw', xl: '35vw' },
+  border: '1px solid #000',
+  boxShadow: 24,
+  p: 6,
+  backgroundColor: 'gray',
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: '16px',
+  overflowY: 'scroll',
+  height: '75%',
+  display: 'block',
+};

@@ -188,7 +188,7 @@ export const PokeSearchBar = () => {
     <Container maxWidth='xl' sx={{ zIndex: 1101, position: 'relative' }}>
       <Stack justifyContent='center' alignItems='center' mt={2} spacing={1}>
         <Pagination
-          count={493}
+          count={898}
           size='large'
           showFirstButton
           showLastButton

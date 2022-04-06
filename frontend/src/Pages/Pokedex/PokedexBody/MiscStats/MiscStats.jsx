@@ -11,8 +11,7 @@ export const MiscStats = () => {
       <Stat stat={`Height: ${pokedexData.height / 10}m`} />
       <Stat stat={`Weight: ${pokedexData.weight / 10}kg`} />
       <Stat stat={`Base Experience: ${pokedexData.base_experience}`} />
-      <Stat stat={`Category: ${currentPokemon.genera[7].genus}`} />
-      <Stat stat={`Shape: ${currentPokemon.shape.name}`} />
+      <Stat stat={`Shape: ${currentPokemon.shape ? currentPokemon.shape.name : 'Unknown'}`} />
       <Stat stat={`Color: ${currentPokemon.color.name}`} />
       <Stat
         stat={`Generation: ${genTranslator(

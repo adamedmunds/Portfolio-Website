@@ -1,12 +1,11 @@
 import { Container, Grid } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators } from '../../../Redux/actions';
 import useColorThief from 'use-color-thief';
 import { isNull } from 'lodash';
 import pSBC from 'shade-blend-color';
-import { importAll } from '../../../Utils/Resources/helperFunctions';
 
 import { Description } from './Description';
 import { MiscStats } from './MiscStats';
@@ -16,8 +15,8 @@ import { TypesAndAbilities } from './TypesAndAbilities';
 
 export const PokedexBody = () => {
   const dispatch = useDispatch();
-  const [images, setImages] = useState({});
   const { data: pokedexData } = useSelector((state) => state.pokedex);
+  const { data: currentPokemon } = useSelector((state) => state.currentPokemon);
 
   const { newColor } = bindActionCreators(actionCreators, dispatch);
   const { color } = useColorThief(pokedexData?.sprites.front_default, {
@@ -33,31 +32,22 @@ export const PokedexBody = () => {
       const G = parseInt(hex.substring(3, 5), 16);
       const B = parseInt(hex.substring(5, 7), 16);
       const luma = Math.sqrt(R * R * 0.241 + G * G * 0.691 + B * B * 0.068);
-      newColor(hex, luma);
+      newColor(hex, luma, color);
     }
-    setImages(
-      importAll(
-        require.context(
-          '../../../Utils/Resources/PokemonIcons',
-          false,
-          /\.(png|jpe?g|svg)$/
-        )
-      )
-    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [color]);
 
-  return pokedexData ? (
+  return pokedexData && currentPokemon ? (
     <Container maxWidth='false'>
-      <PokemonImage images={images} />
+      <PokemonImage />
 
-      <Grid container spacing={2} mt={2} direction='column'>
+      <Grid container mt={2}>
         <Header />
         <TypesAndAbilities />
         <MiscStats />
       </Grid>
 
-      <Description images={images}/>
+      <Description />
     </Container>
   ) : (
     <></>

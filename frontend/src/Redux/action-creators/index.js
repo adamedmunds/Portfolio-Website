@@ -58,11 +58,11 @@ export const newPokedexEntryNoAPI = (data) => {
   };
 };
 
-export const newColor = (color, luma) => {
+export const newColor = (color, luma, oldColor) => {
   return (dispatch) => {
     dispatch({
       type: UPDATE_COLOR,
-      color: { color: color, luma: luma },
+      color: { color: color, luma: luma, originalColor: oldColor },
     });
   };
 };

@@ -23,13 +23,25 @@ export const genTranslator = (gen) => {
       return 'Three';
     case 'iv':
       return 'Four';
+    case 'v':
+      return 'Five';
+    case 'vi':
+      return 'Six';
+    case 'vii':
+      return 'Seven';
+    case 'viii':
+      return 'Eight';
+    case 'ix':
+      return 'Nine';
+    case 'x':
+      return 'Ten';
     default:
       return 'Unknown';
   }
 };
 
-export const convertName = (item) => {
-  switch (item) {
+export const convertName = (translation) => {
+  switch (translation) {
     case 'dawn-stone':
       return 'Dawn Stone';
     case 'dusk-stone':
@@ -86,15 +98,90 @@ export const convertName = (item) => {
       return 'Up-Grade';
     case 'double-hit':
       return 'Double Hit';
+    case 'eterna-forest':
+      return 'Eterna Forest';
+    case 'sinnoh-route-217':
+      return 'Sinnoh Route 217';
+    case 'fairy':
+      return 'Fairy';
+    case 'omega-ruby':
+      return 'Omega Ruby';
+    case 'alpha-sapphire':
+      return 'Alpha Sapphire';
+    case 'lets-go-eevee':
+      return "Let's Go Eevee";
+    case 'lets-go-pikachu':
+      return "Let's Go Pikachu";
+    case 'red':
+      return 'Red';
+    case 'blue':
+      return 'Blue';
+    case 'yellow':
+      return 'Yellow';
+    case 'gold':
+      return 'Gold';
+    case 'silver':
+      return 'Silver';
+    case 'crystal':
+      return 'Crystal';
+    case 'ruby':
+      return 'Ruby';
+    case 'sapphire':
+      return 'Sapphire';
+    case 'emerald':
+      return 'Emerald';
+    case 'firered':
+      return 'Fire Red';
+    case 'leafgreen':
+      return 'Leaf Green';
+    case 'heartgold':
+      return 'Heart Gold';
+    case 'soulsilver':
+      return 'Soul Silver';
+    case 'black':
+      return 'Black';
+    case 'white':
+      return 'White';
+    case 'black-2':
+      return 'Black 2';
+    case 'white-2':
+      return 'White 2';
+    case 'x':
+      return 'X';
+    case 'y':
+      return 'Y';
+    case 'diamond':
+      return 'Diamond';
+    case 'pearl':
+      return 'Pearl';
+    case 'platinum':
+      return 'Platinum';
+    case 'sword':
+      return 'Sword';
+    case 'shield':
+      return 'Shield';
+    case 'tart-apple':
+      return 'Tart Apple';
+    case 'sweet-apple':
+      return 'Sweet Apple';
+    case 'sun':
+      return 'Sun';
+    case 'moon':
+      return 'Moon';
+    case 'ultra-sun':
+      return 'Ultra Sun';
+    case 'ultra-moon':
+      return 'Ultra Moon';
     default:
+      console.log(translation);
       return 'Unknown';
   }
 };
 
 export const getEvolutionTrigger = (input) => {
-  console.log(input);
   if (input === undefined) return;
   const trigger = input.trigger.name;
+  console.log(input);
   var returnValue;
 
   if (trigger === 'use-item') {
@@ -102,7 +189,7 @@ export const getEvolutionTrigger = (input) => {
   } else if (trigger === 'trade') {
     const needsItem = input.held_item === null;
     returnValue = `Trade ${
-      !needsItem ? `with ${convertName(input.held_item.name)}` : ''
+      !needsItem ? `holding ${convertName(input.held_item.name)}` : ''
     }`;
   } else if (trigger === 'level-up') {
     if (input.min_level != null) {
@@ -116,10 +203,18 @@ export const getEvolutionTrigger = (input) => {
     } else if (input.known_move != null) {
       returnValue = `Level up knowing ${convertName(input.known_move.name)}`;
     } else if (input.held_item != null) {
-      returnValue = `Level up with ${convertName(input.held_item.name)}`;
+      returnValue = `Level up holding ${convertName(input.held_item.name)}`;
+    } else if (input.known_move_type != null) {
+      returnValue = `Level up knowing a ${convertName(
+        input.known_move_type.name
+      )} move`;
     }
   } else if (trigger === 'three-critical-hits') {
     returnValue = `Three critical hits in one battle`;
+  } else if (trigger === 'shed') {
+    returnValue = 'Level 20, with empty PokéBall and an open slot in party';
+  } else if (trigger === 'tower-of-darkness') {
+    returnValue = 'Interact with Scroll of Darkness';
   }
   if (input.time_of_day !== '') {
     returnValue += ` in the ${input.time_of_day}`;
@@ -130,5 +225,26 @@ export const getEvolutionTrigger = (input) => {
   if (input.gender === 1) {
     returnValue += ' (Female) ';
   }
+  if (input.min_affection != null) {
+    returnValue += ` with ${input.min_affection}+ affection`;
+  }
+  if (input.relative_physical_stats === 1) {
+    returnValue = `Level up with Attack > Defense`;
+  } else if (input.relative_physical_stats === -1) {
+    returnValue = `Level up with Attack < Defense`;
+  } else if (input.relative_physical_stats === 0) {
+    returnValue = `Level up with Attack = Defense`;
+  }
   return returnValue;
+};
+
+export const removeDashes = (name) => {
+  const nameList = name.split('-');
+  console.log(nameList);
+  if (nameList.length > 1 && nameList.length < 3) {
+    return nameList[1];
+  } else if (nameList.length > 2) {
+    return `Mega ${nameList[2]}`;
+  }
+  return nameList[0];
 };

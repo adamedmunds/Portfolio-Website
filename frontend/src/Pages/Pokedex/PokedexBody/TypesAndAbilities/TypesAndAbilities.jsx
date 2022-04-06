@@ -1,85 +1,114 @@
-import { Box, Chip, Grid, Tooltip, Typography } from '@mui/material';
+import { Box, Chip, Grid, Stack, Tooltip, Typography } from '@mui/material';
 import { TranslatedNames } from '../TranslatedNames';
-import { toTitleCase } from '../../../../Utils/Resources/helperFunctions';
-import { useSelector } from 'react-redux';
+import {
+  toTitleCase,
+  removeDashes,
+} from '../../../../Utils/Resources/helperFunctions';
 import { types } from '../../../../Utils/Resources/typeExporter';
+import pSBC from 'shade-blend-color';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../../../Redux/actions';
 
 export const TypesAndAbilities = () => {
   const { data: pokedexData } = useSelector((state) => state.pokedex);
+  const { data: currentPokemon } = useSelector((state) => state.currentPokemon);
   const boxColor = useSelector((state) => state.color);
+  const dispatch = useDispatch();
+  const { newPokedexEntryNoAPI, newEvoData, newCurrentPokemonEntry } =
+    bindActionCreators(actionCreators, dispatch);
+
+  const handleClick = (data) => {
+    axios
+      .get(`https://pokeapi.co/api/v2/pokemon/${data.toLowerCase()}`)
+      .then((res) => {
+        newPokedexEntryNoAPI(res.data);
+        axios.get(res.data.species.url).then((result) => {
+          newEvoData(result.data.evolution_chain.url);
+          newCurrentPokemonEntry(result.data);
+        });
+      });
+  };
+
   return (
-    <Grid item container direction='row'>
+    <Grid container>
       <TranslatedNames />
       <Grid item xs={3} />
-      <Grid container item xs>
-        {pokedexData.types.map((typeData) => (
-          <Grid item xs={2} key={typeData.type.name}>
+      <Grid item xs>
+        <Stack direction='row' spacing={5}>
+          {pokedexData.types.map((typeData) => (
             <Tooltip
               title={toTitleCase(typeData.type.name)}
-              p={1}
-              sx={{
-                backgroundColor: 'white',
-                borderRadius: '50%',
-              }}
+              key={typeData.type.name}
             >
               <Box
                 component='img'
                 boxShadow={4}
                 src={types[typeData.type.name].icon}
                 alt={typeData.type.name}
+                sx={{
+                  background: pSBC(
+                    0.3,
+                    types[typeData.type.name].color,
+                    '#FFF'
+                  ),
+                  borderRadius: '50%',
+                  p: 1,
+                  maxWidth: '50%',
+                  boxShadow: `0 0 1em ${types[typeData.type.name].color}`,
+                }}
               />
             </Tooltip>
-          </Grid>
-        ))}
-
-        <Grid container item xs={12} direction='row'>
-          <Grid item xs={12}>
-            <Typography
-              variant='h4'
-              sx={{
-                color: boxColor.luma <= 128 ? 'white' : 'black',
-                fontWeight: 'fontWeightMedium',
-                fontfamily: "'Rubik', sans-serif",
-                textShadow: '0 0 12px rgb(0 0 0 / 30%)',
-              }}
-            >
-              Base Stats:
-            </Typography>
-          </Grid>
-
-          <Grid container spacing={1.5}>
-            {pokedexData.stats.map((stat) => (
-              <Grid item key={stat.stat.name}>
-                <Chip
-                  label={`${stat.stat.name}: ${stat.base_stat}`}
-                  sx={{
-                    backgroundColor: 'white',
-                    filter: 'drop-shadow(0 1mm 0.25rem rgb(0 0 0 / 30%))',
-                    borderRadius: '8px',
-                  }}
-                />
-              </Grid>
-            ))}
-          </Grid>
+          ))}
+        </Stack>
+        <Grid item xs={12}>
+          <Typography
+            variant='h4'
+            mt={1}
+            sx={{
+              color: boxColor.luma <= 128 ? 'white' : 'black',
+              fontWeight: 'fontWeightMedium',
+              fontfamily: "'Rubik', sans-serif",
+              textShadow: '0 0 12px rgb(0 0 0 / 30%)',
+            }}
+          >
+            Base Stats:
+          </Typography>
         </Grid>
-        <Grid container>
-          <Grid item>
-            <Typography
-              variant='h4'
-              sx={{
-                color: boxColor.luma <= 128 ? 'white' : 'black',
-                fontWeight: 'fontWeightMedium',
-                fontfamily: "'Rubik', sans-serif",
-                textShadow: '0 0 12px rgb(0 0 0 / 30%)',
-              }}
-            >
-              Abilities:
-            </Typography>
-          </Grid>
-          <Grid container spacing={1.5}>
-            {pokedexData.abilities.map((ability) => (
-              <Grid item key={ability.ability.name}>
-                {ability.is_hidden ? (
+        <Grid container spacing={2}>
+          {pokedexData.stats.map((stat) => (
+            <Grid item key={`${stat.stat.name}: ${stat.base_stat}`}>
+              <Chip
+                label={`${stat.stat.name}: ${stat.base_stat}`}
+                sx={{
+                  backgroundColor: 'white',
+                  filter: 'drop-shadow(0 1mm 0.25rem rgb(0 0 0 / 30%))',
+                  borderRadius: '8px',
+                }}
+              />
+            </Grid>
+          ))}
+        </Grid>
+        <Grid item xs={12}>
+          <Typography
+            variant='h4'
+            mt={2}
+            sx={{
+              color: boxColor.luma <= 128 ? 'white' : 'black',
+              fontWeight: 'fontWeightMedium',
+              fontfamily: "'Rubik', sans-serif",
+              textShadow: '0 0 12px rgb(0 0 0 / 30%)',
+            }}
+          >
+            Abilities:
+          </Typography>
+        </Grid>
+        <Grid container spacing={2}>
+          {pokedexData.abilities.map((ability) => (
+            <Grid item key={ability.ability.name}>
+              {ability.is_hidden ? (
+                <>
                   <Tooltip title={'This is a hidden ability'}>
                     <Chip
                       label={ability.ability.name}
@@ -90,7 +119,9 @@ export const TypesAndAbilities = () => {
                       }}
                     />
                   </Tooltip>
-                ) : (
+                </>
+              ) : (
+                <>
                   <Chip
                     label={ability.ability.name}
                     sx={{
@@ -100,10 +131,57 @@ export const TypesAndAbilities = () => {
                       borderRadius: '8px',
                     }}
                   />
-                )}
-              </Grid>
-            ))}
-          </Grid>
+                </>
+              )}
+            </Grid>
+          ))}
+        </Grid>
+        <Grid item xs={12}>
+          <Typography
+            variant='h4'
+            mt={2}
+            sx={{
+              color: boxColor.luma <= 128 ? 'white' : 'black',
+              fontWeight: 'fontWeightMedium',
+              fontfamily: "'Rubik', sans-serif",
+              textShadow: '0 0 12px rgb(0 0 0 / 30%)',
+            }}
+          >
+            Forms:
+          </Typography>
+        </Grid>
+        <Grid container spacing={2}>
+          {currentPokemon.varieties?.map((form) => (
+            <Grid item key={form.pokemon.name}>
+              {pokedexData.name === form.pokemon.name ? (
+                <Tooltip title='Current Form'>
+                  <Chip
+                    label={removeDashes(form.pokemon.name)}
+                    sx={{
+                      backgroundColor: '#C9C8C8',
+                      fontWeight: 'bold',
+                      filter: 'drop-shadow(0 1mm 0.25rem rgb(0 0 0 / 30%))',
+                      borderRadius: '8px',
+                    }}
+                  />
+                </Tooltip>
+              ) : (
+                <Chip
+                  label={removeDashes(form.pokemon.name)}
+                  sx={{
+                    backgroundColor: 'white',
+                    fontWeight: 'bold',
+                    filter: 'drop-shadow(0 1mm 0.25rem rgb(0 0 0 / 30%))',
+                    borderRadius: '8px',
+                    '&:hover': {
+                      backgroundColor: '#C9C8C8',
+                    },
+                  }}
+                  onClick={() => handleClick(form.pokemon.name)}
+                />
+              )}
+            </Grid>
+          ))}
         </Grid>
       </Grid>
     </Grid>

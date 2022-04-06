@@ -37,13 +37,6 @@ const theme = (color, luma) =>
       },
     },
     components: {
-      MuiCssBaseline: {
-        styleOverrides: {
-          body: {
-            transition: '0.5s',
-          },
-        },
-      },
       MuiOutlinedInput: {
         styleOverrides: {
           root: {
@@ -111,6 +104,25 @@ const theme = (color, luma) =>
         styleOverrides: {
           root: {
             backgroundColor: '#E5E5E5',
+          },
+        },
+      },
+      MuiCssBaseline: {
+        styleOverrides: {
+          body: {
+            '::-webkit-scrollbar': {
+              display: 'none',
+            },
+            transition: 'background-color 0.5s ease',
+          },
+        },
+      },
+      MuiModal: {
+        styleOverrides: {
+          root: {
+            '*::-webkit-scrollbar': {
+              display: 'none',
+            },
           },
         },
       },

@@ -7,11 +7,11 @@ export const Stat = ({ stat }) => {
     <Typography
       variant='h6'
       sx={{
-        color: boxColor.luma <= 128 ? 'white' : 'black',
+        color:
+          boxColor.luma <= 128 ? 'rgb(255 255 255 / 70%)' : 'rgb(0 0 0 / 70%)',
         fontWeight: 'fontWeightMedium',
         textTransform: 'capitalize',
         fontfamily: "'Rubik', sans-serif",
-        textShadow: '0 0 12px rgb(0 0 0 / 30%)',
       }}
     >
       {stat}

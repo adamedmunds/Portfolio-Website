@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 export const TranslatedNames = () => {
   const boxColor = useSelector((state) => state.color);
-  const { data: pokedexData } = useSelector((state) => state.pokedex);
+  const { data: currentPokemon } = useSelector((state) => state.currentPokemon);
   const { data: translatedNames } = useSelector((state) => state.pokemonList);
   return (
     <Grid item xs={4} mt={10}>
@@ -20,7 +20,7 @@ export const TranslatedNames = () => {
             fontfamily: "'Rubik', sans-serif",
           }}
         >
-          {translatedNames[pokedexData?.id - 1].japanese}
+          {translatedNames[currentPokemon?.id - 1]?.japanese}
         </Typography>
       </Tooltip>
       <Tooltip title='Chinese'>
@@ -37,7 +37,7 @@ export const TranslatedNames = () => {
             fontfamily: "'Rubik', sans-serif",
           }}
         >
-          {translatedNames[pokedexData?.id - 1].chinese}
+          {translatedNames[currentPokemon?.id - 1]?.chinese}
         </Typography>
       </Tooltip>
     </Grid>
