@@ -57,6 +57,7 @@ export const TypesAndAbilities = () => {
                   p: 1,
                   maxWidth: '50%',
                   boxShadow: `0 0 1em ${types[typeData.type.name].color}`,
+                  border: `1px solid ${pSBC(0.2, types[typeData.type.name].color, '#FFF')}`,
                 }}
               />
             </Tooltip>

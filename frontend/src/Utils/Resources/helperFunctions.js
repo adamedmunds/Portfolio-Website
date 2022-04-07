@@ -13,8 +13,8 @@ export const importAll = (r) => {
   return images;
 };
 
-export const genTranslator = (gen) => {
-  switch (gen) {
+export const convertName = (translation) => {
+  switch (translation) {
     case 'i':
       return 'One';
     case 'ii':
@@ -33,15 +33,6 @@ export const genTranslator = (gen) => {
       return 'Eight';
     case 'ix':
       return 'Nine';
-    case 'x':
-      return 'Ten';
-    default:
-      return 'Unknown';
-  }
-};
-
-export const convertName = (translation) => {
-  switch (translation) {
     case 'dawn-stone':
       return 'Dawn Stone';
     case 'dusk-stone':
@@ -286,6 +277,234 @@ export const convertName = (translation) => {
       return 'Lucky Egg';
     case 'spell-tag':
       return 'Spell Tag';
+    case 'silver-powder':
+      return 'Silver Powder';
+    case 'poison-barb':
+      return 'Poison Barb';
+    case 'chilan-berry':
+      return 'Chilan Berry';
+    case 'sharp-beak':
+      return 'Sharp Beak';
+    case 'light-ball':
+      return 'Light Ball';
+    case 'quick-claw':
+      return 'Quick Claw';
+    case 'grip-claw':
+      return 'Grip Claw';
+    case 'soft-sand':
+      return 'Soft Sand';
+    case 'rawst-berry':
+      return 'Rawst Berry';
+    case 'charcoal':
+      return 'Charcoal';
+    case 'absorb-bulb':
+      return 'Absorb Bulb';
+    case 'tiny-mushroom':
+      return 'Tiny Mushroom';
+    case 'big-mushroom':
+      return 'Big Mushroom';
+    case 'balm-mushroom':
+      return 'Balm Mushroom';
+    case 'shed-shell':
+      return 'Shed Shell';
+    case 'nugget':
+      return 'Nugget';
+    case 'payapa-berry':
+      return 'Payapa Berry';
+    case 'twisted-spoon':
+      return 'Twisted Spoon';
+    case 'focus-band':
+      return 'Focus Band';
+    case 'everstone':
+      return 'Everstone';
+    case 'hard-stone':
+      return 'Hard Stone';
+    case 'lagging-tail':
+      return 'Lagging Tail';
+    case 'magnet':
+      return 'Magnet';
+    case 'stick':
+      return 'Stick';
+    case 'aspear-berry':
+      return 'Aspear Berry';
+    case 'never-melt-ice':
+      return 'Never Melt Ice';
+    case 'black-sludge':
+      return 'Black Sludge';
+    case 'toxic-orb':
+      return 'Toxic Orb';
+    case 'psychic-seed':
+      return 'Psychic Seed';
+    case 'thick-club':
+      return 'Thick Club';
+    case 'white-herb':
+      return 'White Herb';
+    case 'macho-brace':
+      return 'Macho Brace';
+    case 'power-herb':
+      return 'Power Herb';
+    case 'soul-dew':
+      return 'Soul Dew';
+    case 'choices-scarf':
+      return 'Choices Scarf';
+    case 'choices-specs':
+      return 'Choices Specs';
+    case 'choices-band':
+      return 'Choices Band';
+    case 'exp-share':
+      return 'Exp Share';
+    case 'quick-powder':
+      return 'Quick Powder';
+    case 'zoom-lens':
+      return 'Zoom Lens';
+    case 'muscle-band':
+      return 'Muscle Band';
+    case 'wise-glasses':
+      return 'Wise Glasses';
+    case 'power-lens':
+      return 'Power Lens';
+    case 'power-band':
+      return 'Power Band';
+    case 'smoke-ball':
+      return 'Smoke Ball';
+    case 'mystic-water':
+      return 'Mystic Water';
+    case 'stardust':
+      return 'Stardust';
+    case 'star-piece':
+      return 'Star Piece';
+    case 'metal-powder':
+      return 'Metal Powder';
+    case 'chesto-berry':
+      return 'Chesto Berry';
+    case 'leftovers':
+      return 'Leftovers';
+    case 'dragon-fang':
+      return 'Dragon Fang';
+    case 'lum-berry':
+      return 'Lum Berry';
+    case 'yellow-shard':
+      return 'Yellow Shard';
+    case 'coba-berry':
+      return 'Coba Berry';
+    case 'wide-lens':
+      return 'Wide Lens';
+    case 'persim-berry':
+      return 'Persim Berry';
+    case 'berry-juice':
+      return 'Berry Juice';
+    case 'red-shard':
+      return 'Red Shard';
+    case 'luminous-moss':
+      return 'Luminous Moss';
+    case 'passho-berry':
+      return 'Passho Berry';
+    case 'moomoo-milk':
+      return 'Moomoo Milk';
+    case 'sacred-ash':
+      return 'Sacred Ash';
+    case 'pecha-berry':
+      return 'Pecha Berry';
+    case 'potion':
+      return 'Potion';
+    case 'revive':
+      return 'Revive';
+    case 'max-revive':
+      return 'Max Revive';
+    case 'bright-powder':
+      return 'Bright Powder';
+    case 'mental-herb':
+      return 'Mental Herb';
+    case 'charti-berry':
+      return 'Charti Berry';
+    case 'pretty-wing':
+      return 'Pretty Wing';
+    case 'honey':
+      return 'Honey';
+    case 'black-belt':
+      return 'Black Belt';
+    case 'occa-berry':
+      return 'Occa Berry';
+    case 'iron-ball':
+      return 'Iron Ball';
+    case 'cell-battery':
+      return 'Cell Battery';
+    case 'tanga-berry':
+      return 'Tanga Berry';
+    case 'sticky-barb':
+      return 'Sticky Barb';
+    case 'light-clay':
+      return 'Light Clay';
+    case 'big-root':
+      return 'Big Root';
+    case 'kasib-berry':
+      return 'Kasib Berry';
+    case 'colbur-berry':
+      return 'Colbur Berry';
+    case 'cleanse-tag':
+      return 'Cleanse Tag';
+    case 'life-orb':
+      return 'Life Orb';
+    case 'babiri-berry':
+      return 'Babiri Berry';
+    case 'snowball':
+      return 'Snowball';
+    case 'blue-shard':
+      return 'Blue Shard';
+    case 'green-shard':
+      return 'Green Shard';
+    case 'heart-scale':
+      return 'Heart Scale';
+    case 'yache-berry':
+      return 'Yache Berry';
+    case 'metronome':
+      return 'Metronome';
+    case 'wacan-berry':
+      return 'Wacan Berry';
+    case 'miracle-seed':
+      return 'Miracle Seed';
+    case 'air-balloon':
+      return 'Air Balloon';
+    case 'chople-berry':
+      return 'Chople Berry';
+    case 'cheri-berry':
+      return 'Cheri Berry';
+    case 'haban-berry':
+      return 'Haban Berry';
+    case 'rindo-berry':
+      return 'Rindo Berry';
+    case 'expert-belt':
+      return 'Expert Belt';
+    case 'black-glasses':
+      return 'Black Glasses';
+    case 'rare-bone':
+      return 'Rare Bone';
+    case 'silk-scarf':
+      return 'Silk Scarf';
+    case 'big-nugget':
+      return 'Big Nugget';
+    case 'flame-orb':
+      return 'Flame Orb';
+    case 'sachet':
+      return 'Sachet';
+    case 'whipped-dream':
+      return 'Whipped Dream';
+    case 'mount-lanakila':
+      return 'Mount Lanakila';
+    case 'grassy-seed':
+      return 'Grassy Seed';
+    case 'stomp':
+      return 'Stomp';
+    case 'misty-seed':
+      return 'Misty Seed';
+    case 'electric-seed':
+      return 'Electric Seed';
+    case 'dragon-pulse':
+      return 'Dragon Pulse';
+    case 'taunt':
+      return 'Taunt';
+    case 'cracked-pot':
+      return 'Cracked Pot';
     default:
       console.log(translation);
       return 'Unknown';

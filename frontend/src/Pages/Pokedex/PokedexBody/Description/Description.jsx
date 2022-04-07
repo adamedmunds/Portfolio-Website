@@ -1,15 +1,17 @@
 import { Container } from '@mui/material';
 import { Evolutions } from './Evolutions';
+import { Stats } from './Stats';
 
-export const Description = ({ images }) => {
+export const Description = () => {
   return (
     <Container
       maxWidth='false'
       sx={{
-        height: '50vh',
+        height: '150vh',
       }}
     >
-      <Evolutions images={images} />
+      <Evolutions />
+      <Stats />
     </Container>
   );
 };

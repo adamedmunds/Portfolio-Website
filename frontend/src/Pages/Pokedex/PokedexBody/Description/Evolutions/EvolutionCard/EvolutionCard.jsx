@@ -80,7 +80,11 @@ export const EvolutionCard = ({ data, isMulti }) => {
           <Typography gutterBottom variant='h5' component='div'>
             # {data.url.split('/')[6]}
           </Typography>
-          <Typography gutterBottom variant='h5' component='div'>
+          <Typography
+            gutterBottom
+            variant='h5'
+            component='div'
+          >
             {toTitleCase(data.name)}
           </Typography>
         </Stack>

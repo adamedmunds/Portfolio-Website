@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Stat } from '../../../../Components/Stat';
-import { genTranslator } from '../../../../Utils/Resources/helperFunctions';
+import { convertName } from '../../../../Utils/Resources/helperFunctions';
 
 export const MiscStats = () => {
   const { data: pokedexData } = useSelector((state) => state.pokedex);
@@ -10,11 +10,14 @@ export const MiscStats = () => {
     <Grid item mt={7}>
       <Stat stat={`Height: ${pokedexData.height / 10}m`} />
       <Stat stat={`Weight: ${pokedexData.weight / 10}kg`} />
-      <Stat stat={`Base Experience: ${pokedexData.base_experience}`} />
-      <Stat stat={`Shape: ${currentPokemon.shape ? currentPokemon.shape.name : 'Unknown'}`} />
+      <Stat
+        stat={`Shape: ${
+          currentPokemon.shape ? currentPokemon.shape.name : 'Unknown'
+        }`}
+      />
       <Stat stat={`Color: ${currentPokemon.color.name}`} />
       <Stat
-        stat={`Generation: ${genTranslator(
+        stat={`Generation: ${convertName(
           currentPokemon.generation.name.split('-')[1]
         )}`}
       />

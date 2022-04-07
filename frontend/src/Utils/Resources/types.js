@@ -106,7 +106,8 @@ const convertType = (type) => {
 };
 
 export const calculateType = (type1, type2) => {
-  if (isUndefined(type1) || isUndefined(type2)) return;
+  if (isUndefined(type1)) type1 = 'none';
+  if (isUndefined(type2)) type2 = 'none';
   var result = {};
   for (var i = 0; i < 18; i++) {
     result[convertType(i)] =
