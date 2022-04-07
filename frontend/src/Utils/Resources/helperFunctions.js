@@ -172,6 +172,120 @@ export const convertName = (translation) => {
       return 'Ultra Sun';
     case 'ultra-moon':
       return 'Ultra Moon';
+    case 'sea-incense':
+      return 'Sea Incense';
+    case 'lax-incense':
+      return 'Lax Incense';
+    case 'rose-incense':
+      return 'Rose Incense';
+    case 'wave-incense':
+      return 'Wave Incense';
+    case 'full-incense':
+      return 'Full Incense';
+    case 'luck-incense':
+      return 'Luck Incense';
+    case 'pure-incense':
+      return 'Pure Incense';
+    case 'rock-incense':
+      return 'Rock Incense';
+    case 'odd-incense':
+      return 'Odd Incense';
+    case 'special-attack':
+      return 'Special Attack';
+    case 'special-defense':
+      return 'Special Defense';
+    case 'speed':
+      return 'Speed';
+    case 'hp':
+      return 'HP';
+    case 'attack':
+      return 'Attack';
+    case 'defense':
+      return 'Defense';
+    case 'grassland':
+      return 'Grassland';
+    case 'mountain':
+      return 'Mountain';
+    case 'forest':
+      return 'Forest';
+    case 'waters-edge':
+      return "Water's Edge";
+    case 'sea':
+      return 'Sea';
+    case 'cave':
+      return 'Cave';
+    case 'rough-terrain':
+      return 'Rough Terrain';
+    case 'urban':
+      return 'Urban';
+    case 'rare':
+      return 'Rare';
+    case 'medium-slow':
+      return 'Medium Slow (1,059,860 Exp.)';
+    case 'medium':
+      return 'Medium (1,000,000 Exp.)';
+    case 'slow':
+      return 'Slow (1,250,000 Exp.)';
+    case 'fast':
+      return 'Fast (800,000 Exp.)';
+    case 'slow-then-very-fast':
+      return 'Slow then Very Fast (600,000 Exp.)';
+    case 'fast-then-very-slow':
+      return 'Fast then Very Slow (1,640,000 Exp.)';
+    case 'big-pearl':
+      return 'Big Pearl';
+    case 'oran-berry':
+      return 'Oran Berry';
+    case 'sitrus-berry':
+      return 'Sitrus Berry';
+    case 'figy-berry':
+      return 'Figy Berry';
+    case 'wiki-berry':
+      return 'Wiki Berry';
+    case 'mago-berry':
+      return 'Mago Berry';
+    case 'aguav-berry':
+      return 'Aguav Berry';
+    case 'iapapa-berry':
+      return 'Iapapa Berry';
+    case 'razz-berry':
+      return 'Razz Berry';
+    case 'bluk-berry':
+      return 'Bluk Berry';
+    case 'nanab-berry':
+      return 'Nanab Berry';
+    case 'wepear-berry':
+      return 'Wepear Berry';
+    case 'pinap-berry':
+      return 'Pinap Berry';
+    case 'pomeg-berry':
+      return 'Pomeg Berry';
+    case 'kebia-berry':
+      return 'Kebia Berry';
+    case 'shuca-berry':
+      return 'Shuca Berry';
+    case 'custap-berry':
+      return 'Custap Berry';
+    case 'jaboca-berry':
+      return 'Jaboca Berry';
+    case 'rowap-berry':
+      return 'Rowap Berry';
+    case 'rare-candy':
+      return 'Rare Candy';
+    case 'comet-shard':
+      return 'Comet Shard';
+    case 'durin-berry':
+      return 'Durin Berry';
+    case 'belue-berry':
+      return 'Belue Berry';
+    case 'leppa-berry':
+      return 'Leppa Berry';
+    case 'lucky-punch':
+      return 'Lucky Punch';
+    case 'lucky-egg':
+      return 'Lucky Egg';
+    case 'spell-tag':
+      return 'Spell Tag';
     default:
       console.log(translation);
       return 'Unknown';
@@ -181,7 +295,6 @@ export const convertName = (translation) => {
 export const getEvolutionTrigger = (input) => {
   if (input === undefined) return;
   const trigger = input.trigger.name;
-  console.log(input);
   var returnValue;
 
   if (trigger === 'use-item') {
@@ -240,11 +353,29 @@ export const getEvolutionTrigger = (input) => {
 
 export const removeDashes = (name) => {
   const nameList = name.split('-');
-  console.log(nameList);
   if (nameList.length > 1 && nameList.length < 3) {
     return nameList[1];
   } else if (nameList.length > 2) {
     return `Mega ${nameList[2]}`;
   }
   return nameList[0];
+};
+
+export const calculateCaptureRate = (captureRate) => {
+  return ((captureRate / 3 / 255) * 100).toFixed(2);
+};
+
+export const calculateFriendship = (friendship) => {
+  if (friendship === 0) {
+    return 'Minimum';
+  } else if (friendship > 0 && friendship < 50) {
+    return 'Lower than Normal';
+  } else if (friendship >= 50 && friendship < 90) {
+    return 'Normal';
+  } else if (friendship >= 90 && friendship < 140) {
+    return 'Higher than Normal';
+  } else if (friendship >= 140) {
+    return 'High';
+  }
+  return 'Unknown';
 };
