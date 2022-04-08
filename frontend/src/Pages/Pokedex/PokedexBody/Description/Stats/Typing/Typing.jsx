@@ -62,7 +62,7 @@ export const Typing = () => {
                         background: pSBC(0.3, types[key].color, '#FFF'),
                         borderRadius: '50%',
                         p: 1,
-                        maxWidth: '10%',
+                        maxWidth: {xs: '15%', md: '10%'},
                         boxShadow: `0 0 1em ${types[key].color}`,
                         border: `1px solid ${pSBC(0.2, types[key].color, '#FFF')}`,
                       }}
@@ -101,7 +101,7 @@ export const Typing = () => {
                         background: pSBC(0.3, types[key].color, '#FFF'),
                         borderRadius: '50%',
                         p: 1,
-                        maxWidth: '10%',
+                        maxWidth: {xs: '15%', md: '10%'},
                         boxShadow: `0 0 1em ${types[key].color}`,
                         border: `1px solid ${pSBC(0.2, types[key].color, '#FFF')}`,
                       }}
@@ -140,7 +140,7 @@ export const Typing = () => {
                         background: pSBC(0.3, types[key].color, '#FFF'),
                         borderRadius: '50%',
                         p: 1,
-                        maxWidth: '10%',
+                        maxWidth: {xs: '15%', md: '10%'},
                         boxShadow: `0 0 1em ${types[key].color}`,
                         border: `1px solid ${pSBC(0.2, types[key].color, '#FFF')}`,
                       }}
@@ -179,7 +179,7 @@ export const Typing = () => {
                         background: pSBC(0.3, types[key].color, '#FFF'),
                         borderRadius: '50%',
                         p: 1,
-                        maxWidth: '10%',
+                        maxWidth: {xs: '15%', md: '10%'},
                         boxShadow: `0 0 1em ${types[key].color}`,
                         border: `1px solid ${pSBC(0.2, types[key].color, '#FFF')}`,
                       }}
@@ -218,7 +218,7 @@ export const Typing = () => {
                         background: pSBC(0.3, types[key].color, '#FFF'),
                         borderRadius: '50%',
                         p: 1,
-                        maxWidth: '10%',
+                        maxWidth: {xs: '15%', md: '10%'},
                         boxShadow: `0 0 1em ${types[key].color}`,
                         border: `1px solid ${pSBC(0.2, types[key].color, '#FFF')}`,
                       }}

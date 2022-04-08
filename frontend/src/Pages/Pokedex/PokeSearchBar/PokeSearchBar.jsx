@@ -24,8 +24,10 @@ import { actionCreators } from '../../../Redux/actions';
 import axios from 'axios';
 import { VariableSizeList } from 'react-window';
 import { importAll } from '../../../Utils/Resources/helperFunctions';
+import { useWindowDimensions } from '../../../Hooks/useWindowDimensions';
 
 export const PokeSearchBar = () => {
+  const { width } = useWindowDimensions();
   const dispatch = useDispatch();
   const [images, setImages] = useState({});
   const { data: reduxPokemonSearchData } = useSelector(
@@ -41,6 +43,8 @@ export const PokeSearchBar = () => {
   } = bindActionCreators(actionCreators, dispatch);
   const [inputValue, setInputValue] = useState('');
   const [open, setOpen] = useState(false);
+  const [breakpoint, setBreakpoint] = useState('');
+  const [size, setSize] = useState(0);
   const handleOpen = () => {
     if (inputValue.length > 0) {
       setOpen(true);
@@ -73,6 +77,25 @@ export const PokeSearchBar = () => {
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (width < 600) {
+      setBreakpoint('small');
+      setSize(0);
+    } else if (width < 900) {
+      setBreakpoint('small');
+      setSize(3);
+    } else if (width < 1200) {
+      setBreakpoint('medium');
+      setSize(4);
+    } else if (width < 1536) {
+      setBreakpoint('medium');
+      setSize(6);
+    } else {
+      setBreakpoint('large');
+      setSize(8);
+    }
+  }, [width]);
 
   const handleSubmit = async (e) => {
     axios
@@ -185,14 +208,14 @@ export const PokeSearchBar = () => {
   });
 
   return (
-    <Container maxWidth='xl' sx={{ zIndex: 1101, position: 'relative' }}>
+    <Container maxWidth='xl' sx={{ position: 'relative' }}>
       <Stack justifyContent='center' alignItems='center' mt={2} spacing={1}>
         <Pagination
           count={898}
-          size='large'
-          showFirstButton
-          showLastButton
-          siblingCount={8}
+          size={breakpoint}
+          showFirstButton={breakpoint !== 'small'}
+          showLastButton={breakpoint !== 'small'}
+          siblingCount={size}
           onChange={(_, page) => {
             newPokedexEntry(page);
             updatePage(page);
@@ -205,10 +228,13 @@ export const PokeSearchBar = () => {
           }}
           color='paginationHighlight'
           page={parseInt(currentPage)}
+          sx={{
+            zIndex: 1101,
+          }}
         />
         <Autocomplete
           id='pokemon-search-autocomplete'
-          sx={{ width: 350 }}
+          sx={{ width: 250 }}
           options={reduxPokemonSearchData}
           autoHighlight
           disableClearable

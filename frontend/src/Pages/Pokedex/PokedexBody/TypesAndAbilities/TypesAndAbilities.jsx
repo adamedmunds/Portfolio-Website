@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../../../Redux/actions';
+import { PokemonImage } from '../PokemonImage';
 
 export const TypesAndAbilities = () => {
   const { data: pokedexData } = useSelector((state) => state.pokedex);
@@ -34,7 +35,7 @@ export const TypesAndAbilities = () => {
   return (
     <Grid container>
       <TranslatedNames />
-      <Grid item xs={3} />
+      <Grid item sm={12} md={3}><PokemonImage /></Grid>
       <Grid item xs>
         <Stack direction='row' spacing={5}>
           {pokedexData.types.map((typeData) => (

@@ -106,7 +106,12 @@ export const Evolutions = () => {
             >
               <EvolutionCard data={evolutionChain.chain.species} />
             </Grid>
-            <Grid item xl={evolutionChain.chain.evolves_to[0].evolves_to[0] ? 1 : 1.5} md={12} xs={12}>
+            <Grid
+              item
+              xl={evolutionChain.chain.evolves_to[0].evolves_to[0] ? 1 : 1.5}
+              md={12}
+              xs={12}
+            >
               <EvolutionArrow data={evolutionChain.chain.evolves_to[0]} />
             </Grid>
             <Grid
@@ -121,8 +126,18 @@ export const Evolutions = () => {
             </Grid>
             {evolutionChain.chain.evolves_to[0].evolves_to[0] && (
               <>
-                <Grid item xl={1} md={12} xs={12}>
-                  <Stack sx={{ height: '100%' }}>
+                <Grid
+                  item
+                  xl={1}
+                  md={12}
+                  xs={12}
+                >
+                  <Stack
+                    sx={{ height: '100%' }}
+                    direction={{ xs: 'row', xl: 'column' }}
+                    justifyContent='space-evenly'
+                    alignItems='center'
+                  >
                     <EvolutionArrow
                       data={evolutionChain.chain.evolves_to[0].evolves_to[0]}
                     />
@@ -133,8 +148,18 @@ export const Evolutions = () => {
                     )}
                   </Stack>
                 </Grid>
-                <Grid item xl={1.5} md={12} xs={12}>
-                  <Stack spacing={3}>
+                <Grid
+                  item
+                  xl={1.5}
+                  md={12}
+                  xs={12}
+                >
+                  <Stack
+                    spacing={3}
+                    direction={{ xs: 'row', xl: 'column' }}
+                    justifyContent='center'
+                    alignItems='center'
+                  >
                     <EvolutionCard
                       data={
                         evolutionChain.chain.evolves_to[0].evolves_to[0].species

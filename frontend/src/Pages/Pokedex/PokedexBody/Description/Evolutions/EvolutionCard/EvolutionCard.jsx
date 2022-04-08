@@ -75,7 +75,7 @@ export const EvolutionCard = ({ data, isMulti }) => {
           <img
             src={images[`${data.url.split('/')[6]}.png`]}
             alt={toTitleCase(data.name)}
-            width={isMulti ? '40%' : '60%'}
+            width={isMulti ? '20%' : '60%'}
           />
           <Typography gutterBottom variant='h5' component='div'>
             # {data.url.split('/')[6]}

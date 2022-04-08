@@ -14,7 +14,12 @@ export const EvolutionArrow = ({ data }) => {
       <Typography variant='h6'>
         {getEvolutionTrigger(data.evolution_details[0])}
       </Typography>
-      <DoubleArrowIcon style={{ fontSize: '75' }} />
+      <DoubleArrowIcon
+        style={{ fontSize: '75' }}
+        sx={{
+          transform: { xs: 'rotate(90deg)', xl: 'rotate(0deg)' },
+        }}
+      />
     </Stack>
   );
 };

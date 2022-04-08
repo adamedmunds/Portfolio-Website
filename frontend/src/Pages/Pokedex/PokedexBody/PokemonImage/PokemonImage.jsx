@@ -22,14 +22,7 @@ export const PokemonImage = () => {
     <img
       src={images[`${pokedexData.id}.png`]}
       alt={`${pokedexData.name}`}
-      width='25%'
-      style={{
-        zIndex: '-1',
-        position: 'absolute',
-        top: '50%',
-        left: '45%',
-        transform: 'translate(-50%, -50%)',
-      }}
+      width='90%'
     />
   );
 };
