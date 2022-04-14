@@ -18,7 +18,7 @@ export const TranslatedNames = () => {
                 : 'rgb(0 0 0 / 60%)',
             fontWeight: 'fontWeightBold',
             fontfamily: "'Rubik', sans-serif",
-            fontSize: { xs: '3rem', sm: '6rem' },
+            fontSize: { xs: '3rem', sm: '6rem', md: '5vw' },
           }}
         >
           {translatedNames[currentPokemon?.id - 1]?.japanese}
@@ -28,7 +28,7 @@ export const TranslatedNames = () => {
         <Typography
           variant='h1'
           ml={{ xs: 8, md: 10 }}
-          mt={2}
+          mt={5}
           sx={{
             color:
               boxColor.luma <= 128
@@ -36,7 +36,7 @@ export const TranslatedNames = () => {
                 : 'rgb(0 0 0 / 60%)',
             fontWeight: 'fontWeightBold',
             fontfamily: "'Rubik', sans-serif",
-            fontSize: { xs: '3rem', sm: '6rem' },
+            fontSize: { xs: '3rem', sm: '6rem', md: '5vw' },
           }}
         >
           {translatedNames[currentPokemon?.id - 1]?.chinese}

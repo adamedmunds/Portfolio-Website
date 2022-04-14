@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 
-import {Fragment} from "react";
+import { Fragment } from 'react';
 import { Divider, Grid, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import {
@@ -15,7 +15,13 @@ export const Training = () => {
 
   return currentPokemon && pokedexData ? (
     <Grid item xs={12} xl={4} pr={2}>
-      <Typography variant='h4' mt={5} mb={2} textAlign='center'>
+      <Typography
+        variant='h4'
+        mt={5}
+        mb={2}
+        textAlign='center'
+        fontWeight={500}
+      >
         TRAINING
       </Typography>
       <Grid container spacing={2}>

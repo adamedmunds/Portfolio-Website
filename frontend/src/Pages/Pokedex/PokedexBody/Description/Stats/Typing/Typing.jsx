@@ -33,7 +33,13 @@ export const Typing = () => {
 
   return typeSet ? (
     <Grid item xs={12} xl={4}>
-      <Typography variant='h4' mt={5} mb={2} textAlign='center'>
+      <Typography
+        variant='h4'
+        mt={5}
+        mb={2}
+        textAlign='center'
+        fontWeight={500}
+      >
         TYPING
       </Typography>
       <Grid container spacing={2}>

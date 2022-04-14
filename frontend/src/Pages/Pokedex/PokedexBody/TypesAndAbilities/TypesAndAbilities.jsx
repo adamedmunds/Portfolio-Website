@@ -68,7 +68,7 @@ export const TypesAndAbilities = () => {
         <Grid item xs={12}>
           <Typography
             variant='h4'
-            mt={1}
+            mt={2}
             sx={{
               color: boxColor.luma <= 128 ? 'white' : 'black',
               fontWeight: 'fontWeightMedium',
@@ -96,7 +96,7 @@ export const TypesAndAbilities = () => {
         <Grid item xs={12}>
           <Typography
             variant='h4'
-            mt={2}
+            mt={3}
             sx={{
               color: boxColor.luma <= 128 ? 'white' : 'black',
               fontWeight: 'fontWeightMedium',
@@ -142,7 +142,7 @@ export const TypesAndAbilities = () => {
         <Grid item xs={12}>
           <Typography
             variant='h4'
-            mt={2}
+            mt={3}
             sx={{
               color: boxColor.luma <= 128 ? 'white' : 'black',
               fontWeight: 'fontWeightMedium',
