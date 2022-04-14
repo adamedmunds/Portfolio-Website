@@ -63,8 +63,9 @@ export const Header = () => {
         <ButtonBase
           sx={{
             borderRadius: '8px',
-            backgroundColor: '#E5E5E5',
+            backgroundColor: 'white',
             transition: '0.5s',
+            filter: 'drop-shadow(0 1mm 0.25rem rgb(0 0 0 / 30%))',
             '&:hover': {
               backgroundColor: '#B3B3B3',
             },
