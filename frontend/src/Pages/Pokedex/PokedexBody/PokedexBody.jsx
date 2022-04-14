@@ -1,5 +1,5 @@
 import { Container, Grid } from '@mui/material';
-import { useEffect, Fragment } from 'react';
+import { useEffect, Fragment, useRef } from 'react';
 import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators } from '../../../Redux/actions';
@@ -16,6 +16,8 @@ export const PokedexBody = () => {
   const dispatch = useDispatch();
   const { data: pokedexData } = useSelector((state) => state.pokedex);
   const { data: currentPokemon } = useSelector((state) => state.currentPokemon);
+
+  const scrollToRef = useRef(null);
 
   const { newColor } = bindActionCreators(actionCreators, dispatch);
   const { color } = useColorThief(pokedexData?.sprites.front_default, {
@@ -41,9 +43,9 @@ export const PokedexBody = () => {
       <Grid container mt={2}>
         <Header />
         <TypesAndAbilities />
-        <MiscStats />
+        <MiscStats scrollRef={scrollToRef}/>
       </Grid>
-      <Description />
+      <Description scrollRef={scrollToRef}/>
     </Container>
   ) : (
     <Fragment></Fragment>

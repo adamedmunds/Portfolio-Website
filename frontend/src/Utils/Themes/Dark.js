@@ -126,6 +126,16 @@ const darkTheme = createTheme({
         },
       },
     },
+    MuiListItem: {
+      styleOverrides: {
+        button: {
+          transition: 'background-color 0.2s ease-in-out',
+          '&:hover': {
+            backgroundColor: '#75788A',
+          },
+        },
+      },
+    },
   },
   transitions: {
     easing: {

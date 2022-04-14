@@ -122,7 +122,6 @@ const theme = (color, luma) =>
         styleOverrides: {
           body: {
             '::-webkit-scrollbar': {
-              display: 'none',
             },
             transition: 'background-color 0.5s ease',
           },
@@ -132,7 +131,6 @@ const theme = (color, luma) =>
         styleOverrides: {
           root: {
             '*::-webkit-scrollbar': {
-              display: 'none',
             },
           },
         },

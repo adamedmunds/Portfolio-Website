@@ -7,11 +7,19 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import darkTheme from '../../../../Utils/Themes/Dark';
 import { useWindowDimensions } from '../../../../Hooks/useWindowDimensions';
 
-export const MiscStats = () => {
+export const MiscStats = ({ scrollRef }) => {
   const { data: pokedexData } = useSelector((state) => state.pokedex);
   const { data: currentPokemon } = useSelector((state) => state.currentPokemon);
   const containerRef = useRef(null);
   const { width } = useWindowDimensions();
+
+  const handleClick = () => {
+    scrollRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  };
+
   return currentPokemon ? (
     <Fragment>
       <Grid item mt={width >= 900 ? 7 : 2}>
@@ -56,6 +64,14 @@ export const MiscStats = () => {
               style={{
                 fontSize: '100',
               }}
+              sx={{
+                '&:hover': {
+                  cursor: 'pointer',
+                  transition: '0.2s ease-in-out',
+                  transform: 'scale(1.25) !important',
+                },
+              }}
+              onClick={() => handleClick()}
             />
           </Slide>
         </Grid>

@@ -153,17 +153,6 @@ export const Navbar = () => {
                   <MenuIcon />
                 </IconButton>
               </Box>
-
-              <Box
-                sx={{
-                  flexGrow: 1,
-                  display: {
-                    xs: 'none',
-                    md: 'flex',
-                    flexDirection: 'row-reverse',
-                  },
-                }}
-              />
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title={tooltipMessage}>
                   <IconButton sx={{ gap: 2 }} onClick={handleClick}>

@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux';
 import { EvolutionCard } from './EvolutionCard/EvolutionCard';
 import { EvolutionArrow } from './EvolutionArrow/EvolutionArrow';
 
-export const Evolutions = () => {
+export const Evolutions = ({ scrollRef }) => {
   const { data: evolutionChain } = useSelector((state) => state.evolutionData);
 
   return evolutionChain ? (
     <Fragment>
-      <Typography variant='h4' mt={5} mb={2}>
+      <Typography variant='h4' mt={5} mb={2} id='evolutions' ref={scrollRef}>
         Evolution Chain
       </Typography>
       <Grid container columns={6.5}>

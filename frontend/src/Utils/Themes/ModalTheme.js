@@ -7,7 +7,7 @@ export const ModalTheme = {
   border: '1px solid #000',
   boxShadow: 24,
   p: 6,
-  backgroundColor: 'gray',
+  backgroundColor: '#E5E5E5',
   justifyContent: 'center',
   alignItems: 'center',
   borderRadius: '16px',

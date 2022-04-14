@@ -100,7 +100,7 @@ export const Header = () => {
             boxShadow={5}
           >
             <Typography variant='h4'>Pokédex Entries</Typography>
-            <Divider color='white' />
+            <Divider color='black' />
             {currentPokemon?.flavor_text_entries.map((entry) => {
               if (entry.language.name === 'en') {
                 return (
@@ -138,7 +138,7 @@ export const Header = () => {
                 );
               }
             })}
-            <Divider color='white' />
+            <Divider color='black' />
             <Button
               onClick={handleClose}
               sx={{ color: 'black', marginTop: '8px', fontWeight: 'bold' }}

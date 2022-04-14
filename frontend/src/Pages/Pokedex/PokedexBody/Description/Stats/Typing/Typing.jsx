@@ -40,7 +40,7 @@ export const Typing = () => {
         textAlign='center'
         fontWeight={500}
       >
-        TYPING
+        WEAKNESSES
       </Typography>
       <Grid container spacing={2}>
         <Grid item md={3} xs={12}>
