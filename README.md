@@ -2,4 +2,4 @@
 
 ## Currently working on pokedex
 
-## See [adamedmunds.dev](adamedmunds.dev) for a live version
+## See [adamedmunds.dev](http://adamedmunds.dev) for a live version
