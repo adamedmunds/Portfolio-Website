@@ -93,7 +93,7 @@ export const Header = () => {
         close={handleClose}
         layout={
           <Box
-            sx={ModalTheme}
+            sx={ModalTheme('75%')}
             textAlign='center'
             justifyContent='center'
             alignItems='center'

@@ -22,7 +22,7 @@ export const MiscStats = ({ scrollRef }) => {
 
   return currentPokemon ? (
     <Fragment>
-      <Grid item mt={width >= 900 ? 7 : 2}>
+      <Grid item mt={width >= 900 ? 5 : 2}>
         <Stat stat={`Height: ${pokedexData.height / 10}m`} />
         <Stat stat={`Weight: ${pokedexData.weight / 10}kg`} />
         <Stat
@@ -42,7 +42,6 @@ export const MiscStats = ({ scrollRef }) => {
           item
           container
           xs
-          mt={7}
           justifyContent='center'
           alignItems='flex-end'
           ref={containerRef}
