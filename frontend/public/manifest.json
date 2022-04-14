@@ -1,6 +1,6 @@
 {
-  "short_name": "RPN App",
-  "name": "RPN Api App",
+  "short_name": "Portfolio website",
+  "name": "My Portfolio Website",
   "icons": [
     {
       "src": "favicon.ico",
@@ -11,5 +11,5 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#24252a"
 }
