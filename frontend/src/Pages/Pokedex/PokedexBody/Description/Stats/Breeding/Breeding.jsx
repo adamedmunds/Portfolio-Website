@@ -1,3 +1,4 @@
+import {Fragment} from "react";
 import { Divider, Grid, Stack, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import {
@@ -64,7 +65,7 @@ export const Breeding = () => {
               />
             </Stack>
           ) : (
-            <>
+            <Fragment>
               <Stack direction='row' justifyContent='center'>
                 <Typography variant='h6' textAlign='center'>
                   {100 - currentPokemon.gender_rate * 12.5}% Male
@@ -77,7 +78,7 @@ export const Breeding = () => {
                 </Typography>
                 <FemaleIcon sx={{ marginTop: '3px' }} />
               </Stack>
-            </>
+            </Fragment>
           )}
         </Grid>
         <Grid item xs={12}>
@@ -113,6 +114,6 @@ export const Breeding = () => {
       </Grid>
     </Grid>
   ) : (
-    <></>
+    <Fragment></Fragment>
   );
 };

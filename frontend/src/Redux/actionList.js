@@ -8,3 +8,5 @@ export const NEW_CURRENT_POKEMON_DATA = 'NEW_CURRENT_POKEMON_DATA';
 export const UPDATE_PAGE = 'UPDATE_PAGE';
 
 export const UPDATE_COLOR = 'UPDATE_COLOR';
+
+export const UPDATE_THEME = 'UPDATE_THEME'; 

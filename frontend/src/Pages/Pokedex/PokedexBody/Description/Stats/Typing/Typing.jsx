@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 import { Box, Divider, Grid, Stack, Tooltip, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import pSBC from 'shade-blend-color';
@@ -49,8 +49,12 @@ export const Typing = () => {
             justifyContent='center'
             alignItems='center'
           >
-            {Object.entries(typeSet).map(([key, value]) => {
-              if (value === 0) {
+            {typeSet['0x'].length === 0 ? (
+              <Typography variant='h6' textAlign='center'>
+                None
+              </Typography>
+            ) : (
+              typeSet['0x'].map((key) => {
                 return (
                   <Tooltip title={toTitleCase(key)} key={key}>
                     <Box
@@ -62,15 +66,19 @@ export const Typing = () => {
                         background: pSBC(0.3, types[key].color, '#FFF'),
                         borderRadius: '50%',
                         p: 1,
-                        maxWidth: {xs: '15%', md: '10%'},
+                        maxWidth: { xs: '15%', md: '10%' },
                         boxShadow: `0 0 1em ${types[key].color}`,
-                        border: `1px solid ${pSBC(0.2, types[key].color, '#FFF')}`,
+                        border: `1px solid ${pSBC(
+                          0.2,
+                          types[key].color,
+                          '#FFF'
+                        )}`,
                       }}
                     />
                   </Tooltip>
                 );
-              }
-            })}
+              })
+            )}
           </Stack>
         </Grid>
         <Grid item xs={12}>
@@ -88,8 +96,12 @@ export const Typing = () => {
             justifyContent='center'
             alignItems='center'
           >
-            {Object.entries(typeSet).map(([key, value]) => {
-              if (value === 0.25) {
+            {typeSet['0.25x'].length === 0 ? (
+              <Typography variant='h6' textAlign='center'>
+                None
+              </Typography>
+            ) : (
+              typeSet['0.25x'].map((key) => {
                 return (
                   <Tooltip title={toTitleCase(key)} key={key}>
                     <Box
@@ -101,15 +113,19 @@ export const Typing = () => {
                         background: pSBC(0.3, types[key].color, '#FFF'),
                         borderRadius: '50%',
                         p: 1,
-                        maxWidth: {xs: '15%', md: '10%'},
+                        maxWidth: { xs: '15%', md: '10%' },
                         boxShadow: `0 0 1em ${types[key].color}`,
-                        border: `1px solid ${pSBC(0.2, types[key].color, '#FFF')}`,
+                        border: `1px solid ${pSBC(
+                          0.2,
+                          types[key].color,
+                          '#FFF'
+                        )}`,
                       }}
                     />
                   </Tooltip>
                 );
-              }
-            })}
+              })
+            )}
           </Stack>
         </Grid>
         <Grid item xs={12}>
@@ -127,8 +143,12 @@ export const Typing = () => {
             justifyContent='center'
             alignItems='center'
           >
-            {Object.entries(typeSet).map(([key, value]) => {
-              if (value === 0.5) {
+            {typeSet['0.5x'].length === 0 ? (
+              <Typography variant='h6' textAlign='center'>
+                None
+              </Typography>
+            ) : (
+              typeSet['0.5x'].map((key) => {
                 return (
                   <Tooltip title={toTitleCase(key)} key={key}>
                     <Box
@@ -140,15 +160,19 @@ export const Typing = () => {
                         background: pSBC(0.3, types[key].color, '#FFF'),
                         borderRadius: '50%',
                         p: 1,
-                        maxWidth: {xs: '15%', md: '10%'},
+                        maxWidth: { xs: '15%', md: '10%' },
                         boxShadow: `0 0 1em ${types[key].color}`,
-                        border: `1px solid ${pSBC(0.2, types[key].color, '#FFF')}`,
+                        border: `1px solid ${pSBC(
+                          0.2,
+                          types[key].color,
+                          '#FFF'
+                        )}`,
                       }}
                     />
                   </Tooltip>
                 );
-              }
-            })}
+              })
+            )}
           </Stack>
         </Grid>
         <Grid item xs={12}>
@@ -166,8 +190,12 @@ export const Typing = () => {
             justifyContent='center'
             alignItems='center'
           >
-            {Object.entries(typeSet).map(([key, value]) => {
-              if (value === 2) {
+            {typeSet['2x'].length === 0 ? (
+              <Typography variant='h6' textAlign='center'>
+                None
+              </Typography>
+            ) : (
+              typeSet['2x'].map((key) => {
                 return (
                   <Tooltip title={toTitleCase(key)} key={key}>
                     <Box
@@ -179,15 +207,19 @@ export const Typing = () => {
                         background: pSBC(0.3, types[key].color, '#FFF'),
                         borderRadius: '50%',
                         p: 1,
-                        maxWidth: {xs: '15%', md: '10%'},
+                        maxWidth: { xs: '15%', md: '10%' },
                         boxShadow: `0 0 1em ${types[key].color}`,
-                        border: `1px solid ${pSBC(0.2, types[key].color, '#FFF')}`,
+                        border: `1px solid ${pSBC(
+                          0.2,
+                          types[key].color,
+                          '#FFF'
+                        )}`,
                       }}
                     />
                   </Tooltip>
                 );
-              }
-            })}
+              })
+            )}
           </Stack>
         </Grid>
         <Grid item xs={12}>
@@ -205,8 +237,12 @@ export const Typing = () => {
             justifyContent='center'
             alignItems='center'
           >
-            {Object.entries(typeSet).map(([key, value]) => {
-              if (value === 4) {
+            {typeSet['4x'].length === 0 ? (
+              <Typography variant='h6' textAlign='center'>
+                None
+              </Typography>
+            ) : (
+              typeSet['4x'].map((key) => {
                 return (
                   <Tooltip title={toTitleCase(key)} key={key}>
                     <Box
@@ -218,20 +254,24 @@ export const Typing = () => {
                         background: pSBC(0.3, types[key].color, '#FFF'),
                         borderRadius: '50%',
                         p: 1,
-                        maxWidth: {xs: '15%', md: '10%'},
+                        maxWidth: { xs: '15%', md: '10%' },
                         boxShadow: `0 0 1em ${types[key].color}`,
-                        border: `1px solid ${pSBC(0.2, types[key].color, '#FFF')}`,
+                        border: `1px solid ${pSBC(
+                          0.2,
+                          types[key].color,
+                          '#FFF'
+                        )}`,
                       }}
                     />
                   </Tooltip>
                 );
-              }
-            })}
+              })
+            )}
           </Stack>
         </Grid>
       </Grid>
     </Grid>
   ) : (
-    <>No Data</>
+    <Fragment>No Data</Fragment>
   );
 };

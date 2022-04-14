@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { Grid, Stack, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { EvolutionCard } from './EvolutionCard/EvolutionCard';
@@ -7,15 +8,15 @@ export const Evolutions = () => {
   const { data: evolutionChain } = useSelector((state) => state.evolutionData);
 
   return evolutionChain ? (
-    <>
+    <Fragment>
       <Typography variant='h4' mt={5} mb={2}>
         Evolution Chain
       </Typography>
       <Grid container columns={6.5}>
         {evolutionChain.chain.evolves_to.length > 1 ? (
-          <>
+          <Fragment>
             {evolutionChain.chain.evolves_to[0].evolves_to.length ? (
-              <>
+              <Fragment>
                 <Grid item xl={1.5} md={12} xs={12}>
                   <EvolutionCard data={evolutionChain.chain.species} />
                 </Grid>
@@ -59,9 +60,9 @@ export const Evolutions = () => {
                     ))}
                   </Stack>
                 </Grid>
-              </>
+              </Fragment>
             ) : (
-              <>
+              <Fragment>
                 <Grid item xl={2.5} md={12} xs={12}>
                   <EvolutionCard data={evolutionChain.chain.species} isMulti />
                 </Grid>
@@ -86,9 +87,9 @@ export const Evolutions = () => {
                     ))}
                   </Stack>
                 </Grid>
-              </>
+              </Fragment>
             )}
-          </>
+          </Fragment>
         ) : evolutionChain.chain.evolves_to.length === 0 ? (
           <Grid item xs={12}>
             <Stack justifyContent='center' alignItems='center' spacing={3}>
@@ -97,7 +98,7 @@ export const Evolutions = () => {
             </Stack>
           </Grid>
         ) : (
-          <>
+          <Fragment>
             <Grid
               item
               xl={evolutionChain.chain.evolves_to[0].evolves_to[0] ? 1.5 : 2.5}
@@ -125,13 +126,8 @@ export const Evolutions = () => {
               />
             </Grid>
             {evolutionChain.chain.evolves_to[0].evolves_to[0] && (
-              <>
-                <Grid
-                  item
-                  xl={1}
-                  md={12}
-                  xs={12}
-                >
+              <Fragment>
+                <Grid item xl={1} md={12} xs={12}>
                   <Stack
                     sx={{ height: '100%' }}
                     direction={{ xs: 'row', xl: 'column' }}
@@ -148,12 +144,7 @@ export const Evolutions = () => {
                     )}
                   </Stack>
                 </Grid>
-                <Grid
-                  item
-                  xl={1.5}
-                  md={12}
-                  xs={12}
-                >
+                <Grid item xl={1.5} md={12} xs={12}>
                   <Stack
                     spacing={3}
                     direction={{ xs: 'row', xl: 'column' }}
@@ -175,13 +166,13 @@ export const Evolutions = () => {
                     )}
                   </Stack>
                 </Grid>
-              </>
+              </Fragment>
             )}
-          </>
+          </Fragment>
         )}
       </Grid>
-    </>
+    </Fragment>
   ) : (
-    <></>
+    <Fragment></Fragment>
   );
 };

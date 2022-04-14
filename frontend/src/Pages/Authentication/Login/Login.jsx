@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import {
   Avatar,
   Box,
@@ -91,9 +91,9 @@ export const Login = () => {
   };
 
   return (
-    <>
+    <Fragment>
       <Container
-        maxWidth="false"
+        maxWidth='false'
         sx={{
           height: '100vh',
           backgroundImage: `url(${Background})`,
@@ -107,9 +107,9 @@ export const Login = () => {
       <Grid
         container
         spacing={0}
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
+        direction='column'
+        alignItems='center'
+        justifyContent='center'
         sx={{
           pt: 18,
           zIndex: 2,
@@ -117,7 +117,7 @@ export const Login = () => {
           top: 0,
         }}
       >
-        <Container component="main" maxWidth="md">
+        <Container component='main' maxWidth='md'>
           <Box
             sx={{
               padding: 6,
@@ -133,14 +133,14 @@ export const Login = () => {
               <LockOutlinedIcon />
             </Avatar>
             <Typography
-              component="h1"
-              variant="authTitle"
-              color="primary.white"
+              component='h1'
+              variant='authTitle'
+              color='primary.white'
             >
               LOGIN
             </Typography>
             <Box
-              component="form"
+              component='form'
               noValidate
               onSubmit={handleSubmit}
               sx={{ mt: 3, width: '85%' }}
@@ -150,48 +150,48 @@ export const Login = () => {
                   <StyledTextField
                     required
                     fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                    color="inputColor"
+                    id='email'
+                    label='Email Address'
+                    name='email'
+                    autoComplete='email'
+                    color='inputColor'
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <StyledTextField
                     required
                     fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="new-password"
-                    color="inputColor"
+                    name='password'
+                    label='Password'
+                    type='password'
+                    id='password'
+                    autoComplete='new-password'
+                    color='inputColor'
                   />
                 </Grid>
               </Grid>
               {errorMessage.error && (
                 <Grid item xs={12}>
-                  <Typography align="center" mt={3} color="error">
+                  <Typography align='center' mt={3} color='error'>
                     {errorMessage.error}
                   </Typography>
                 </Grid>
               )}
               <Button
-                type="submit"
+                type='submit'
                 fullWidth
-                variant="contained"
+                variant='contained'
                 sx={{ mt: 3, mb: 2, fontWeight: 'bold' }}
               >
                 Login
               </Button>
-              <Grid container justifyContent="flex-end">
+              <Grid container justifyContent='flex-end'>
                 <Grid item xs={12}>
                   <Divider spacing={2}>
                     <Typography
-                      variant="body1"
-                      align="center"
-                      color="primary.white"
+                      variant='body1'
+                      align='center'
+                      color='primary.white'
                     >
                       Other ways to login
                     </Typography>
@@ -199,7 +199,7 @@ export const Login = () => {
                 </Grid>
                 <Grid item xs={12} textAlign={'center'} mt={2}>
                   <ButtonBase onClick={signInWithGoogle}>
-                    <img alt="Google sign in" src={GoogleButton} />
+                    <img alt='Google sign in' src={GoogleButton} />
                   </ButtonBase>
                 </Grid>
               </Grid>
@@ -243,6 +243,6 @@ export const Login = () => {
           </Box>
         </Container>
       </Grid>
-    </>
+    </Fragment>
   );
 };

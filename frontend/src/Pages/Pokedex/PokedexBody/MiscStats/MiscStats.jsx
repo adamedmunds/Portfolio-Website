@@ -1,3 +1,4 @@
+import {Fragment} from "react";
 import { Grid } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Stat } from '../../../../Components/Stat';
@@ -23,6 +24,6 @@ export const MiscStats = () => {
       />
     </Grid>
   ) : (
-    <></>
+    <Fragment></Fragment>
   );
 };

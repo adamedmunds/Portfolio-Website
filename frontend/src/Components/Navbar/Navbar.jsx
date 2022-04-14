@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import ArticleIcon from '@mui/icons-material/Article';
+import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import EmailIcon from '@mui/icons-material/Email';
 import LoginIcon from '@mui/icons-material/Login';
@@ -13,26 +13,86 @@ import {
   Container,
   Divider,
   Drawer,
+  Fab,
   Fade,
   IconButton,
+  Link,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
   Toolbar,
   Tooltip,
+  useScrollTrigger,
+  Zoom,
 } from '@mui/material';
-import { NavLink, useNavigate } from 'react-router-dom';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { auth } from '../../Utils/Authentication/firebase-config';
 import { signOut } from 'firebase/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../Redux/actions';
 import { isEmpty } from 'lodash';
+import logo from '../../Utils/Resources/logo.png';
+
+function ScrollTop() {
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 250,
+  });
+
+  const handleClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      '#back-to-top-anchor'
+    );
+
+    if (anchor) {
+      anchor.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }
+  };
+
+  return (
+    <Zoom in={trigger}>
+      <Box
+        onClick={handleClick}
+        role='presentation'
+        sx={{
+          position: 'fixed',
+          bottom: 16,
+          right: 16,
+          zIndex: 999,
+        }}
+      >
+        <Fab
+          color='secondary'
+          size='small'
+          aria-label='scroll back to top'
+          sx={{
+            backgroundColor: '#E5E5E5',
+            transition: '0.5s ease-in-out',
+            color: 'black',
+            '&:hover': { backgroundColor: '#BDBDBD' },
+          }}
+        >
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </Box>
+    </Zoom>
+  );
+}
 
 export const Navbar = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const { logoutUser } = bindActionCreators(actionCreators, dispatch);
   const [isSidebarOpen, setSideBarOpen] = useState(false);
   const navigate = useNavigate();
@@ -41,7 +101,7 @@ export const Navbar = () => {
   const pages = ['home', 'portfolio', 'pokedex', 'contact'];
   const icons = [
     <DashboardIcon />,
-    <ArticleIcon />,
+    <ArticleOutlinedIcon />,
     <CatchingPokemonIcon sx={{ transform: 'rotate(180deg)' }} />,
     <EmailIcon />,
   ];
@@ -70,11 +130,11 @@ export const Navbar = () => {
   };
 
   return (
-    <>
+    <Fragment>
       <AppBar position='absolute' color='transparent' elevation={0}>
         <Fade in={true} timeout={1000}>
           <Container maxWidth='false' component='section'>
-            <Toolbar disableGutters>
+            <Toolbar disableGutters id='back-to-top-anchor'>
               <Box
                 sx={{
                   flexGrow: { xs: 1 },
@@ -86,7 +146,7 @@ export const Navbar = () => {
                   edge='start'
                   aria-label='open drawer'
                   sx={{
-                    color: 'primary.white',
+                    color: pathname === '/pokedex' ? 'black' : 'primary.white',
                   }}
                   onClick={toggleDrawer(true)}
                 >
@@ -129,6 +189,14 @@ export const Navbar = () => {
           onKeyDown={toggleDrawer(false)}
         >
           <List>
+            <ListItem>
+              <Box margin='auto'>
+                <img src={logo} alt='logo' width={95} />
+              </Box>
+            </ListItem>
+          </List>
+          <Divider sx={{ bgcolor: '#CACACA' }} variant='middle' />
+          <List>
             {pages.map((value, index) => (
               <ListItem
                 button
@@ -156,7 +224,7 @@ export const Navbar = () => {
                 <ListItemText primary={'Logout'} />
               </ListItem>
             ) : (
-              <>
+              <Fragment>
                 <ListItem
                   button
                   key={'Login'}
@@ -179,11 +247,38 @@ export const Navbar = () => {
                   </ListItemIcon>
                   <ListItemText primary={'Register'} />
                 </ListItem>
-              </>
+              </Fragment>
             )}
+          </List>
+          <List
+            style={{
+              position: 'fixed',
+              bottom: 0,
+              textAlign: 'center',
+              paddingBottom: 10,
+            }}
+          >
+            <ListItem>
+              <ListItemText>
+                Made with love
+                <br />
+                By{' '}
+                <Link
+                  href='https://github.com/Mightylordx22'
+                  underline='none'
+                  sx={{
+                    transition: '0.15s ease-in',
+                    '&:hover': { color: 'salmon' },
+                  }}
+                >
+                  Adam
+                </Link>
+              </ListItemText>
+            </ListItem>
           </List>
         </Box>
       </Drawer>
-    </>
+      <ScrollTop />
+    </Fragment>
   );
 };

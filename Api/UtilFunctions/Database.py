@@ -1,12 +1,14 @@
 from pymongo import MongoClient
 from dotenv import load_dotenv
+import certifi
 import os
 
 load_dotenv()
 
 
 def connect_to_mongo() -> MongoClient:
-    client = MongoClient(os.getenv('MONGOLOCALURI'))
+    client = MongoClient(os.getenv('MONGODBURI'), tls=True,
+                         tlsCertificateKeyFile=os.getenv('MONGOCERTPATH'))
     return client
 
 

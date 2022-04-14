@@ -5,7 +5,7 @@ import { Typing } from './Typing';
 
 export const Stats = () => {
   return (
-    <Grid container mt={10}>
+    <Grid container mt={10} pb={5}>
       <Breeding />
       <Training />
       <Typing />

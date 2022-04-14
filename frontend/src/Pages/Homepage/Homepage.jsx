@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, Fragment } from "react";
 import { Button, Container, Slide, Typography } from "@mui/material";
 import Background from "../../Utils/Resources/background.svg";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ const About = lazy(() =>
 
 export const Homepage = () => {
   return (
-    <>
+    <Fragment>
       <Container
         sx={{
           height: "100vh",
@@ -54,6 +54,6 @@ export const Homepage = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <About />
       </Suspense>
-    </>
+    </Fragment>
   );
 };

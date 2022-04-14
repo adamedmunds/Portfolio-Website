@@ -6,6 +6,7 @@ import {
   NEW_POKEMON_EVO_CHAIN,
   UPDATE_COLOR,
   UPDATE_PAGE,
+  UPDATE_THEME
 } from '../actionList';
 import axios from 'axios';
 
@@ -92,6 +93,15 @@ export const updatePage = (pageData) => {
     dispatch({
       type: UPDATE_PAGE,
       pageData: { data: pageData },
+    });
+  };
+};
+
+export const updateTheme = (theme) => {
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_THEME,
+      theme: { theme: theme },
     });
   };
 };

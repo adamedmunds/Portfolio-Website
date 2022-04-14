@@ -7,6 +7,7 @@ import pokemonListReducer from './pokemonListReducer';
 import evolutionReducer from './evolutionReducer';
 import currentPokemonReducer from './currentPokemonReducer';
 import pageReducer from './pageReducer';
+import themeReducer from './themeReducer';
 
 const reducers = combineReducers({
   user: userReducer,
@@ -16,6 +17,7 @@ const reducers = combineReducers({
   evolutionData: evolutionReducer,
   currentPokemon: currentPokemonReducer,
   currentPage: pageReducer,
+  theme: themeReducer,
 });
 
 export default reducers;

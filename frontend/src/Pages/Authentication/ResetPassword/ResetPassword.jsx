@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import {
   Avatar,
   Box,
@@ -51,7 +51,7 @@ export const ResetPassword = () => {
       });
   };
   return (
-    <>
+    <Fragment>
       <Container
         maxWidth='false'
         sx={{
@@ -160,6 +160,6 @@ export const ResetPassword = () => {
           </Box>
         </Container>
       </Grid>
-    </>
+    </Fragment>
   );
 };

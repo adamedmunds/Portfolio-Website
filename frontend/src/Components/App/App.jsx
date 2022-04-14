@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense, useEffect, Fragment } from 'react';
 import darkTheme from '../../Utils/Themes/Dark';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import {
@@ -59,7 +59,7 @@ export const App = () => {
     });
   });
   return (
-    <>
+    <Fragment>
       <Router>
         <ThemeProvider theme={darkTheme}>
           <CssBaseline />
@@ -106,6 +106,6 @@ export const App = () => {
         </ThemeProvider>
         <Outlet />
       </Router>
-    </>
+    </Fragment>
   );
 };

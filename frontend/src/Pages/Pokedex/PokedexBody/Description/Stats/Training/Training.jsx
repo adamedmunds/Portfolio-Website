@@ -1,5 +1,6 @@
 /* eslint-disable array-callback-return */
 
+import {Fragment} from "react";
 import { Divider, Grid, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import {
@@ -123,6 +124,6 @@ export const Training = () => {
       </Grid>
     </Grid>
   ) : (
-    <></>
+    <Fragment></Fragment>
   );
 };

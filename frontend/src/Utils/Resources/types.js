@@ -108,10 +108,18 @@ const convertType = (type) => {
 export const calculateType = (type1, type2) => {
   if (isUndefined(type1)) type1 = 'none';
   if (isUndefined(type2)) type2 = 'none';
-  var result = {};
+  var result = {
+    '0x': [],
+    '0.25x': [],
+    '0.5x': [],
+    '1x': [],
+    '2x': [],
+    '4x': [],
+  };
   for (var i = 0; i < 18; i++) {
-    result[convertType(i)] =
+    const effectiveness =
       types[convertType(type1)][i] * types[convertType(type2)][i];
+    result[effectiveness.toString() + 'x'].push(convertType(i));
   }
   return result;
 };

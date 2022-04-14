@@ -61,6 +61,7 @@ export const PokeSearchBar = () => {
   };
 
   useEffect(() => {
+    updatePage(1);
     newPokedexEntry(1);
     axios.get('https://pokeapi.co/api/v2/pokemon-species/1').then((result) => {
       newEvoData(result.data.evolution_chain.url);

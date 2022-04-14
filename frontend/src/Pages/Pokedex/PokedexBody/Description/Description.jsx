@@ -4,12 +4,7 @@ import { Stats } from './Stats';
 
 export const Description = () => {
   return (
-    <Container
-      maxWidth='false'
-      sx={{
-        height: '150vh',
-      }}
-    >
+    <Container maxWidth='false'>
       <Evolutions />
       <Stats />
     </Container>

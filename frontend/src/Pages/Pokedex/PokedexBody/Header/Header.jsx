@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import {
   Box,
   Button,
@@ -10,9 +10,7 @@ import {
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { CustomModal } from '../../../../Components/Modal';
-import {
-  convertName,
-} from '../../../../Utils/Resources/helperFunctions';
+import { convertName } from '../../../../Utils/Resources/helperFunctions';
 import { ModalTheme } from '../../../../Utils/Themes/ModalTheme';
 
 export const Header = () => {
@@ -30,7 +28,7 @@ export const Header = () => {
   const { data: currentPokemon } = useSelector((state) => state.currentPokemon);
 
   return (
-    <>
+    <Fragment>
       <Grid item xs={12}>
         <Typography
           variant='h4'
@@ -65,7 +63,7 @@ export const Header = () => {
         <ButtonBase
           sx={{
             borderRadius: '8px',
-            backgroundColor: 'white',
+            backgroundColor: '#E5E5E5',
             transition: '0.5s',
             '&:hover': {
               backgroundColor: '#B3B3B3',
@@ -151,6 +149,6 @@ export const Header = () => {
           </Box>
         }
       />
-    </>
+    </Fragment>
   );
 };

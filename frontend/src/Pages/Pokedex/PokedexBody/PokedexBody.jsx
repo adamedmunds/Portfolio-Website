@@ -1,5 +1,5 @@
 import { Container, Grid } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators } from '../../../Redux/actions';
@@ -46,6 +46,6 @@ export const PokedexBody = () => {
       <Description />
     </Container>
   ) : (
-    <></>
+    <Fragment></Fragment>
   );
 };

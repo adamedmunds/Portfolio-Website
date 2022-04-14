@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import GoogleButton from '../../../Utils/Resources/googleSignIn.png';
 import {
@@ -93,7 +93,7 @@ export const Register = () => {
   };
 
   return (
-    <>
+    <Fragment>
       <Container
         maxWidth="false"
         sx={{
@@ -228,6 +228,6 @@ export const Register = () => {
           </Box>
         </Container>
       </Grid>
-    </>
+    </Fragment>
   );
 };

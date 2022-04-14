@@ -1,3 +1,4 @@
+import {Fragment} from "react";
 import { Box, Chip, Grid, Stack, Tooltip, Typography } from '@mui/material';
 import { TranslatedNames } from '../TranslatedNames';
 import {
@@ -110,7 +111,7 @@ export const TypesAndAbilities = () => {
           {pokedexData.abilities.map((ability) => (
             <Grid item key={ability.ability.name}>
               {ability.is_hidden ? (
-                <>
+                <Fragment>
                   <Tooltip title={'This is a hidden ability'}>
                     <Chip
                       label={ability.ability.name}
@@ -121,9 +122,9 @@ export const TypesAndAbilities = () => {
                       }}
                     />
                   </Tooltip>
-                </>
+                </Fragment>
               ) : (
-                <>
+                <Fragment>
                   <Chip
                     label={ability.ability.name}
                     sx={{
@@ -133,7 +134,7 @@ export const TypesAndAbilities = () => {
                       borderRadius: '8px',
                     }}
                   />
-                </>
+                </Fragment>
               )}
             </Grid>
           ))}
