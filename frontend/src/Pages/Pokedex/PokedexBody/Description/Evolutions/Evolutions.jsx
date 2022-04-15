@@ -9,7 +9,15 @@ export const Evolutions = ({ scrollRef }) => {
 
   return evolutionChain ? (
     <Fragment>
-      <Typography variant='h4' mt={5} mb={2} id='evolutions' ref={scrollRef}>
+      <Typography
+        variant='h3'
+        mt={5}
+        mb={2}
+        id='evolutions'
+        ref={scrollRef}
+        fontWeight={500}
+        fontSize='3rem'
+      >
         Evolution Chain
       </Typography>
       <Grid container columns={6.5}>

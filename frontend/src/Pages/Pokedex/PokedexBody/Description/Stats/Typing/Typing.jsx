@@ -50,7 +50,7 @@ export const Typing = () => {
 
   return typeSet ? (
     <Grid item xs={12} xl={4}>
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid item xs={4.3} />
         <Grid item container xs={3} justifyContent='center' alignItems='center'>
           <Typography
@@ -59,6 +59,7 @@ export const Typing = () => {
             mb={2}
             textAlign='center'
             fontWeight={500}
+            fontSize='3rem'
           >
             {isWeakness ? 'DEFENSE' : 'ATTACK'}
           </Typography>
@@ -67,8 +68,8 @@ export const Typing = () => {
           <Switch
             onChange={() => handleChange()}
             sx={{
-              mt: 2.5,
-              ml: 2,
+              mt: 3,
+              ml: 6,
               '& .MuiSwitch-switchBase': {
                 '&.Mui-checked': {
                   color: '#fff',

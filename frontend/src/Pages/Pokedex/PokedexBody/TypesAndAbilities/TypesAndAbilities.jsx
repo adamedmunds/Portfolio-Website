@@ -173,7 +173,7 @@ export const TypesAndAbilities = () => {
               variant='h4'
               mt={2}
               sx={{
-                color: boxColor.luma <= 128 ? 'white' : 'black',
+                color: 'rgb(0 0 0 / 80%)',
                 fontWeight: 'fontWeightMedium',
                 fontfamily: "'Rubik', sans-serif",
                 textShadow: '0 0 12px rgb(0 0 0 / 30%)',
@@ -201,7 +201,7 @@ export const TypesAndAbilities = () => {
               variant='h4'
               mt={3}
               sx={{
-                color: boxColor.luma <= 128 ? 'white' : 'black',
+                color: 'rgb(0 0 0 / 80%)',
                 fontWeight: 'fontWeightMedium',
                 fontfamily: "'Rubik', sans-serif",
                 textShadow: '0 0 12px rgb(0 0 0 / 30%)',
@@ -424,7 +424,7 @@ export const TypesAndAbilities = () => {
               variant='h4'
               mt={3}
               sx={{
-                color: boxColor.luma <= 128 ? 'white' : 'black',
+                color: 'rgb(0 0 0 / 80%)',
                 fontWeight: 'fontWeightMedium',
                 fontfamily: "'Rubik', sans-serif",
                 textShadow: '0 0 12px rgb(0 0 0 / 30%)',

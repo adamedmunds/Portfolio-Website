@@ -21,6 +21,7 @@ export const Training = () => {
         mb={2}
         textAlign='center'
         fontWeight={500}
+        fontSize='3rem'
       >
         TRAINING
       </Typography>

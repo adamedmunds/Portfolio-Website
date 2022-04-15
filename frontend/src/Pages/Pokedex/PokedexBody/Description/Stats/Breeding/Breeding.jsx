@@ -16,11 +16,12 @@ export const Breeding = () => {
     <Grid item xs={12} xl={4} pr={2}>
       <Grid item xs={12}>
         <Typography
-          variant='h4'
+          variant='h2'
           mt={5}
           mb={2}
           textAlign='center'
           fontWeight={500}
+          fontSize='3rem'
         >
           BREEDING
         </Typography>
