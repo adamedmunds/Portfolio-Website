@@ -3,10 +3,11 @@ import { startCase } from 'lodash';
 
 export const Ability = ({ name, isHidden, click }) => {
   return (
-    <Grid item key={name} onClick={click}>
+    <Grid item key={name}>
       <Tooltip title={isHidden ? 'This is a hidden ability' : ''}>
         <Chip
           label={startCase(name)}
+          onClick={click}
           sx={{
             backgroundColor: 'white',
             fontWeight: 'bold',
