@@ -1,16 +1,27 @@
 /* eslint-disable array-callback-return */
-import { Box, Divider, Grid, Stack, Tooltip, Typography } from '@mui/material';
+import {
+  Box,
+  Divider,
+  Grid,
+  Stack,
+  Switch,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import { useEffect, useState, Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import pSBC from 'shade-blend-color';
-import { calculateType } from '../../../../../../Utils/Resources/types';
+import {
+  calculateWeakness,
+  calculateStrength,
+} from '../../../../../../Utils/Resources/types';
 import { types } from '../../../../../../Utils/Resources/typeExporter';
 import { toTitleCase } from '../../../../../../Utils/Resources/helperFunctions';
 
 export const Typing = () => {
   const { data: pokedexData } = useSelector((state) => state.pokedex);
-
+  const [isWeakness, setIsWeakness] = useState(true);
   const [typeOneData, setTypeOneData] = useState('none');
   const [typeTwoData, setTypeTwoData] = useState('none');
 
@@ -29,21 +40,60 @@ export const Typing = () => {
     }
   }, [pokedexData]);
 
-  const typeSet = calculateType(typeOneData.name, typeTwoData.name);
+  const handleChange = () => {
+    setIsWeakness(!isWeakness);
+  };
+
+  const typeSet = !isWeakness
+    ? calculateStrength(typeOneData.name, typeTwoData.name)
+    : calculateWeakness(typeOneData.name, typeTwoData.name);
 
   return typeSet ? (
     <Grid item xs={12} xl={4}>
-      <Typography
-        variant='h4'
-        mt={5}
-        mb={2}
-        textAlign='center'
-        fontWeight={500}
-      >
-        WEAKNESSES
-      </Typography>
+      <Grid container>
+        <Grid item xs={4.3} />
+        <Grid item container xs={3} justifyContent='center' alignItems='center'>
+          <Typography
+            variant='h4'
+            mt={5}
+            mb={2}
+            textAlign='center'
+            fontWeight={500}
+          >
+            {isWeakness ? 'DEFENSE' : 'ATTACK'}
+          </Typography>
+        </Grid>
+        <Grid item xs={3} container alignItems='center'>
+          <Switch
+            onChange={() => handleChange()}
+            sx={{
+              mt: 2.5,
+              ml: 2,
+              '& .MuiSwitch-switchBase': {
+                '&.Mui-checked': {
+                  color: '#fff',
+                  '& + .MuiSwitch-track': {
+                    backgroundColor: '#636674',
+                  },
+                },
+                '&:hover': {
+                  color: 'black',
+                },
+              },
+              '& .MuiSwitch-thumb': {
+                backgroundColor: 'black',
+              },
+              '& .MuiSwitch-track': {
+                opacity: 1,
+                backgroundColor: '#454750',
+                borderRadius: 20 / 2,
+              },
+            }}
+          />
+        </Grid>
+      </Grid>
       <Grid container spacing={2}>
-        <Grid item md={3} xs={12}>
+        <Grid item md={3} xs={12} minHeight='64px'>
           <Typography variant='h6' textAlign='center'>
             0x
           </Typography>
@@ -90,7 +140,7 @@ export const Typing = () => {
         <Grid item xs={12}>
           <Divider />
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={3} xs={12} minHeight='64px'>
           <Typography variant='h6' textAlign='center'>
             0.25x
           </Typography>
@@ -137,7 +187,7 @@ export const Typing = () => {
         <Grid item xs={12}>
           <Divider />
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={3} xs={12} minHeight='64px'>
           <Typography variant='h6' textAlign='center'>
             0.5x
           </Typography>
@@ -184,7 +234,7 @@ export const Typing = () => {
         <Grid item xs={12}>
           <Divider />
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={3} xs={12} minHeight='64px'>
           <Typography variant='h6' textAlign='center'>
             2x
           </Typography>
@@ -231,7 +281,7 @@ export const Typing = () => {
         <Grid item xs={12}>
           <Divider />
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={3} xs={12} minHeight='64px'>
           <Typography variant='h6' textAlign='center'>
             4x
           </Typography>

@@ -25,7 +25,6 @@ import axios from 'axios';
 import { VariableSizeList } from 'react-window';
 import { importAll } from '../../../Utils/Resources/helperFunctions';
 import { useWindowDimensions } from '../../../Hooks/useWindowDimensions';
-import currentPokemonReducer from '../../../Redux/reducers/currentPokemonReducer';
 
 export const PokeSearchBar = () => {
   const { width } = useWindowDimensions();

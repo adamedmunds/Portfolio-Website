@@ -25,7 +25,7 @@ export const Training = () => {
         TRAINING
       </Typography>
       <Grid container spacing={2}>
-        <Grid item md={3} xs={12}>
+        <Grid item md={3} xs={12} minHeight='64px'>
           <Typography variant='h6' textAlign='center'>
             Ev Yield
           </Typography>
@@ -48,7 +48,7 @@ export const Training = () => {
         <Grid item xs={12}>
           <Divider />
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={3} xs={12} minHeight='64px'>
           <Typography variant='h6' textAlign='center'>
             Catch Rate
           </Typography>
@@ -63,7 +63,7 @@ export const Training = () => {
         <Grid item xs={12}>
           <Divider />
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={3} xs={12} minHeight='64px'>
           <Typography variant='h6' textAlign='center'>
             Base Happiness
           </Typography>
@@ -77,7 +77,7 @@ export const Training = () => {
         <Grid item xs={12}>
           <Divider />
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={3} xs={12} minHeight='64px'>
           <Typography variant='h6' textAlign='center'>
             Base Experience
           </Typography>
@@ -103,7 +103,7 @@ export const Training = () => {
         <Grid item xs={12}>
           <Divider />
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={3} xs={12} minHeight='64px'>
           <Typography variant='h6' textAlign='center'>
             Held Items
           </Typography>

@@ -25,7 +25,7 @@ export const Breeding = () => {
           BREEDING
         </Typography>
       </Grid>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} minHeight='64px'>
         <Grid item md={3} xs={12}>
           <Typography variant='h6' textAlign='center'>
             Egg Groups
@@ -41,7 +41,7 @@ export const Breeding = () => {
         <Grid item xs={12}>
           <Divider />
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={3} xs={12} minHeight='64px'>
           <Typography variant='h6' textAlign='center'>
             Egg Cycles
           </Typography>
@@ -55,7 +55,7 @@ export const Breeding = () => {
         <Grid item xs={12}>
           <Divider />
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={3} xs={12} minHeight='64px'>
           <Typography variant='h6' textAlign='center'>
             Gender Distribution
           </Typography>
@@ -90,7 +90,7 @@ export const Breeding = () => {
         <Grid item xs={12}>
           <Divider />
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={3} xs={12} minHeight='64px'>
           <Typography variant='h6' textAlign='center'>
             Baby Trigger Item
           </Typography>
@@ -105,7 +105,7 @@ export const Breeding = () => {
         <Grid item xs={12}>
           <Divider />
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={3} xs={12} minHeight='64px'>
           <Typography variant='h6' textAlign='center'>
             Habitat
           </Typography>
