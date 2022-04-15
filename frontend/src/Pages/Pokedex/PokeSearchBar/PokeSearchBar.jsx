@@ -25,6 +25,7 @@ import axios from 'axios';
 import { VariableSizeList } from 'react-window';
 import { importAll } from '../../../Utils/Resources/helperFunctions';
 import { useWindowDimensions } from '../../../Hooks/useWindowDimensions';
+import currentPokemonReducer from '../../../Redux/reducers/currentPokemonReducer';
 
 export const PokeSearchBar = () => {
   const { width } = useWindowDimensions();
@@ -61,12 +62,14 @@ export const PokeSearchBar = () => {
   };
 
   useEffect(() => {
-    updatePage(1);
-    newPokedexEntry(1);
-    axios.get('https://pokeapi.co/api/v2/pokemon-species/1').then((result) => {
-      newEvoData(result.data.evolution_chain.url);
-      newCurrentPokemonEntry(result.data);
-    });
+    updatePage(currentPage);
+    newPokedexEntry(currentPage);
+    axios
+      .get(`https://pokeapi.co/api/v2/pokemon-species/${currentPage}`)
+      .then((result) => {
+        newEvoData(result.data.evolution_chain.url);
+        newCurrentPokemonEntry(result.data);
+      });
     setImages(
       importAll(
         require.context(
