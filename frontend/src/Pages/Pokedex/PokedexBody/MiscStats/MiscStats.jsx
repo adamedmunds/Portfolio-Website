@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef } from 'react';
+import { Fragment, useRef } from 'react';
 import { Grid, Slide } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Stat } from '../../../../Components/Stat';
