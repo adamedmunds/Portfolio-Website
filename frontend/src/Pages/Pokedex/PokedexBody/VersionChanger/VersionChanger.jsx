@@ -1,4 +1,4 @@
-import { Chip, Container, Grid, Tooltip } from '@mui/material';
+import { Chip, Container, Grid, Tooltip, Typography } from '@mui/material';
 import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreators } from '../../../../Redux/actions';
@@ -52,7 +52,10 @@ export const VersionChanger = () => {
   };
 
   return (
-    <Container maxWidth='xl'>
+    <Container maxWidth='false'>
+      <Typography variant='h3' mt={8} mb={2} fontWeight={500} fontSize='3rem'>
+        Versions
+      </Typography>
       <Grid
         container
         justifyContent='center'
