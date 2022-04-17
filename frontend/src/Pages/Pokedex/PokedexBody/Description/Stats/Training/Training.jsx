@@ -14,17 +14,19 @@ export const Training = () => {
   const { data: pokedexData } = useSelector((state) => state.pokedex);
 
   return currentPokemon && pokedexData ? (
-    <Grid item xs={12} xl={4} pr={2}>
-      <Typography
-        variant='h4'
-        mt={5}
-        mb={2}
-        textAlign='center'
-        fontWeight={500}
-        fontSize='3rem'
-      >
-        TRAINING
-      </Typography>
+    <Grid item xs={12} xl={4} pr={2} sx={{ padding: '0 48px' }}>
+      <Grid item container xs={12} justifyContent='center' alignItems='center'>
+        <Typography
+          variant='h4'
+          mt={5}
+          mb={2}
+          textAlign='center'
+          fontWeight={500}
+          fontSize='3rem'
+        >
+          TRAINING
+        </Typography>
+      </Grid>
       <Grid container spacing={2}>
         <Grid item md={3} xs={12} minHeight='64px'>
           <Typography variant='h6' textAlign='center'>

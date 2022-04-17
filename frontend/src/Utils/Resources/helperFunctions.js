@@ -1,3 +1,8 @@
+import { isNull, startCase } from 'lodash';
+import physical from './PokemonIcons/physical.png';
+import special from './PokemonIcons/special.png';
+import status from './PokemonIcons/status.png';
+
 export const toTitleCase = (str) => {
   return str.replace(/\w\S*/g, function (txt) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -597,4 +602,64 @@ export const calculateFriendship = (friendship) => {
     return 'High';
   }
   return 'Unknown';
+};
+
+export const moveIcons = {
+  physical: {
+    icon: physical,
+    color: '#f44336',
+  },
+  special: {
+    icon: special,
+    color: '#2196f3',
+  },
+  status: {
+    icon: status,
+    color: '#B3B3B3',
+  },
+};
+
+export const contestColors = {
+  beauty: {
+    color: '#FFB6C1',
+  },
+  cool: {
+    color: '#87CEFA',
+  },
+  cute: {
+    color: '#FFA07A',
+  },
+  smart: {
+    color: '#90EE90',
+  },
+  tough: {
+    color: '#C3ADFC',
+  },
+};
+
+export const getContestColor = (contest) => {
+  if (isNull(contest.contest_type)) {
+    contest.contest_type = { name: 'No Contest Type' };
+  }
+  switch (contest.contest_type.name) {
+    case 'beauty':
+      return '#FFB6C1';
+    case 'cool':
+      return '#87CEFA';
+    case 'cute':
+      return '#FFA07A';
+    case 'smart':
+      return '#90EE90';
+    case 'tough':
+      return '#C3ADFC';
+    default:
+      return '#FFAC63';
+  }
+};
+
+export const convertContestName = (contest) => {
+  if (isNull(contest.contest_type)) {
+    contest.contest_type = { name: 'No Contest Type' };
+  }
+  return startCase(contest.contest_type.name);
 };

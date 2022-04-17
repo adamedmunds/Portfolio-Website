@@ -10,6 +10,7 @@ import {
   UPDATE_COLOR,
   UPDATE_PAGE,
   UPDATE_THEME,
+  UPDATE_VERSION,
 } from '../actionList';
 import axios from 'axios';
 import { isNull } from 'lodash';
@@ -162,5 +163,14 @@ export const updateAbilityThree = (abilityData) => {
           abilityThree: { data: res.data },
         });
       });
+  };
+};
+
+export const updateVersion = (version) => {
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_VERSION,
+      version: { data: version },
+    });
   };
 };

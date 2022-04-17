@@ -61,7 +61,6 @@ const StyledHeader = ({ heading }) => {
 export const TypesAndAbilities = () => {
   const { data: pokedexData } = useSelector((state) => state.pokedex);
   const { data: currentPokemon } = useSelector((state) => state.currentPokemon);
-  const boxColor = useSelector((state) => state.color);
   const { data: abilityOne } = useSelector((state) => state.abilityOne);
   const { data: abilityTwo } = useSelector((state) => state.abilityTwo);
   const { data: abilityThree } = useSelector((state) => state.abilityThree);
@@ -228,7 +227,7 @@ export const TypesAndAbilities = () => {
                       alignItems='center'
                       boxShadow={5}
                     >
-                      <Typography variant='h4' mb={1}>
+                      <Typography variant='h3' mb={1}>
                         {startCase(pokedexData.abilities[0].ability.name)}
                       </Typography>
                       <Divider color='black' />
@@ -240,7 +239,7 @@ export const TypesAndAbilities = () => {
                           ) {
                             return (
                               <Fragment key={text.flavor_text}>
-                                <StyledHeader heading={'GAME DESCRIPTION'} />
+                                <StyledHeader heading={'DESCRIPTION'} />
                                 <StyledBody data={text.flavor_text} />
                               </Fragment>
                             );
@@ -263,9 +262,13 @@ export const TypesAndAbilities = () => {
                       <Button
                         onClick={handleAbilityOneClose}
                         sx={{
-                          color: 'black',
+                          color: 'white',
                           marginTop: '8px',
                           fontWeight: 'bold',
+                          backgroundColor: '#24252a',
+                          '&:hover': {
+                            backgroundColor: '#757889',
+                          },
                         }}
                         variant='contained'
                       >
@@ -294,7 +297,7 @@ export const TypesAndAbilities = () => {
                       alignItems='center'
                       boxShadow={5}
                     >
-                      <Typography variant='h4' mb={1}>
+                      <Typography variant='h3' mb={1}>
                         {startCase(pokedexData.abilities[1].ability.name)}
                       </Typography>
                       {pokedexData.abilities[1].is_hidden && (
@@ -311,7 +314,7 @@ export const TypesAndAbilities = () => {
                           ) {
                             return (
                               <Fragment key={text.flavor_text}>
-                                <StyledHeader heading={'GAME DESCRIPTION'} />
+                                <StyledHeader heading={'DESCRIPTION'} />
                                 <StyledBody data={text.flavor_text} />
                               </Fragment>
                             );
@@ -334,9 +337,13 @@ export const TypesAndAbilities = () => {
                       <Button
                         onClick={handleAbilityTwoClose}
                         sx={{
-                          color: 'black',
+                          color: 'white',
                           marginTop: '8px',
                           fontWeight: 'bold',
+                          backgroundColor: '#24252a',
+                          '&:hover': {
+                            backgroundColor: '#757889',
+                          },
                         }}
                         variant='contained'
                       >
@@ -365,7 +372,7 @@ export const TypesAndAbilities = () => {
                       alignItems='center'
                       boxShadow={5}
                     >
-                      <Typography variant='h4' mb={1}>
+                      <Typography variant='h3' mb={1}>
                         {startCase(pokedexData.abilities[2].ability.name)}
                       </Typography>
                       {pokedexData.abilities[2].is_hidden && (
@@ -382,7 +389,7 @@ export const TypesAndAbilities = () => {
                           ) {
                             return (
                               <Fragment key={text.flavor_text}>
-                                <StyledHeader heading={'GAME DESCRIPTION'} />
+                                <StyledHeader heading={'DESCRIPTION'} />
                                 <StyledBody data={text.flavor_text} />
                               </Fragment>
                             );
@@ -405,9 +412,13 @@ export const TypesAndAbilities = () => {
                       <Button
                         onClick={handleAbilityThreeClose}
                         sx={{
-                          color: 'black',
+                          color: 'white',
                           marginTop: '8px',
                           fontWeight: 'bold',
+                          backgroundColor: '#24252a',
+                          '&:hover': {
+                            backgroundColor: '#757889',
+                          },
                         }}
                         variant='contained'
                       >

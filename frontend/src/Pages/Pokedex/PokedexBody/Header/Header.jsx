@@ -100,7 +100,7 @@ export const Header = () => {
             alignItems='center'
             boxShadow={5}
           >
-            <Typography variant='h4'>Pokédex Entries</Typography>
+            <Typography variant='h3'>Pokédex Entries</Typography>
             <Divider color='black' />
             {currentPokemon?.flavor_text_entries.map((entry) => {
               if (entry.language.name === 'en') {
@@ -139,10 +139,18 @@ export const Header = () => {
                 );
               }
             })}
-            <Divider color='black' />
+            <Divider color='black' sx={{ marginTop: '16px' }} />
             <Button
               onClick={handleClose}
-              sx={{ color: 'black', marginTop: '8px', fontWeight: 'bold' }}
+              sx={{
+                color: 'white',
+                marginTop: '8px',
+                fontWeight: 'bold',
+                backgroundColor: '#24252a',
+                '&:hover': {
+                  backgroundColor: '#757889',
+                },
+              }}
               variant='contained'
             >
               Back

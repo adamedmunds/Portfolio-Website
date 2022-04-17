@@ -11,7 +11,7 @@ export const Evolutions = ({ scrollRef }) => {
     <Fragment>
       <Typography
         variant='h3'
-        mt={5}
+        mt={8}
         mb={2}
         id='evolutions'
         ref={scrollRef}

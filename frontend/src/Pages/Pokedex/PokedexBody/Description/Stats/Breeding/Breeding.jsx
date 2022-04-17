@@ -12,9 +12,10 @@ import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 export const Breeding = () => {
   const { data: currentPokemon } = useSelector((state) => state.currentPokemon);
   const { data: evoData } = useSelector((state) => state.evolutionData);
+
   return currentPokemon && evoData ? (
-    <Grid item xs={12} xl={4} pr={2}>
-      <Grid item xs={12}>
+    <Grid item xs={12} xl={4} pr={2} sx={{ padding: '0 48px' }}>
+      <Grid item container xs={12} justifyContent='center' alignItems='center'>
         <Typography
           variant='h2'
           mt={5}

@@ -11,6 +11,8 @@ import { Description } from './Description';
 import { MiscStats } from './MiscStats';
 import { Header } from './Header';
 import { TypesAndAbilities } from './TypesAndAbilities';
+import { MoveSet } from './MoveSet';
+import { VersionChanger } from './VersionChanger';
 
 export const PokedexBody = () => {
   const dispatch = useDispatch();
@@ -43,9 +45,11 @@ export const PokedexBody = () => {
       <Grid container mt={2}>
         <Header />
         <TypesAndAbilities />
-        <MiscStats scrollRef={scrollToRef}/>
+        <MiscStats scrollRef={scrollToRef} />
       </Grid>
-      <Description scrollRef={scrollToRef}/>
+      <Description scrollRef={scrollToRef} />
+      <MoveSet />
+      <VersionChanger />
     </Container>
   ) : (
     <Fragment></Fragment>

@@ -49,7 +49,7 @@ export const Typing = () => {
     : calculateWeakness(typeOneData.name, typeTwoData.name);
 
   return typeSet ? (
-    <Grid item xs={12} xl={4}>
+    <Grid item xs={12} xl={4} sx={{ padding: '0 48px' }}>
       <Grid container spacing={2}>
         <Grid item xs={4.3} />
         <Grid item container xs={3} justifyContent='center' alignItems='center'>
@@ -64,12 +64,19 @@ export const Typing = () => {
             {isWeakness ? 'DEFENSE' : 'ATTACK'}
           </Typography>
         </Grid>
-        <Grid item xs={3} container alignItems='center'>
+        <Grid
+          item
+          container
+          xs={12}
+          md={2}
+          justifyContent='center'
+          alignItems='center'
+        >
           <Switch
             onChange={() => handleChange()}
             sx={{
-              mt: 3,
-              ml: 6,
+              mt: { xs: 0, md: 3 },
+              ml: { xs: 0, xl: 20 },
               '& .MuiSwitch-switchBase': {
                 '&.Mui-checked': {
                   color: '#fff',
@@ -123,7 +130,8 @@ export const Typing = () => {
                         background: pSBC(0.3, types[key].color, '#FFF'),
                         borderRadius: '50%',
                         p: 1,
-                        maxWidth: { xs: '15%', md: '10%' },
+                        maxWidth: '45px',
+
                         boxShadow: `0 0 1em ${types[key].color}`,
                         border: `1px solid ${pSBC(
                           0.2,
@@ -170,7 +178,7 @@ export const Typing = () => {
                         background: pSBC(0.3, types[key].color, '#FFF'),
                         borderRadius: '50%',
                         p: 1,
-                        maxWidth: { xs: '15%', md: '10%' },
+                        maxWidth: '45px',
                         boxShadow: `0 0 1em ${types[key].color}`,
                         border: `1px solid ${pSBC(
                           0.2,
@@ -217,7 +225,8 @@ export const Typing = () => {
                         background: pSBC(0.3, types[key].color, '#FFF'),
                         borderRadius: '50%',
                         p: 1,
-                        maxWidth: { xs: '15%', md: '10%' },
+                        maxWidth: '45px',
+
                         boxShadow: `0 0 1em ${types[key].color}`,
                         border: `1px solid ${pSBC(
                           0.2,
@@ -264,7 +273,8 @@ export const Typing = () => {
                         background: pSBC(0.3, types[key].color, '#FFF'),
                         borderRadius: '50%',
                         p: 1,
-                        maxWidth: { xs: '15%', md: '10%' },
+                        maxWidth: '45px',
+
                         boxShadow: `0 0 1em ${types[key].color}`,
                         border: `1px solid ${pSBC(
                           0.2,
@@ -311,7 +321,8 @@ export const Typing = () => {
                         background: pSBC(0.3, types[key].color, '#FFF'),
                         borderRadius: '50%',
                         p: 1,
-                        maxWidth: { xs: '15%', md: '10%' },
+                        maxWidth: '45px',
+
                         boxShadow: `0 0 1em ${types[key].color}`,
                         border: `1px solid ${pSBC(
                           0.2,

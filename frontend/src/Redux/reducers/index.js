@@ -11,6 +11,7 @@ import themeReducer from './themeReducer';
 import abilityOneReducer from './abilityOneReducer';
 import abilityTwoReducer from './abilityTwoReducer';
 import abilityThreeReducer from './abilityThreeReducer';
+import updateVersionReducer from './updateVersionReducer';
 
 const reducers = combineReducers({
   user: userReducer,
@@ -24,6 +25,7 @@ const reducers = combineReducers({
   abilityOne: abilityOneReducer,
   abilityTwo: abilityTwoReducer,
   abilityThree: abilityThreeReducer,
+  version: updateVersionReducer,
 });
 
 export default reducers;
