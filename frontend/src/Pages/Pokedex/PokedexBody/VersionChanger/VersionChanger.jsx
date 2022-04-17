@@ -53,7 +53,14 @@ export const VersionChanger = () => {
 
   return (
     <Container maxWidth='false'>
-      <Typography variant='h3' mt={8} mb={2} fontWeight={500} fontSize='3rem'>
+      <Typography
+        variant='h3'
+        mt={8}
+        mb={2}
+        fontWeight={500}
+        fontSize='3rem'
+        textAlign='center'
+      >
         Versions
       </Typography>
       <Grid

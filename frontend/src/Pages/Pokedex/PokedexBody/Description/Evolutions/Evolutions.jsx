@@ -14,6 +14,7 @@ export const Evolutions = ({ scrollRef }) => {
         mt={8}
         mb={2}
         id='evolutions'
+        textAlign='center'
         ref={scrollRef}
         fontWeight={500}
         fontSize='3rem'

@@ -41,11 +41,11 @@ export const MiscStats = ({ scrollRef }) => {
           </Grid>
         </div>
       </Slide>
-      {width >= 900 && (
+      {width >= 1100 && (
         <Grid
           item
           container
-          xs
+          xs={9.5}
           justifyContent='center'
           alignItems='flex-end'
           ref={containerRef}
