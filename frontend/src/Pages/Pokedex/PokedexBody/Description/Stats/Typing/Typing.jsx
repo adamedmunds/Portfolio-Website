@@ -53,16 +53,24 @@ export const Typing = () => {
       <Grid container spacing={2}>
         <Grid item xs={4.3} />
         <Grid item container xs={3} justifyContent='center' alignItems='center'>
-          <Typography
-            variant='h4'
-            mt={5}
-            mb={2}
-            textAlign='center'
-            fontWeight={500}
-            fontSize='3rem'
+          <Tooltip
+            title={
+              isWeakness
+                ? 'Damage multiplier when defending'
+                : 'Damage multiplier when attacking'
+            }
           >
-            {isWeakness ? 'DEFENSE' : 'ATTACK'}
-          </Typography>
+            <Typography
+              variant='h4'
+              mt={5}
+              mb={2}
+              textAlign='center'
+              fontWeight={500}
+              fontSize='3rem'
+            >
+              {isWeakness ? 'DEFENSE' : 'ATTACK'}
+            </Typography>
+          </Tooltip>
         </Grid>
         <Grid
           item
