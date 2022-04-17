@@ -22,21 +22,25 @@ export const MiscStats = ({ scrollRef }) => {
 
   return currentPokemon ? (
     <Fragment>
-      <Grid item mt={width >= 900 ? 5 : 2}>
-        <Stat stat={`Height: ${pokedexData.height / 10}m`} />
-        <Stat stat={`Weight: ${pokedexData.weight / 10}kg`} />
-        <Stat
-          stat={`Shape: ${
-            currentPokemon.shape ? currentPokemon.shape.name : 'Unknown'
-          }`}
-        />
-        <Stat stat={`Color: ${currentPokemon.color.name}`} />
-        <Stat
-          stat={`Generation: ${convertName(
-            currentPokemon.generation.name.split('-')[1]
-          )}`}
-        />
-      </Grid>
+      <Slide direction='right' in={true} timeout={700}>
+        <div>
+          <Grid item mt={width >= 900 ? 5 : 2}>
+            <Stat stat={`Height: ${pokedexData.height / 10}m`} />
+            <Stat stat={`Weight: ${pokedexData.weight / 10}kg`} />
+            <Stat
+              stat={`Shape: ${
+                currentPokemon.shape ? currentPokemon.shape.name : 'Unknown'
+              }`}
+            />
+            <Stat stat={`Color: ${currentPokemon.color.name}`} />
+            <Stat
+              stat={`Generation: ${convertName(
+                currentPokemon.generation.name.split('-')[1]
+              )}`}
+            />
+          </Grid>
+        </div>
+      </Slide>
       {width >= 900 && (
         <Grid
           item

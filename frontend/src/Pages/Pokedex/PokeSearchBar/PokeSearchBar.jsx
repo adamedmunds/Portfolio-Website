@@ -9,6 +9,7 @@ import {
   Typography,
   useTheme,
   useMediaQuery,
+  Slide,
 } from '@mui/material';
 import {
   useEffect,
@@ -211,66 +212,68 @@ export const PokeSearchBar = () => {
   });
 
   return (
-    <Container maxWidth='xl' sx={{ position: 'relative' }}>
-      <Stack justifyContent='center' alignItems='center' mt={2} spacing={1}>
-        <Pagination
-          count={898}
-          size={breakpoint}
-          showFirstButton={breakpoint !== 'small'}
-          showLastButton={breakpoint !== 'small'}
-          siblingCount={size}
-          onChange={(_, page) => {
-            newPokedexEntry(page);
-            updatePage(page);
-            axios
-              .get(`https://pokeapi.co/api/v2/pokemon-species/${page}`)
-              .then((result) => {
-                newEvoData(result.data.evolution_chain.url);
-                newCurrentPokemonEntry(result.data);
-              });
-          }}
-          color='paginationHighlight'
-          page={parseInt(currentPage)}
-          sx={{
-            zIndex: 1101,
-          }}
-        />
-        <Autocomplete
-          id='pokemon-search-autocomplete'
-          sx={{ width: 250 }}
-          options={reduxPokemonSearchData}
-          autoHighlight
-          disableClearable
-          ListboxComponent={ListboxComponent}
-          getOptionLabel={(option) => option.name}
-          filterOptions={filterOptions}
-          renderOption={(props, option) => [props, option]}
-          onChange={(_, data) => {
-            handleSubmit(data.name);
-          }}
-          open={open}
-          onOpen={handleOpen}
-          onClose={() => setOpen(false)}
-          inputValue={inputValue}
-          onInputChange={handleInputChange}
-          popupIcon={null}
-          renderInput={(params) => (
-            <TextField
-              id='pokemon-search-field'
-              label='Pokemon Search'
-              name='Pokemon Search'
-              variant='standard'
-              required
-              color='inputColor'
-              {...params}
-              InputProps={{
-                ...params.InputProps,
-                type: 'search',
-              }}
-            />
-          )}
-        />
-      </Stack>
+    <Container maxWidth='xl' sx={{ position: 'relative', overflow: 'hidden' }}>
+      <Slide direction='down' in={true} timeout={700}>
+        <Stack justifyContent='center' alignItems='center' mt={2} spacing={1}>
+          <Pagination
+            count={898}
+            size={breakpoint}
+            showFirstButton={breakpoint !== 'small'}
+            showLastButton={breakpoint !== 'small'}
+            siblingCount={size}
+            onChange={(_, page) => {
+              newPokedexEntry(page);
+              updatePage(page);
+              axios
+                .get(`https://pokeapi.co/api/v2/pokemon-species/${page}`)
+                .then((result) => {
+                  newEvoData(result.data.evolution_chain.url);
+                  newCurrentPokemonEntry(result.data);
+                });
+            }}
+            color='paginationHighlight'
+            page={parseInt(currentPage)}
+            sx={{
+              zIndex: 1101,
+            }}
+          />
+          <Autocomplete
+            id='pokemon-search-autocomplete'
+            sx={{ width: 250 }}
+            options={reduxPokemonSearchData}
+            autoHighlight
+            disableClearable
+            ListboxComponent={ListboxComponent}
+            getOptionLabel={(option) => option.name}
+            filterOptions={filterOptions}
+            renderOption={(props, option) => [props, option]}
+            onChange={(_, data) => {
+              handleSubmit(data.name);
+            }}
+            open={open}
+            onOpen={handleOpen}
+            onClose={() => setOpen(false)}
+            inputValue={inputValue}
+            onInputChange={handleInputChange}
+            popupIcon={null}
+            renderInput={(params) => (
+              <TextField
+                id='pokemon-search-field'
+                label='Pokemon Search'
+                name='Pokemon Search'
+                variant='standard'
+                required
+                color='inputColor'
+                {...params}
+                InputProps={{
+                  ...params.InputProps,
+                  type: 'search',
+                }}
+              />
+            )}
+          />
+        </Stack>
+      </Slide>
     </Container>
   );
 };

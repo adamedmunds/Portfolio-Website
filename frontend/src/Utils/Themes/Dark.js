@@ -150,7 +150,7 @@ const darkTheme = createTheme({
       sharp: 'cubic-bezier(0.4, 0, 0.6, 1)',
     },
     duration: {
-      enteringScreen: 2100,
+      enteringScreen: 800,
     },
   },
 });

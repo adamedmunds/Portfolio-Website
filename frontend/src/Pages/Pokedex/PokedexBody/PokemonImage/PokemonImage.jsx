@@ -1,3 +1,4 @@
+import { Slide } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -19,10 +20,14 @@ export const PokemonImage = () => {
     );
   }, []);
   return (
-    <img
-      src={images[`${pokedexData.id}.png`]}
-      alt={`${pokedexData.name}`}
-      width='90%'
-    />
+    <Slide direction='right' in={true} timeout={700}>
+      <div>
+        <img
+          src={images[`${pokedexData.id}.png`]}
+          alt={`${pokedexData.name}`}
+          width='90%'
+        />
+      </div>
+    </Slide>
   );
 };
