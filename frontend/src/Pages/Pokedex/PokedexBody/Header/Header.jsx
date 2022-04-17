@@ -102,7 +102,9 @@ export const Header = () => {
               alignItems='center'
               boxShadow={5}
             >
-              <Typography variant='h3'>Pokédex Entries</Typography>
+              <Typography variant='h3' mb={1}>
+                Pokédex Entries
+              </Typography>
               <Divider color='black' />
               {currentPokemon?.flavor_text_entries.map((entry) => {
                 if (entry.language.name === 'en') {
@@ -111,8 +113,8 @@ export const Header = () => {
                       <Typography
                         variant='h6'
                         sx={{
-                          fontSize: '1.1rem',
-                          fontWeight: 'bolder',
+                          fontSize: '1.75rem',
+                          fontWeight: '500',
                           color: 'rgb(0 0 0 / 80%)',
                         }}
                       >
@@ -121,9 +123,9 @@ export const Header = () => {
                           : null}
                         <Divider variant='middle' />
                       </Typography>
-
                       <Typography
                         variant='body1'
+                        mb={2}
                         sx={{
                           fontfamily: "'Rubik', sans-serif",
                           fontWeight: '500',

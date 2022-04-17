@@ -4,16 +4,12 @@ import {
   NEW_CURRENT_POKEMON_DATA,
   NEW_POKDEX_ENTRY,
   NEW_POKEMON_EVO_CHAIN,
-  UPDATE_ABLITY_ONE_DATA,
-  UPDATE_ABLITY_TWO_DATA,
-  UPDATE_ABLITY_THREE_DATA,
   UPDATE_COLOR,
   UPDATE_PAGE,
   UPDATE_THEME,
   UPDATE_VERSION,
 } from '../actionList';
 import axios from 'axios';
-import { isNull } from 'lodash';
 
 export const authenticateUser = (user) => {
   return (dispatch) => {
@@ -108,61 +104,6 @@ export const updateTheme = (theme) => {
       type: UPDATE_THEME,
       theme: { theme: theme },
     });
-  };
-};
-
-export const updateAbilityOne = (abilityData) => {
-  return (dispatch) => {
-    axios
-      .get(`https://pokeapi.co/api/v2/ability/${abilityData}`)
-      .then((res) => {
-        dispatch({
-          type: UPDATE_ABLITY_ONE_DATA,
-          abilityOne: { data: res.data },
-        });
-      });
-  };
-};
-
-export const updateAbilityTwo = (abilityData) => {
-  if (isNull(abilityData)) {
-    return (dispatch) => {
-      dispatch({
-        type: UPDATE_ABLITY_TWO_DATA,
-        abilityTwo: {},
-      });
-    };
-  }
-  return (dispatch) => {
-    axios
-      .get(`https://pokeapi.co/api/v2/ability/${abilityData}`)
-      .then((res) => {
-        dispatch({
-          type: UPDATE_ABLITY_TWO_DATA,
-          abilityTwo: { data: res.data },
-        });
-      });
-  };
-};
-
-export const updateAbilityThree = (abilityData) => {
-  if (isNull(abilityData)) {
-    return (dispatch) => {
-      dispatch({
-        type: UPDATE_ABLITY_THREE_DATA,
-        abilityThree: {},
-      });
-    };
-  }
-  return (dispatch) => {
-    axios
-      .get(`https://pokeapi.co/api/v2/ability/${abilityData}`)
-      .then((res) => {
-        dispatch({
-          type: UPDATE_ABLITY_THREE_DATA,
-          abilityThree: { data: res.data },
-        });
-      });
   };
 };
 

@@ -375,7 +375,7 @@ export const MoveSet = () => {
                         alignItems='center'
                         boxShadow={5}
                       >
-                        <Typography variant='h3'>
+                        <Typography variant='h3' mb={1}>
                           {startCase(modalData.name)}
                         </Typography>
                         <Divider color='black' />

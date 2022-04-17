@@ -8,9 +8,6 @@ import evolutionReducer from './evolutionReducer';
 import currentPokemonReducer from './currentPokemonReducer';
 import pageReducer from './pageReducer';
 import themeReducer from './themeReducer';
-import abilityOneReducer from './abilityOneReducer';
-import abilityTwoReducer from './abilityTwoReducer';
-import abilityThreeReducer from './abilityThreeReducer';
 import updateVersionReducer from './updateVersionReducer';
 
 const reducers = combineReducers({
@@ -22,9 +19,6 @@ const reducers = combineReducers({
   currentPokemon: currentPokemonReducer,
   currentPage: pageReducer,
   theme: themeReducer,
-  abilityOne: abilityOneReducer,
-  abilityTwo: abilityTwoReducer,
-  abilityThree: abilityThreeReducer,
   version: updateVersionReducer,
 });
 

@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 import {
   Box,
   Button,
@@ -27,7 +27,7 @@ import { PokemonImage } from '../PokemonImage';
 import { Ability } from './Ability';
 import { CustomModal } from '../../../../Components/Modal';
 import { ModalTheme } from '../../../../Utils/Themes/ModalTheme';
-import { startCase } from 'lodash';
+import { isEmpty, startCase } from 'lodash';
 
 const StyledBody = ({ data }) => {
   return (
@@ -49,8 +49,8 @@ const StyledHeader = ({ heading }) => {
     <Typography
       variant='h6'
       sx={{
-        fontSize: '1.1rem',
-        fontWeight: 'bolder',
+        fontSize: '1.75rem',
+        fontWeight: '500',
         color: 'rgb(0 0 0 / 80%)',
       }}
     >
@@ -62,45 +62,24 @@ const StyledHeader = ({ heading }) => {
 export const TypesAndAbilities = () => {
   const { data: pokedexData } = useSelector((state) => state.pokedex);
   const { data: currentPokemon } = useSelector((state) => state.currentPokemon);
-  const { data: abilityOne } = useSelector((state) => state.abilityOne);
-  const { data: abilityTwo } = useSelector((state) => state.abilityTwo);
-  const { data: abilityThree } = useSelector((state) => state.abilityThree);
+  const { data: version } = useSelector((state) => state.version);
   const dispatch = useDispatch();
-  const {
-    newPokedexEntryNoAPI,
-    newEvoData,
-    newCurrentPokemonEntry,
-    updateAbilityOne,
-    updateAbilityTwo,
-    updateAbilityThree,
-  } = bindActionCreators(actionCreators, dispatch);
+  const { newPokedexEntryNoAPI, newEvoData, newCurrentPokemonEntry } =
+    bindActionCreators(actionCreators, dispatch);
 
-  const [abilityOneOpen, setAbilityOneOpen] = useState(false);
-  const [abilityTwoOpen, setAbilityTwoOpen] = useState(false);
-  const [abilityThreeOpen, setAbilityThreeOpen] = useState(false);
+  const [isModalOpen, setIsModaOpen] = useState(false);
+  const [modalData, setModalData] = useState({});
 
-  const handleAbilityOneOpen = () => {
-    setAbilityOneOpen(true);
+  const handleAbilityModalOpen = async (data, isHidden) => {
+    await axios.get(data.ability.url).then((res) => {
+      res.data['isHidden'] = isHidden;
+      setModalData(res.data);
+      setIsModaOpen(true);
+    });
   };
 
-  const handleAbilityOneClose = () => {
-    setAbilityOneOpen(false);
-  };
-
-  const handleAbilityTwoOpen = () => {
-    setAbilityTwoOpen(true);
-  };
-
-  const handleAbilityTwoClose = () => {
-    setAbilityTwoOpen(false);
-  };
-
-  const handleAbilityThreeOpen = () => {
-    setAbilityThreeOpen(true);
-  };
-
-  const handleAbilityThreeClose = () => {
-    setAbilityThreeOpen(false);
+  const handleAbilityModalClose = () => {
+    setIsModaOpen(false);
   };
 
   const handleClick = (data) => {
@@ -114,20 +93,9 @@ export const TypesAndAbilities = () => {
         });
       });
   };
-
-  useEffect(() => {
-    updateAbilityOne(pokedexData.abilities[0].ability.name);
-    if (pokedexData.abilities[1]) {
-      updateAbilityTwo(pokedexData.abilities[1].ability.name);
-    } else {
-      updateAbilityTwo(null);
-    }
-    if (pokedexData.abilities[2]) {
-      updateAbilityThree(pokedexData.abilities[2].ability.name);
-    } else {
-      updateAbilityThree(null);
-    }
-  }, [pokedexData]);
+  const oldVersion = ['red-blue', 'yellow', 'gold-silver', 'crystal'].includes(
+    version
+  );
 
   return (
     pokedexData && (
@@ -212,224 +180,96 @@ export const TypesAndAbilities = () => {
               </Typography>
             </Grid>
             <Grid container spacing={2}>
-              {pokedexData.abilities[0] && (
-                <Fragment>
+              {pokedexData.abilities.map((ability) => {
+                return (
                   <Ability
-                    name={pokedexData.abilities[0].ability.name}
-                    click={handleAbilityOneOpen}
-                  />
-                  <CustomModal
-                    open={abilityOneOpen}
-                    close={handleAbilityOneClose}
-                    layout={
-                      <Box
-                        sx={ModalTheme('55%')}
-                        textAlign='center'
-                        justifyContent='center'
-                        alignItems='center'
-                        boxShadow={5}
-                      >
-                        <Typography variant='h3' mb={1}>
-                          {startCase(pokedexData.abilities[0].ability.name)}
-                        </Typography>
-                        <Divider color='black' />
-                        <Box mt={2}>
-                          {abilityOne?.flavor_text_entries.map((text) => {
-                            if (
-                              text.language.name === 'en' &&
-                              text.version_group.name === 'sword-shield'
-                            ) {
-                              return (
-                                <Fragment key={text.flavor_text}>
-                                  <StyledHeader heading={'DESCRIPTION'} />
-                                  <StyledBody data={text.flavor_text} />
-                                </Fragment>
-                              );
-                            }
-                          })}
-                          {abilityOne?.effect_entries.map((text) => {
-                            if (text.language.name === 'en') {
-                              return (
-                                <Fragment key={text.short_effect}>
-                                  <StyledHeader heading={'Effect'} />
-                                  <StyledBody data={text.short_effect} />
-                                  <StyledHeader heading={'Detailed Effect'} />
-                                  <StyledBody data={text.effect} />
-                                </Fragment>
-                              );
-                            }
-                          })}
-                        </Box>
-                        <Divider color='black' />
-                        <Button
-                          onClick={handleAbilityOneClose}
-                          sx={{
-                            color: 'white',
-                            marginTop: '8px',
-                            fontWeight: 'bold',
-                            backgroundColor: '#24252a',
-                            '&:hover': {
-                              backgroundColor: '#757889',
-                            },
-                          }}
-                          variant='contained'
-                        >
-                          Back
-                        </Button>
-                      </Box>
+                    key={ability.ability.name}
+                    isHidden={ability.is_hidden}
+                    name={ability.ability.name}
+                    click={() =>
+                      handleAbilityModalOpen(ability, ability.is_hidden)
                     }
                   />
-                </Fragment>
-              )}
-              {pokedexData.abilities[1] && (
-                <Fragment>
-                  <Ability
-                    name={pokedexData.abilities[1].ability.name}
-                    isHidden={pokedexData.abilities[1].is_hidden}
-                    click={handleAbilityTwoOpen}
-                  />
-                  <CustomModal
-                    open={abilityTwoOpen}
-                    close={handleAbilityTwoClose}
-                    layout={
-                      <Box
-                        sx={ModalTheme('55%')}
-                        textAlign='center'
-                        justifyContent='center'
-                        alignItems='center'
-                        boxShadow={5}
-                      >
-                        <Typography variant='h3' mb={1}>
-                          {startCase(pokedexData.abilities[1].ability.name)}
+                );
+              })}
+              {modalData && !isEmpty(modalData) && (
+                <CustomModal
+                  open={isModalOpen}
+                  close={handleAbilityModalClose}
+                  layout={
+                    <Box
+                      sx={ModalTheme('55%')}
+                      textAlign='center'
+                      justifyContent='center'
+                      alignItems='center'
+                      boxShadow={5}
+                    >
+                      <Typography variant='h3' mb={1}>
+                        {startCase(modalData.name)}
+                      </Typography>
+                      {modalData.isHidden && (
+                        <Typography variant='h6' mb={1}>
+                          Hidden Ability
                         </Typography>
-                        {pokedexData.abilities[1].is_hidden && (
-                          <Typography variant='h6' mb={1}>
-                            Hidden Ability
-                          </Typography>
+                      )}
+                      <Divider color='black' />
+                      <Box mt={2}>
+                        {oldVersion ? (
+                          <Fragment>
+                            <StyledHeader heading={'Oops!'} />
+                            <StyledBody
+                              data={'Abilities were added in Generation 3+'}
+                            />
+                          </Fragment>
+                        ) : (
+                          <Fragment>
+                            {modalData.flavor_text_entries.map((text) => {
+                              if (
+                                text.language.name === 'en' &&
+                                text.version_group.name === version
+                              ) {
+                                return (
+                                  <Fragment key={text.flavor_text}>
+                                    <StyledHeader heading={'DESCRIPTION'} />
+                                    <StyledBody data={text.flavor_text} />
+                                  </Fragment>
+                                );
+                              }
+                            })}
+                            {modalData.effect_entries.map((text) => {
+                              if (text.language.name === 'en') {
+                                return (
+                                  <Fragment key={text.short_effect}>
+                                    <StyledHeader heading={'Effect'} />
+                                    <StyledBody data={text.short_effect} />
+                                    <StyledHeader heading={'Detailed Effect'} />
+                                    <StyledBody data={text.effect} />
+                                  </Fragment>
+                                );
+                              }
+                            })}
+                          </Fragment>
                         )}
-                        <Divider color='black' />
-                        <Box mt={2}>
-                          {abilityTwo?.flavor_text_entries.map((text) => {
-                            if (
-                              text.language.name === 'en' &&
-                              text.version_group.name === 'sword-shield'
-                            ) {
-                              return (
-                                <Fragment key={text.flavor_text}>
-                                  <StyledHeader heading={'DESCRIPTION'} />
-                                  <StyledBody data={text.flavor_text} />
-                                </Fragment>
-                              );
-                            }
-                          })}
-                          {abilityTwo?.effect_entries.map((text) => {
-                            if (text.language.name === 'en') {
-                              return (
-                                <Fragment key={text.effect}>
-                                  <StyledHeader heading={'Effect'} />
-                                  <StyledBody data={text.short_effect} />
-                                  <StyledHeader heading={'Detailed Effect'} />
-                                  <StyledBody data={text.effect} />
-                                </Fragment>
-                              );
-                            }
-                          })}
-                        </Box>
-                        <Divider color='black' />
-                        <Button
-                          onClick={handleAbilityTwoClose}
-                          sx={{
-                            color: 'white',
-                            marginTop: '8px',
-                            fontWeight: 'bold',
-                            backgroundColor: '#24252a',
-                            '&:hover': {
-                              backgroundColor: '#757889',
-                            },
-                          }}
-                          variant='contained'
-                        >
-                          Back
-                        </Button>
                       </Box>
-                    }
-                  />
-                </Fragment>
-              )}
-              {pokedexData.abilities[2] && (
-                <Fragment>
-                  <Ability
-                    name={pokedexData.abilities[2].ability.name}
-                    isHidden={pokedexData.abilities[2].is_hidden}
-                    click={handleAbilityThreeOpen}
-                  />
-                  <CustomModal
-                    open={abilityThreeOpen}
-                    close={handleAbilityThreeClose}
-                    layout={
-                      <Box
-                        sx={ModalTheme('50%')}
-                        textAlign='center'
-                        justifyContent='center'
-                        alignItems='center'
-                        boxShadow={5}
+                      <Divider color='black' />
+                      <Button
+                        onClick={handleAbilityModalClose}
+                        sx={{
+                          color: 'white',
+                          marginTop: '8px',
+                          fontWeight: 'bold',
+                          backgroundColor: '#24252a',
+                          '&:hover': {
+                            backgroundColor: '#757889',
+                          },
+                        }}
+                        variant='contained'
                       >
-                        <Typography variant='h3' mb={1}>
-                          {startCase(pokedexData.abilities[2].ability.name)}
-                        </Typography>
-                        {pokedexData.abilities[2].is_hidden && (
-                          <Typography variant='h6' mb={1}>
-                            Hidden Ability
-                          </Typography>
-                        )}
-                        <Divider color='black' />
-                        <Box mt={2}>
-                          {abilityThree?.flavor_text_entries.map((text) => {
-                            if (
-                              text.language.name === 'en' &&
-                              text.version_group.name === 'sword-shield'
-                            ) {
-                              return (
-                                <Fragment key={text.flavor_text}>
-                                  <StyledHeader heading={'DESCRIPTION'} />
-                                  <StyledBody data={text.flavor_text} />
-                                </Fragment>
-                              );
-                            }
-                          })}
-                          {abilityThree?.effect_entries.map((text) => {
-                            if (text.language.name === 'en') {
-                              return (
-                                <Fragment key={text.short_effect}>
-                                  <StyledHeader heading={'Effect'} />
-                                  <StyledBody data={text.short_effect} />
-                                  <StyledHeader heading={'Detailed Effect'} />
-                                  <StyledBody data={text.effect} />
-                                </Fragment>
-                              );
-                            }
-                          })}
-                        </Box>
-                        <Divider color='black' />
-                        <Button
-                          onClick={handleAbilityThreeClose}
-                          sx={{
-                            color: 'white',
-                            marginTop: '8px',
-                            fontWeight: 'bold',
-                            backgroundColor: '#24252a',
-                            '&:hover': {
-                              backgroundColor: '#757889',
-                            },
-                          }}
-                          variant='contained'
-                        >
-                          Back
-                        </Button>
-                      </Box>
-                    }
-                  />
-                </Fragment>
+                        Back
+                      </Button>
+                    </Box>
+                  }
+                />
               )}
             </Grid>
             <Grid item xs={12}>
