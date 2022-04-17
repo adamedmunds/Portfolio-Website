@@ -725,7 +725,7 @@ export const MoveSet = () => {
             fontWeight={500}
             fontSize='2rem'
           >
-            No Moves for version: {startCase(version.globalVersion)}
+            No moves for version: {startCase(version.globalVersion)}
           </Typography>
         )}
       </Container>

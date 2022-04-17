@@ -94,7 +94,7 @@ export const TypesAndAbilities = () => {
       });
   };
   const oldVersion = ['red-blue', 'yellow', 'gold-silver', 'crystal'].includes(
-    version
+    version.globalVersion
   );
 
   return (
@@ -226,7 +226,8 @@ export const TypesAndAbilities = () => {
                             {modalData.flavor_text_entries.map((text) => {
                               if (
                                 text.language.name === 'en' &&
-                                text.version_group.name === version
+                                text.version_group.name ===
+                                  version.globalVersion
                               ) {
                                 return (
                                   <Fragment key={text.flavor_text}>
