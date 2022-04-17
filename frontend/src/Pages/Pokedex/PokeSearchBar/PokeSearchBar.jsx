@@ -241,6 +241,7 @@ export const PokeSearchBar = () => {
             id='pokemon-search-autocomplete'
             sx={{ width: 250 }}
             options={reduxPokemonSearchData}
+            blurOnSelect
             autoHighlight
             disableClearable
             ListboxComponent={ListboxComponent}
@@ -254,7 +255,13 @@ export const PokeSearchBar = () => {
             onOpen={handleOpen}
             onClose={() => setOpen(false)}
             inputValue={inputValue}
-            onInputChange={handleInputChange}
+            onInputChange={(e, newValue, reason) => {
+              handleInputChange(e, newValue);
+              if (reason === 'reset') {
+                setInputValue('');
+                setOpen(false);
+              }
+            }}
             popupIcon={null}
             renderInput={(params) => (
               <TextField
