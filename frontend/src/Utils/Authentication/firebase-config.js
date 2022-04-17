@@ -3,7 +3,7 @@ import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: 'portfolio-pokedex.firebaseapp.com',
+  authDomain: 'auth.adamedmunds.dev',
   projectId: 'portfolio-pokedex',
   storageBucket: 'portfolio-pokedex.appspot.com',
   messagingSenderId: '209479522848',
