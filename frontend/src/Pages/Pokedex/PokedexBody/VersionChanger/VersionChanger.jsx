@@ -44,11 +44,11 @@ export const VersionChanger = () => {
   const { data: selectedVersion } = useSelector((state) => state.version);
   const { updateVersion } = bindActionCreators(actionCreators, dispatch);
 
-  const handleClick = (version) => {
-    if (selectedVersion === version) {
+  const handleClick = (version, localVersion) => {
+    if (selectedVersion.localVersion === localVersion) {
       return;
     }
-    updateVersion(version);
+    updateVersion(version, localVersion);
   };
 
   return (
@@ -75,24 +75,30 @@ export const VersionChanger = () => {
             <Grid item key={version.name}>
               <Tooltip
                 title={
-                  selectedVersion === version.version ? 'Selected Version' : ''
+                  selectedVersion.localVersion === version.name
+                    ? 'Selected Version'
+                    : ''
                 }
               >
                 <Chip
                   label={startCase(version.name)}
-                  onClick={() => handleClick(version.version)}
+                  onClick={() => handleClick(version.version, version.name)}
                   sx={{
                     color:
-                      selectedVersion === version.version ? 'white' : 'black',
+                      selectedVersion.localVersion === version.name
+                        ? 'white'
+                        : 'black',
                     backgroundColor:
-                      selectedVersion === version.version ? 'black' : 'white',
+                      selectedVersion.localVersion === version.name
+                        ? 'black'
+                        : 'white',
                     fontWeight: 'bold',
                     filter: 'drop-shadow(0 1mm 0.25rem rgb(0 0 0 / 30%))',
                     borderRadius: '8px',
                     '&:hover': {
                       cursor: 'pointer',
                       backgroundColor:
-                        selectedVersion === version.version
+                        selectedVersion.localVersion === version.name
                           ? 'black'
                           : '#E5E5E5',
                     },

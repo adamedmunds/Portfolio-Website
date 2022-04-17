@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Divider, Grid, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import {
@@ -8,10 +8,31 @@ import {
   calculateCaptureRate,
   calculateFriendship,
 } from '../../../../../../Utils/Resources/helperFunctions';
+import { startCase } from 'lodash';
 
 export const Training = () => {
   const { data: currentPokemon } = useSelector((state) => state.currentPokemon);
   const { data: pokedexData } = useSelector((state) => state.pokedex);
+  const { data: version } = useSelector((state) => state.version);
+
+  const [heldItems, setHeldItems] = useState([]);
+
+  useEffect(() => {
+    if (pokedexData && version) {
+      const tempHeldItems = [];
+      pokedexData.held_items.map((item) => {
+        item.version_details.map((itemVersion) => {
+          if (itemVersion.version.name === version.localVersion) {
+            return tempHeldItems.push({
+              name: item.item.name,
+              rarity: itemVersion.rarity,
+            });
+          }
+        });
+      });
+      setHeldItems(tempHeldItems);
+    }
+  }, [pokedexData, version]);
 
   return currentPokemon && pokedexData ? (
     <Grid item xs={12} xl={4} pr={2} sx={{ padding: '0 48px' }}>
@@ -117,17 +138,27 @@ export const Training = () => {
               None
             </Typography>
           ) : (
-            pokedexData.held_items.map((item) => {
-              return (
-                <Typography
-                  variant='h6'
-                  textAlign='center'
-                  key={item.item.name}
-                >
-                  {convertName(item.item.name)}
+            <Fragment>
+              {heldItems.length === 0 ? (
+                <Typography variant='h6' textAlign='center'>
+                  None for selected version: {startCase(version.localVersion)}
                 </Typography>
-              );
-            })
+              ) : (
+                <Fragment>
+                  {heldItems &&
+                    heldItems.map((item) => (
+                      <Typography
+                        variant='h6'
+                        textAlign='center'
+                        id={item.name}
+                        key={item.name}
+                      >
+                        {convertName(item.name)} {item.rarity}%
+                      </Typography>
+                    ))}
+                </Fragment>
+              )}
+            </Fragment>
           )}
         </Grid>
       </Grid>

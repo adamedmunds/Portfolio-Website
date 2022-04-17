@@ -107,11 +107,11 @@ export const updateTheme = (theme) => {
   };
 };
 
-export const updateVersion = (version) => {
+export const updateVersion = (version, localVersion) => {
   return (dispatch) => {
     dispatch({
       type: UPDATE_VERSION,
-      version: { data: version },
+      version: { data: { globalVersion: version, localVersion: localVersion } },
     });
   };
 };

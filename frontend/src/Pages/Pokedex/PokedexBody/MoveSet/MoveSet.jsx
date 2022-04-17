@@ -55,7 +55,7 @@ export const MoveSet = () => {
     for (const entry of data.flavor_text_entries) {
       if (
         entry.language.name === 'en' &&
-        entry.version_group.name === version
+        entry.version_group.name === version.globalVersion
       ) {
         setModalDescription(entry.flavor_text);
         found = true;
@@ -64,7 +64,9 @@ export const MoveSet = () => {
     }
     if (!found) {
       setModalDescription(
-        `No description available for selected version: ${startCase(version)}`
+        `No description available for selected version: ${startCase(
+          version.globalVersion
+        )}`
       );
     }
   };
@@ -93,14 +95,14 @@ export const MoveSet = () => {
       const count = { 'level-up': 0, machine: 0, egg: 0, tutor: 0 };
       for await (const move of pokedexData.moves) {
         for await (const details of move.version_group_details) {
-          if (details.version_group.name === version) {
+          if (details.version_group.name === version.globalVersion) {
             await axios.get(move.move.url).then((res) => {
               res.data['learnt_at'] = details.level_learned_at;
               res.data['method'] = details.move_learn_method.name;
               moveData.push(res.data);
               count[details.move_learn_method.name] += 1;
               res.data.machines.map((machine) => {
-                if (machine.version_group.name === version) {
+                if (machine.version_group.name === version.globalVersion) {
                   axios.get(machine.machine.url).then((res2) => {
                     res.data['machine_name'] = res2.data.item.name;
                   });
@@ -723,7 +725,7 @@ export const MoveSet = () => {
             fontWeight={500}
             fontSize='2rem'
           >
-            No Moves for version: {startCase(version)}
+            No Moves for version: {startCase(version.globalVersion)}
           </Typography>
         )}
       </Container>
