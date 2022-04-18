@@ -47,7 +47,7 @@ export const MiscStats = ({ scrollRef }) => {
           container
           xs={9.5}
           justifyContent='center'
-          alignItems='flex-end'
+          alignItems='center'
           ref={containerRef}
           overflow='hidden'
         >
