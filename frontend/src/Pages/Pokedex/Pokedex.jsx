@@ -15,7 +15,7 @@ const PokeSearchBar = lazy(() =>
   }))
 );
 
-const theme = (color, luma) =>
+const theme = (color) =>
   createTheme({
     palette: {
       type: 'dark',
@@ -136,7 +136,7 @@ export const Pokedex = () => {
   const boxColor = useSelector((state) => state.color);
   return (
     <Container maxWidth='false'>
-      <ThemeProvider theme={theme(boxColor.color, boxColor.luma)}>
+      <ThemeProvider theme={theme(boxColor.color)}>
         <CssBaseline />
         <Suspense fallback={<div>Loading...</div>}>
           <PokeSearchBar />

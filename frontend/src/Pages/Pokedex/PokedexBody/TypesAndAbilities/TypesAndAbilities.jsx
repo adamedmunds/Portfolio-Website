@@ -201,9 +201,48 @@ export const TypesAndAbilities = () => {
                       />
                     }
                   >
-                    <MenuItem value={'base'}>Base</MenuItem>
-                    <MenuItem value={'min'}>Minimum</MenuItem>
-                    <MenuItem value={'max'}>Maximum</MenuItem>
+                    <MenuItem
+                      value={'base'}
+                      sx={{
+                        transition: '0.3s',
+                        '&.Mui-selected': { backgroundColor: '#D1D0D0' },
+                        '&:hover': {
+                          backgroundColor: '#E5E5E5',
+                          transition: '0.15s ease-in',
+                        },
+                        '&.Mui-selected:hover': { backgroundColor: '#E5E5E5' },
+                      }}
+                    >
+                      Base
+                    </MenuItem>
+                    <MenuItem
+                      value={'min'}
+                      sx={{
+                        transition: '0.3s',
+                        '&.Mui-selected': { backgroundColor: '#D1D0D0' },
+                        '&:hover': {
+                          backgroundColor: '#E5E5E5',
+                          transition: '0.15s ease-in',
+                        },
+                        '&.Mui-selected:hover': { backgroundColor: '#E5E5E5' },
+                      }}
+                    >
+                      Minimum
+                    </MenuItem>
+                    <MenuItem
+                      value={'max'}
+                      sx={{
+                        transition: '0.3s',
+                        '&.Mui-selected': { backgroundColor: '#D1D0D0' },
+                        '&:hover': {
+                          backgroundColor: '#E5E5E5',
+                          transition: '0.15s ease-in',
+                        },
+                        '&.Mui-selected:hover': { backgroundColor: '#E5E5E5' },
+                      }}
+                    >
+                      Maximum
+                    </MenuItem>
                   </Select>
                 </FormControl>
               </Grid>

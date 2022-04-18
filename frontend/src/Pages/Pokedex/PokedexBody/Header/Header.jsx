@@ -5,17 +5,63 @@ import {
   Button,
   ButtonBase,
   Divider,
+  FormControl,
   Grid,
+  Input,
+  MenuItem,
+  Select,
   Slide,
   Typography,
 } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../../../Redux/actions';
 import { CustomModal } from '../../../../Components/Modal';
 import { convertName } from '../../../../Utils/Resources/helperFunctions';
 import { ModalTheme } from '../../../../Utils/Themes/ModalTheme';
+import { startCase } from 'lodash';
+
+const versions = {
+  red: { version: 'red-blue' },
+  blue: { version: 'red-blue' },
+  yellow: { version: 'yellow' },
+  gold: { version: 'gold-silver' },
+  silver: { version: 'gold-silver' },
+  crystal: { version: 'crystal' },
+  ruby: { version: 'ruby-sapphire' },
+  sapphire: { version: 'ruby-sapphire' },
+  emerald: { version: 'emerald' },
+  'fire red': { version: 'firered-leafgreen' },
+  'leaf green': { version: 'firered-leafgreen' },
+  diamond: { version: 'diamond-pearl' },
+  pearl: { version: 'diamond-pearl' },
+  platinum: { version: 'platinum' },
+  'heart gold': { version: 'heartgold-soulsilver' },
+  'soul silver': { version: 'heartgold-soulsilver' },
+  black: { version: 'black-white' },
+  white: { version: 'black-white' },
+  'black-2': { version: 'black-2-white-2' },
+  'white-2': { version: 'black-2-white-2' },
+  x: { version: 'x-y' },
+  y: { version: 'x-y' },
+  'omega-ruby': { version: 'omega-ruby-alpha-sapphire' },
+  'alpha-sapphire': { version: 'omega-ruby-alpha-sapphire' },
+  sun: { version: 'sun-moon' },
+  moon: { version: 'sun-moon' },
+  'ultra-sun': { version: 'ultra-sun-ultra-moon' },
+  'ultra-moon': { version: 'ultra-sun-ultra-moon' },
+  sword: { version: 'sword-shield' },
+  shield: { version: 'sword-shield' },
+  'lets-go-pikachu': { version: 'lets-go-pikachu-lets-go-eevee' },
+  'lets-go-eevee': { version: 'lets-go-pikachu-lets-go-eevee' },
+};
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { updateVersion } = bindActionCreators(actionCreators, dispatch);
+  const { data: selectedVersion } = useSelector((state) => state.version);
+  const { data: currentPokemon } = useSelector((state) => state.currentPokemon);
 
   const handleOpen = () => {
     setOpen(true);
@@ -25,8 +71,9 @@ export const Header = () => {
     setOpen(false);
   };
 
-  const boxColor = useSelector((state) => state.color);
-  const { data: currentPokemon } = useSelector((state) => state.currentPokemon);
+  const handleChange = (event) => {
+    updateVersion(versions[event.target.value].version, event.target.value);
+  };
 
   return (
     <Slide direction='right' in={true} timeout={700}>
@@ -35,31 +82,87 @@ export const Header = () => {
           <Typography
             variant='h4'
             sx={{
-              color: boxColor.luma <= 128 ? 'white' : 'black',
+              color: 'black',
               fontWeight: 'fontWeightMedium',
               textTransform: 'capitalize',
               fontfamily: "'Rubik', sans-serif",
               textShadow: '0 0 12px rgb(0 0 0 / 30%)',
+              ml: 0.6,
             }}
           >
             # {currentPokemon.id}
           </Typography>
         </Grid>
-        <Grid item xs={12}>
-          <Typography
-            variant='h2'
-            sx={{
-              color:
-                boxColor.luma <= 128
-                  ? 'rgb(255 255 255 / 70%)'
-                  : 'rgb(0 0 0 / 70%)',
-              fontWeight: 'fontWeightMedium',
-              textTransform: 'capitalize',
-              fontfamily: "'Rubik', sans-serif",
-            }}
-          >
-            {currentPokemon?.name}
-          </Typography>
+        <Grid item container alignItems='center'>
+          <Grid item xs={12}>
+            <Typography
+              variant='h2'
+              sx={{
+                color: 'rgb(0 0 0 / 70%)',
+                fontWeight: 'fontWeightMedium',
+                textTransform: 'capitalize',
+                fontfamily: "'Rubik', sans-serif",
+              }}
+            >
+              {currentPokemon?.name}
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography
+              variant='h5'
+              sx={{
+                color: 'rgb(0 0 0 / 70%)',
+                fontWeight: 'fontWeightMedium',
+                textTransform: 'capitalize',
+                fontfamily: "'Rubik', sans-serif",
+                ml: 0.6,
+              }}
+            >
+              Version:
+            </Typography>
+          </Grid>
+          <Grid item>
+            <FormControl
+              id='version-select'
+              fullWidth
+              variant='standard'
+              sx={{ m: 1, minWidth: 120 }}
+            >
+              <Select
+                labelId='version-select-label'
+                value={selectedVersion.localVersion}
+                onChange={handleChange}
+                displayEmpty
+                input={
+                  <Input
+                    sx={{
+                      typography: 'body1',
+                      fontWeight: '500',
+                      ':before': { borderBottomColor: 'black' },
+                      ':after': { borderBottomColor: 'black' },
+                    }}
+                  />
+                }
+              >
+                {Object.entries(versions).map(([key]) => (
+                  <MenuItem
+                    key={key}
+                    value={key}
+                    sx={{
+                      '&.Mui-selected': { backgroundColor: '#D1D0D0' },
+                      '&:hover': {
+                        backgroundColor: '#E5E5E5',
+                        transition: '0.15s ease-in',
+                      },
+                      '&.Mui-selected:hover': { backgroundColor: '#E5E5E5' },
+                    }}
+                  >
+                    {startCase(key)}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
         </Grid>
         <Grid item xs={12} mt={1}>
           <ButtonBase

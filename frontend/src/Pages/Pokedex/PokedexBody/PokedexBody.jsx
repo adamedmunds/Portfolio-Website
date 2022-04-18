@@ -12,7 +12,6 @@ import { MiscStats } from './MiscStats';
 import { Header } from './Header';
 import { TypesAndAbilities } from './TypesAndAbilities';
 import { MoveSet } from './MoveSet';
-import { VersionChanger } from './VersionChanger';
 
 export const PokedexBody = () => {
   const dispatch = useDispatch();
@@ -31,11 +30,7 @@ export const PokedexBody = () => {
   useEffect(() => {
     if (!isNull(color)) {
       const hex = pSBC(0.6, color, '#FFF');
-      const R = parseInt(hex.substring(1, 3), 16);
-      const G = parseInt(hex.substring(3, 5), 16);
-      const B = parseInt(hex.substring(5, 7), 16);
-      const luma = Math.sqrt(R * R * 0.241 + G * G * 0.691 + B * B * 0.068);
-      newColor(hex, luma, color);
+      newColor(hex, color);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [color]);
@@ -49,7 +44,6 @@ export const PokedexBody = () => {
       </Grid>
       <Description scrollRef={scrollToRef} />
       <MoveSet />
-      <VersionChanger />
     </Container>
   ) : (
     <Fragment></Fragment>
