@@ -255,6 +255,7 @@ export const Navbar = () => {
                 <Link
                   href='https://github.com/Mightylordx22'
                   underline='none'
+                  target='_blank'
                   sx={{
                     transition: '0.15s ease-in',
                     '&:hover': { color: 'salmon' },
