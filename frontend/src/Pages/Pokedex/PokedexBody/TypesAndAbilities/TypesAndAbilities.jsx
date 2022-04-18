@@ -6,7 +6,11 @@ import {
   Button,
   Chip,
   Divider,
+  FormControl,
   Grid,
+  Input,
+  MenuItem,
+  Select,
   Slide,
   Stack,
   Tooltip,
@@ -69,6 +73,7 @@ export const TypesAndAbilities = () => {
 
   const [isModalOpen, setIsModaOpen] = useState(false);
   const [modalData, setModalData] = useState({});
+  const [statOption, setStatOption] = useState('base');
 
   const handleAbilityModalOpen = async (data, isHidden) => {
     await axios.get(data.ability.url).then((res) => {
@@ -80,6 +85,28 @@ export const TypesAndAbilities = () => {
 
   const handleAbilityModalClose = () => {
     setIsModaOpen(false);
+  };
+
+  const handleChange = (event) => {
+    setStatOption(event.target.value);
+  };
+
+  const calculateStat = (stat, statName) => {
+    if (statOption === 'base') {
+      return stat;
+    } else if (statOption === 'min') {
+      if (statName === 'hp') {
+        return Math.floor(2 * stat + 110);
+      } else {
+        return Math.floor((2 * stat + 5) * 0.9);
+      }
+    } else if (statOption === 'max') {
+      if (statName === 'hp') {
+        return Math.floor(2 * stat + 204);
+      } else {
+        return Math.floor((2 * stat + 99) * 1.1);
+      }
+    }
   };
 
   const handleClick = (data) => {
@@ -137,25 +164,64 @@ export const TypesAndAbilities = () => {
                 </Tooltip>
               ))}
             </Stack>
-            <Grid item xs={12}>
-              <Typography
-                variant='h4'
-                mt={2}
-                sx={{
-                  color: 'rgb(0 0 0 / 80%)',
-                  fontWeight: 'fontWeightMedium',
-                  fontfamily: "'Rubik', sans-serif",
-                  textShadow: '0 0 12px rgb(0 0 0 / 30%)',
-                }}
-              >
-                Base Stats:
-              </Typography>
+            <Grid item container xs={12} alignItems='center' spacing={2} mt={1}>
+              <Grid item>
+                <Typography
+                  variant='h4'
+                  sx={{
+                    color: 'rgb(0 0 0 / 80%)',
+                    fontWeight: 'fontWeightMedium',
+                    fontfamily: "'Rubik', sans-serif",
+                    textShadow: '0 0 12px rgb(0 0 0 / 30%)',
+                  }}
+                >
+                  Stats:
+                </Typography>
+              </Grid>
+              <Grid item>
+                <FormControl
+                  id='stat-select'
+                  fullWidth
+                  variant='standard'
+                  sx={{ m: 1, minWidth: 120 }}
+                >
+                  <Select
+                    labelId='stat-select-label'
+                    value={statOption}
+                    onChange={handleChange}
+                    displayEmpty
+                    input={
+                      <Input
+                        sx={{
+                          typography: 'body1',
+                          fontWeight: '500',
+                          ':before': { borderBottomColor: 'black' },
+                          ':after': { borderBottomColor: 'black' },
+                        }}
+                      />
+                    }
+                  >
+                    <MenuItem value={'base'}>Base</MenuItem>
+                    <MenuItem value={'min'}>Minimum</MenuItem>
+                    <MenuItem value={'max'}>Maximum</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
             </Grid>
             <Grid container spacing={2}>
               {pokedexData.stats.map((stat) => (
                 <Grid item key={`${stat.stat.name}: ${stat.base_stat}`}>
                   <Chip
-                    label={`${startCase(stat.stat.name)}: ${stat.base_stat}`}
+                    label={
+                      <Stack direction='row' spacing={0.5}>
+                        <Typography variant='body1' fontWeight={600}>
+                          {startCase(stat.stat.name)}:{' '}
+                        </Typography>
+                        <Typography variant='body1' fontWeight={500}>
+                          {calculateStat(stat.base_stat, stat.stat.name)}
+                        </Typography>
+                      </Stack>
+                    }
                     sx={{
                       backgroundColor: 'white',
                       filter: 'drop-shadow(0 1mm 0.25rem rgb(0 0 0 / 30%))',
@@ -293,7 +359,11 @@ export const TypesAndAbilities = () => {
                   {pokedexData.name === form.pokemon.name ? (
                     <Tooltip title='Current Form'>
                       <Chip
-                        label={removeDashes(form.pokemon.name)}
+                        label={
+                          <Typography variant='body1' fontWeight={600}>
+                            {removeDashes(form.pokemon.name)}
+                          </Typography>
+                        }
                         sx={{
                           backgroundColor: '#C9C8C8',
                           fontWeight: 'bold',
@@ -304,7 +374,11 @@ export const TypesAndAbilities = () => {
                     </Tooltip>
                   ) : (
                     <Chip
-                      label={removeDashes(form.pokemon.name)}
+                      label={
+                        <Typography variant='body1' fontWeight={500}>
+                          {removeDashes(form.pokemon.name)}
+                        </Typography>
+                      }
                       sx={{
                         backgroundColor: 'white',
                         fontWeight: 'bold',

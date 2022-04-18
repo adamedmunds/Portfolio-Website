@@ -1,4 +1,4 @@
-import { Chip, Grid, Tooltip } from '@mui/material';
+import { Chip, Grid, Tooltip, Typography } from '@mui/material';
 import { startCase } from 'lodash';
 
 export const Ability = ({ name, isHidden, click }) => {
@@ -6,7 +6,11 @@ export const Ability = ({ name, isHidden, click }) => {
     <Grid item>
       <Tooltip title={isHidden ? 'This is a hidden ability' : ''}>
         <Chip
-          label={startCase(name)}
+          label={
+            <Typography variant='body1' fontWeight={isHidden ? 500 : 600}>
+              {startCase(name)}
+            </Typography>
+          }
           onClick={click}
           sx={{
             backgroundColor: 'white',

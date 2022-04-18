@@ -8,6 +8,8 @@ import { App } from './Components/App';
 import { SnackbarProvider } from 'notistack';
 import { Fade } from '@mui/material';
 
+import * as serviceWorker from './serviceWorkerRegistration';
+
 ReactDOM.render(
   <React.StrictMode>
     <SnackbarProvider
@@ -29,3 +31,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+serviceWorker.register();

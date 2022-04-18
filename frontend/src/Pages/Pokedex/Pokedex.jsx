@@ -27,7 +27,7 @@ const theme = (color, luma) =>
         main: '#84D2F6',
       },
       inputColor: {
-        main: luma <= 128 ? '#FFF' : '#000',
+        main: '#000',
       },
       error: {
         main: '#FF3B00',
@@ -51,10 +51,10 @@ const theme = (color, luma) =>
       MuiOutlinedInput: {
         styleOverrides: {
           root: {
-            color: luma <= 128 ? 'white' : 'black',
+            color: '#fff',
           },
           notchedOutline: {
-            borderColor: luma <= 128 ? '#91E5F6' : 'black',
+            borderColor: '#91E5F6',
           },
         },
       },
@@ -62,12 +62,10 @@ const theme = (color, luma) =>
         styleOverrides: {
           root: {
             '&.MuiInput-underline::before': {
-              borderBottomColor:
-                luma <= 128 ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.3)',
+              borderBottomColor: 'rgba(0,0,0,0.3)',
             },
             '&.MuiInput-underline:hover:not(.Mui-disabled):before': {
-              borderBottomColor:
-                luma <= 128 ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)',
+              borderBottomColor: 'rgba(0,0,0,0.5)',
             },
           },
         },
@@ -76,7 +74,7 @@ const theme = (color, luma) =>
         styleOverrides: {
           input: {
             '&.MuiInput-input': {
-              color: luma <= 128 ? 'white' : 'black',
+              color: 'black',
             },
           },
         },
@@ -84,22 +82,20 @@ const theme = (color, luma) =>
       MuiInputLabel: {
         styleOverrides: {
           root: {
-            color: luma <= 128 ? 'white' : 'black',
+            color: 'black',
           },
         },
       },
       MuiPaginationItem: {
         styleOverrides: {
           root: {
-            color: luma <= 128 ? 'white' : 'black',
+            color: 'black',
             '&.Mui-selected': {
               fontWeight: '500',
-              backgroundColor:
-                luma <= 128 ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)',
+              backgroundColor: 'rgba(0, 0, 0, 0.3)',
             },
             '&:hover :not(&.ellipsis):not(svg)': {
-              backgroundColor:
-                luma <= 128 ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.5)',
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
             },
           },
         },
@@ -121,8 +117,7 @@ const theme = (color, luma) =>
       MuiCssBaseline: {
         styleOverrides: {
           body: {
-            '::-webkit-scrollbar': {
-            },
+            '::-webkit-scrollbar': {},
             transition: 'background-color 0.5s ease',
           },
         },
@@ -130,8 +125,7 @@ const theme = (color, luma) =>
       MuiModal: {
         styleOverrides: {
           root: {
-            '*::-webkit-scrollbar': {
-            },
+            '*::-webkit-scrollbar': {},
           },
         },
       },
