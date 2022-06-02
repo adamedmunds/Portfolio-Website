@@ -1,4 +1,4 @@
-import { useEffect, useState, Fragment } from 'react';
+import { useLayoutEffect, useState, Fragment } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import GoogleButton from '../../../Utils/Resources/googleSignIn.png';
 import {
@@ -25,6 +25,7 @@ import { styled } from '@mui/material/styles';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUser } from '../../../Utils/API/createUser';
+import { useSnackbar } from 'notistack';
 
 const StyledTextField = styled(TextField)(`
   &:hover .${outlinedInputClasses.notchedOutline} {
@@ -35,8 +36,9 @@ const StyledTextField = styled(TextField)(`
 export const Register = () => {
   const [errorMessage, setErrorMessage] = useState({});
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         navigate('../', { replace: true });
@@ -55,6 +57,13 @@ export const Register = () => {
       );
       sendEmailVerification(auth.currentUser).then(() => {});
       createUser(user.user);
+      if (user && !user.emailVerified) {
+        setTimeout(() => {
+          enqueueSnackbar('Please verify your email', {
+            variant: 'error',
+          });
+        }, 500);
+      }
       navigate('/profile', { replace: true });
     } catch (error) {
       handleErrorMessage(error);
@@ -75,9 +84,6 @@ export const Register = () => {
 
   const handleErrorMessage = (error) => {
     switch (error.code) {
-      case 'auth/email-already-in-use':
-        setErrorMessage({ error: 'Email already in use' });
-        break;
       case 'auth/weak-password':
         setErrorMessage({ error: 'Invalid password' });
         break;
@@ -95,7 +101,7 @@ export const Register = () => {
   return (
     <Fragment>
       <Container
-        maxWidth="false"
+        maxWidth='false'
         sx={{
           height: '100vh',
           backgroundImage: `url(${Background})`,
@@ -109,9 +115,9 @@ export const Register = () => {
       <Grid
         container
         spacing={0}
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
+        direction='column'
+        alignItems='center'
+        justifyContent='center'
         sx={{
           pt: 18,
           zIndex: 2,
@@ -119,7 +125,7 @@ export const Register = () => {
           top: 0,
         }}
       >
-        <Container component="main" maxWidth="md">
+        <Container component='main' maxWidth='md'>
           <Box
             sx={{
               padding: 6,
@@ -135,14 +141,14 @@ export const Register = () => {
               <LockOutlinedIcon />
             </Avatar>
             <Typography
-              component="h1"
-              variant="authTitle"
-              color="primary.white"
+              component='h1'
+              variant='authTitle'
+              color='primary.white'
             >
               REGISTER
             </Typography>
             <Box
-              component="form"
+              component='form'
               noValidate
               onSubmit={handleSubmit}
               sx={{ mt: 3, width: '85%' }}
@@ -152,48 +158,48 @@ export const Register = () => {
                   <StyledTextField
                     required
                     fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                    color="inputColor"
+                    id='email'
+                    label='Email Address'
+                    name='email'
+                    autoComplete='email'
+                    color='inputColor'
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <StyledTextField
                     required
                     fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="new-password"
-                    color="inputColor"
+                    name='password'
+                    label='Password'
+                    type='password'
+                    id='password'
+                    autoComplete='new-password'
+                    color='inputColor'
                   />
                 </Grid>
               </Grid>
               {errorMessage.error && (
                 <Grid item xs={12}>
-                  <Typography align="center" mt={3} color="error">
+                  <Typography align='center' mt={3} color='error'>
                     {errorMessage.error}
                   </Typography>
                 </Grid>
               )}
               <Button
-                type="submit"
+                type='submit'
                 fullWidth
-                variant="contained"
+                variant='contained'
                 sx={{ mt: 3, mb: 2, fontWeight: 'bold' }}
               >
                 Register
               </Button>
-              <Grid container justifyContent="flex-end">
+              <Grid container justifyContent='flex-end'>
                 <Grid item xs={12}>
                   <Divider spacing={2}>
                     <Typography
-                      variant="body1"
-                      align="center"
-                      color="primary.white"
+                      variant='body1'
+                      align='center'
+                      color='primary.white'
                     >
                       Other ways to register
                     </Typography>
@@ -201,7 +207,7 @@ export const Register = () => {
                 </Grid>
                 <Grid item xs={12} textAlign={'center'} mt={2}>
                   <ButtonBase onClick={signInWithGoogle}>
-                    <img alt="Google sign in" src={GoogleButton} />
+                    <img alt='Google sign in' src={GoogleButton} />
                   </ButtonBase>
                 </Grid>
               </Grid>

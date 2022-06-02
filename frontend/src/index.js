@@ -6,7 +6,7 @@ import { store } from './Redux/store';
 
 import { App } from './Components/App';
 import { SnackbarProvider } from 'notistack';
-import { Fade } from '@mui/material';
+import { Slide } from '@mui/material';
 
 import * as serviceWorker from './serviceWorkerRegistration';
 
@@ -18,11 +18,11 @@ ReactDOM.render(
         vertical: 'top',
         horizontal: 'right',
       }}
-      TransitionComponent={Fade}
+      TransitionComponent={Slide}
       hideIconVariant
       preventDuplicate
       transitionDuration={{ exit: 200, enter: 200 }}
-      autoHideDuration={8000}
+      autoHideDuration={3500}
     >
       <Provider store={store}>
         <App />

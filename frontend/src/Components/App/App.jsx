@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, Fragment } from 'react';
+import { useEffect, Fragment } from 'react';
 import darkTheme from '../../Utils/Themes/Dark';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import {
@@ -13,37 +13,20 @@ import { Pokedex } from '../../Pages/Pokedex';
 import { Contact } from '../../Pages/Contact';
 import { NotFound } from '../../Pages/NotFound/NotFound';
 import { Navbar } from '../Navbar';
-import { Fallback } from '../Fallback';
 import { auth } from '../../Utils/Authentication/firebase-config';
 import { onAuthStateChanged } from 'firebase/auth';
 
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../Redux/actions';
-
-const Login = lazy(() =>
-  import('../../Pages/Authentication/Login').then((module) => ({
-    default: module.Login,
-  }))
-);
-
-const Register = lazy(() =>
-  import('../../Pages/Authentication/Register').then((module) => ({
-    default: module.Register,
-  }))
-);
-
-const ResetPassword = lazy(() =>
-  import('../../Pages/Authentication/ResetPassword').then((module) => ({
-    default: module.ResetPassword,
-  }))
-);
-
-const Logout = lazy(() =>
-  import('../../Pages/Authentication/Logout').then((module) => ({
-    default: module.Logout,
-  }))
-);
+import { Profile } from '../../Pages/Profile';
+import { ProfileEdit } from '../../Pages/Profile/ProfileEdit';
+import {
+  Login,
+  Register,
+  ResetPassword,
+  Logout,
+} from '../../Pages/Authentication';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -69,38 +52,12 @@ export const App = () => {
             <Route path='portfolio' element={<Portfolio />} />
             <Route path='Contact' element={<Contact />} />
             <Route path='pokedex' element={<Pokedex />} />
-            <Route
-              path='login'
-              element={
-                <Suspense fallback={<Fallback />}>
-                  <Login />
-                </Suspense>
-              }
-            />
-            <Route
-              path='register'
-              element={
-                <Suspense fallback={<Fallback />}>
-                  <Register />
-                </Suspense>
-              }
-            />
-            <Route
-              path='logout'
-              element={
-                <Suspense fallback={<Fallback />}>
-                  <Logout />
-                </Suspense>
-              }
-            />
-            <Route
-              path='resetpassword'
-              element={
-                <Suspense fallback={<Fallback />}>
-                  <ResetPassword />
-                </Suspense>
-              }
-            />
+            <Route path='profile' element={<Profile />} />
+            <Route path='profile/edit' element={<ProfileEdit />} />
+            <Route path='login' element={<Login />} />
+            <Route path='register' element={<Register />} />
+            <Route path='logout' element={<Logout />} />
+            <Route path='resetpassword' element={<ResetPassword />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
         </ThemeProvider>

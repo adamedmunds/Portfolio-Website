@@ -4,8 +4,8 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import EmailIcon from '@mui/icons-material/Email';
-import LoginIcon from '@mui/icons-material/Login';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {
   AppBar,
   Avatar,
@@ -38,9 +38,6 @@ import { isEmpty } from 'lodash';
 import logo from '../../Utils/Resources/logo.png';
 
 function ScrollTop() {
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 250,
@@ -206,12 +203,25 @@ export const Navbar = () => {
           <Divider sx={{ bgcolor: '#CACACA' }} variant='middle' />
           <List>
             {isUserLoggedIn ? (
-              <ListItem button key={'Logout'} onClick={logout}>
-                <ListItemIcon sx={{ color: 'white' }}>
-                  <LoginIcon />
-                </ListItemIcon>
-                <ListItemText primary={'Logout'} />
-              </ListItem>
+              <Fragment>
+                <ListItem
+                  button
+                  key={'Profile'}
+                  component={NavLink}
+                  to={'/profile'}
+                >
+                  <ListItemIcon sx={{ color: 'white' }}>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'Profile'} />
+                </ListItem>
+                <ListItem button key={'Logout'} onClick={logout}>
+                  <ListItemIcon sx={{ color: 'white' }}>
+                    <LogoutIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'Logout'} />
+                </ListItem>
+              </Fragment>
             ) : (
               <Fragment>
                 <ListItem
@@ -221,7 +231,7 @@ export const Navbar = () => {
                   to={'/login'}
                 >
                   <ListItemIcon sx={{ color: 'white' }}>
-                    <AccountCircleOutlinedIcon />
+                    <AccountCircleIcon />
                   </ListItemIcon>
                   <ListItemText primary={'Login'} />
                 </ListItem>
@@ -232,7 +242,7 @@ export const Navbar = () => {
                   to={'/register'}
                 >
                   <ListItemIcon sx={{ color: 'white' }}>
-                    <AccountCircleOutlinedIcon />
+                    <AccountCircleIcon />
                   </ListItemIcon>
                   <ListItemText primary={'Register'} />
                 </ListItem>

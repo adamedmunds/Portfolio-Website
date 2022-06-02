@@ -2,6 +2,7 @@ import { isNull, startCase } from 'lodash';
 import physical from './PokemonIcons/physical.png';
 import special from './PokemonIcons/special.png';
 import status from './PokemonIcons/status.png';
+import pSBC from 'shade-blend-color';
 
 export const toTitleCase = (str) => {
   return str.replace(/\w\S*/g, function (txt) {
@@ -662,4 +663,14 @@ export const convertContestName = (contest) => {
     contest.contest_type = { name: 'No Contest Type' };
   }
   return startCase(contest.contest_type.name);
+};
+
+export const generateRandomColor = () => {
+  const color =
+    '#' +
+    Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, '0')
+      .toUpperCase();
+  return pSBC(0.6, color, '#FFF');
 };

@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from 'react';
+import { useState, useLayoutEffect, Fragment } from 'react';
 import {
   Avatar,
   Box,
@@ -24,6 +24,8 @@ import Background from '../../../Utils/Resources/background.svg';
 import { styled } from '@mui/material/styles';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 import { createUser } from '../../../Utils/API/createUser';
+import { isEmpty } from 'lodash';
+import { useSelector } from 'react-redux';
 
 const StyledTextField = styled(TextField)(`
   &:hover .${outlinedInputClasses.notchedOutline} {
@@ -35,7 +37,7 @@ export const Login = () => {
   const [errorMessage, setErrorMessage] = useState({});
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         navigate('../', { replace: true });
@@ -73,9 +75,6 @@ export const Login = () => {
 
   const handleErrorMessage = (error) => {
     switch (error.code) {
-      case 'auth/email-already-in-use':
-        setErrorMessage({ error: 'Email already in use' });
-        break;
       case 'auth/weak-password':
         setErrorMessage({ error: 'Invalid password' });
         break;
@@ -90,7 +89,9 @@ export const Login = () => {
     }
   };
 
-  return (
+  const user = useSelector((state) => state.user);
+
+  return isEmpty(user) ? (
     <Fragment>
       <Container
         maxWidth='false'
@@ -244,5 +245,7 @@ export const Login = () => {
         </Container>
       </Grid>
     </Fragment>
+  ) : (
+    <Fragment></Fragment>
   );
 };

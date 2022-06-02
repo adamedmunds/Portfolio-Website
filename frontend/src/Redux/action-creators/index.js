@@ -25,6 +25,7 @@ export const authenticateUser = (user) => {
           metadata: user.metadata,
           role: res.data.data.role,
           activePokedexes: res.data.data.activePokedexes,
+          color: res.data.data.color,
         },
       });
     });
