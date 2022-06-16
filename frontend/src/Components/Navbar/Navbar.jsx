@@ -16,7 +16,6 @@ import {
   Fab,
   Fade,
   IconButton,
-  Link,
   List,
   ListItem,
   ListItemIcon,
@@ -36,6 +35,7 @@ import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../Redux/actions';
 import { isEmpty } from 'lodash';
 import logo from '../../Utils/Resources/logo.png';
+import { ExternalLink } from '../ExternalLink';
 
 function ScrollTop() {
   const trigger = useScrollTrigger({
@@ -262,17 +262,9 @@ export const Navbar = () => {
                 Made with love
                 <br />
                 By{' '}
-                <Link
-                  href='https://github.com/Mightylordx22'
-                  underline='none'
-                  target='_blank'
-                  sx={{
-                    transition: '0.15s ease-in',
-                    '&:hover': { color: 'salmon' },
-                  }}
-                >
+                <ExternalLink href='https://github.com/Mightylordx22'>
                   Adam
-                </Link>
+                </ExternalLink>
               </ListItemText>
             </ListItem>
           </List>

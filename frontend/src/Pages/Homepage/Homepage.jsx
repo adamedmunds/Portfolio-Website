@@ -1,10 +1,10 @@
-import { Suspense, lazy, Fragment } from "react";
-import { Button, Container, Slide, Typography } from "@mui/material";
-import Background from "../../Utils/Resources/background.svg";
-import { Link } from "react-router-dom";
+import { Suspense, lazy, Fragment } from 'react';
+import { Button, Container, Slide, Typography } from '@mui/material';
+import Background from '../../Utils/Resources/background.svg';
+import { Link } from 'react-router-dom';
 
 const About = lazy(() =>
-  import("./About").then((module) => ({ default: module.About }))
+  import('./About').then((module) => ({ default: module.About }))
 );
 
 export const Homepage = () => {
@@ -12,40 +12,40 @@ export const Homepage = () => {
     <Fragment>
       <Container
         sx={{
-          height: "100vh",
+          height: '100vh',
           backgroundImage: `url(${Background})`,
-          backgroundColor: "#2F3037",
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
-          backgroundSize: "cover",
+          backgroundColor: '#2F3037',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+          backgroundSize: 'cover',
         }}
-        maxWidth="false"
+        maxWidth='false'
       >
-        <Slide direction="down" in={true} timeout={750}>
-          <Container align="center" component="section">
+        <Slide direction='down' in={true} timeout={750}>
+          <Container align='center' component='section'>
             <Typography
-              variant="h1"
+              variant='h1'
               noWrap
               sx={{
                 fontWeight: 500,
-                textTransform: "uppercase",
+                textTransform: 'uppercase',
                 p: { xs: 0, md: 15 },
                 pt: { xs: 10 },
-                fontSize: { xs: "4rem", md: "6rem" },
+                fontSize: { xs: '4rem', md: '6rem' },
               }}
-              color="primary.white"
+              color='primary.white'
             >
               Adam
-              <Typography variant="body1" color="secondary" noWrap>
+              <Typography variant='body1' color='secondary' noWrap>
                 Welcome to my Portfolio
               </Typography>
               <Button
-                variant="text"
+                variant='text'
                 component={Link}
-                to={"/pokedex"}
-                color="secondary"
+                to={'/portfolio'}
+                color='secondary'
               >
-                Visit the pokedex
+                View my projects
               </Button>
             </Typography>
           </Container>

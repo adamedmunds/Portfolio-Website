@@ -10,7 +10,15 @@ export const toTitleCase = (str) => {
   });
 };
 
+
+
 export const importAll = (r) => {
+  /* Here is the explanation for the code above:
+    1. r.keys() returns an array of all the keys in the directory.
+    2. .map() iterates through the array and returns a new array.
+    3. .replace('./', '') removes the ./ from the beginning of the string.
+    4. images[item.replace('./', '')] = r(item); adds the image to the images object. 
+  */
   let images = {};
   // eslint-disable-next-line array-callback-return
   r.keys().map((item, _) => {
