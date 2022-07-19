@@ -3,6 +3,7 @@ import { Button, Container, Slide, Typography } from '@mui/material';
 import Background from '../../Utils/Resources/background.svg';
 import { Link } from 'react-router-dom';
 import { About } from './About';
+import { Experience } from './Experience';
 
 export const Homepage = () => {
   return (
@@ -49,6 +50,7 @@ export const Homepage = () => {
         </Slide>
       </Container>
       <About />
+      <Experience />
     </Fragment>
   );
 };
