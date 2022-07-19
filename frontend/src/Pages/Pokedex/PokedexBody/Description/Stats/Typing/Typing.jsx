@@ -56,8 +56,8 @@ export const Typing = () => {
           <Tooltip
             title={
               isWeakness
-                ? 'Damage multiplier when defending'
-                : 'Damage multiplier when attacking'
+                ? 'Damage multiplier of types when defending'
+                : 'Damage multiplier of learnable moves when attacking'
             }
           >
             <Typography
