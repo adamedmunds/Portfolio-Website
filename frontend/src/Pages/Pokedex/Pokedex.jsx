@@ -1,19 +1,8 @@
-import { lazy, Suspense } from 'react';
 import { Container, CssBaseline, createTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
-
-const PokedexBody = lazy(() =>
-  import('./PokedexBody').then((module) => ({
-    default: module.PokedexBody,
-  }))
-);
-
-const PokeSearchBar = lazy(() =>
-  import('./PokeSearchBar').then((module) => ({
-    default: module.PokeSearchBar,
-  }))
-);
+import { PokedexBody } from './PokedexBody';
+import { PokeSearchBar } from './PokeSearchBar';
 
 const theme = (color) =>
   createTheme({
@@ -138,10 +127,8 @@ export const Pokedex = () => {
     <Container maxWidth='false'>
       <ThemeProvider theme={theme(boxColor.color)}>
         <CssBaseline />
-        <Suspense fallback={<div>Loading...</div>}>
-          <PokeSearchBar />
-          <PokedexBody />
-        </Suspense>
+        <PokeSearchBar />
+        <PokedexBody />
       </ThemeProvider>
     </Container>
   );

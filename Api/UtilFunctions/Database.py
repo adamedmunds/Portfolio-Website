@@ -24,7 +24,8 @@ def createUser(user: dict) -> None:
             "photo": user["photoURL"],
             "createdAt": user["createdAt"],
             "role": "user",
-            "activePokedexes": ["all"]
+            "activePokedexes": ["all"],
+            "color": user["color"]
         })
     client.close()
 

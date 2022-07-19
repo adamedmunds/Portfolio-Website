@@ -42,14 +42,12 @@ export const About = () => {
             ./ AboutMe
           </AboutText>
           <AboutText>
-            I am currently a third year Software Engineering undergrad student
-            at{' '}
-            <ExternalLink href={'https://www.shu.ac.uk'}>
+            I am approaching my final year of BEng Software Engineering at{' '}
+            <ExternalLink href='https://www.shu.ac.uk'>
               Sheffield Hallam University
             </ExternalLink>
-            . I'm approaching the end of my year long internship at{' '}
-            <ExternalLink href={'https://wandisco.com/'}>WANdisco</ExternalLink>
-            .
+            . I have finished my year long internship at{' '}
+            <ExternalLink href='https://wandisco.com/'>WANdisco</ExternalLink>.
           </AboutText>
           <AboutText>
             The skills I learnt from this internship are extremely valuable in
@@ -61,8 +59,8 @@ export const About = () => {
             <ExternalLink href={'https://russellgroup.ac.uk/'}>
               Russel group university
             </ExternalLink>{' '}
-            so I can get a Masters degree in Computer Science. I've had this goal in
-            mind for years.
+            so I can get a Masters degree in Computer Science. I've had this
+            goal in mind for years.
           </AboutText>
           <AboutText>
             Outside of work and academics I enjoy programming, playing video

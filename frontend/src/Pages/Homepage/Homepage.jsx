@@ -1,11 +1,8 @@
-import { Suspense, lazy, Fragment } from 'react';
+import { Fragment } from 'react';
 import { Button, Container, Slide, Typography } from '@mui/material';
 import Background from '../../Utils/Resources/background.svg';
 import { Link } from 'react-router-dom';
-
-const About = lazy(() =>
-  import('./About').then((module) => ({ default: module.About }))
-);
+import { About } from './About';
 
 export const Homepage = () => {
   return (
@@ -51,9 +48,7 @@ export const Homepage = () => {
           </Container>
         </Slide>
       </Container>
-      <Suspense fallback={<div>Loading...</div>}>
-        <About />
-      </Suspense>
+      <About />
     </Fragment>
   );
 };
